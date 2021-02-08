@@ -18,13 +18,22 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/template.scss';
+
+body {
+	background-color: $light-grey;
+}
 
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-	color: #2c3e50;
+	color: $secondary-color;
+
+	margin: 0 auto;
+	max-width: 65rem;
+	background-color: $primary-color;
 }
 
 #nav {
@@ -33,9 +42,12 @@ export default {
 	a {
 		font-weight: bold;
 		color: #2c3e50;
-
+		text-decoration: none;
 		&.router-link-exact-active {
-			color: #42b983;
+			color: $secondary-color;
+			text-underline-offset: 0.5rem;
+			text-decoration-line: underline;
+			text-decoration-thickness: 0.5em;
 		}
 	}
 }

@@ -1,10 +1,29 @@
 <template>
-	<div id="nav">
-		<router-link to="/">Home</router-link> |
-		<router-link to="/about">About</router-link> |
-		<router-link to="/register">Register</router-link> |
-		<router-link to="/products">Products</router-link> | 
-    <router-link to="/myaccount">MyAccount</router-link>
+	<!-- <div id="nav">
+	</div> -->
+
+	<div id="nav" class="header">
+		<div id="logo">
+			<router-link to="/">
+				<img src="../../../assets/sinus-logo.svg" />
+			</router-link>
+		</div>
+
+		<div id="header-middle"></div>
+
+		<div class="header-right">
+			<router-link to="/register">Register </router-link>
+
+			<router-link to="/account">My Account</router-link>
+
+			<button class="roundButton bkg-lightgrey">
+				<img src="../../../assets/icon-user-black.svg" />
+			</button>
+
+			<button class="roundButton bkg-orange">
+				<img src="../../../assets/icon-bag-white.svg" />
+			</button>
+		</div>
 	</div>
 </template>
 
@@ -17,20 +36,43 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-	margin: 40px 0 0;
+<style lang="scss">
+.header {
+	display: flex;
+	// border-bottom: 1px solid #d3d3d3;
+	overflow: hidden;
+	align-items: center;
+	flex-wrap: wrap;
 }
-ul {
-	list-style-type: none;
-	padding: 0;
+
+div#header > div {
+	text-align: center;
+	border: 4px dashed; /* Useful for positioning */
+	overflow: hidden;
 }
-li {
-	display: inline-block;
-	margin: 0 10px;
+
+#logo {
+	color: #08a3d9;
+	width: 300px;
+	border-color: red;
 }
-a {
-	color: #42b983;
+
+#header-middle {
+	flex-grow: 4;
+
+	display: flex;
+	gap: 1rem;
+	border-color: green;
+}
+
+.header-right {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	border-color: blue;
+}
+
+router-link {
+	background-color: red;
 }
 </style>
