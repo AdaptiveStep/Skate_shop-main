@@ -6,7 +6,7 @@
       <div class="headerImage"></div>
     </div>
 
-    <h1>This is an register page</h1>
+    <h1>This is an Products page</h1>
   </div>
 </template>
 
