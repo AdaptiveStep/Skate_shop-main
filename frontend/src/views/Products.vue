@@ -17,7 +17,7 @@
 
 				<div class="modalInfo">
 					<div class="modalTitle">
-						<span>Tricky</span>
+						<span>GRETA FURY</span>
 					</div>
 					<div class="modalSubtitle">
 						<span>Unisex</span>
@@ -25,9 +25,14 @@
 					<div class="modalTextInfo">
 						<p>Jag gillar apor som hoppar</p>
 					</div>
+
 					<div class="modalCash">
 						<span>999 sek</span>
 					</div>
+
+					<span class="blackPill">
+						Take my Money
+					</span>
 				</div>
 			</div>
 		</Overlay>
@@ -48,12 +53,12 @@
 				<div class="cardContent">
 					<img class="cardImage" src="../../../assets/skateboard-generic.png" />
 
-					<span class="cardPrice">
-						<div class="pricePrice">
+					<span class="blackPill move">
+						<div class="pillPrice">
 							133300
 						</div>
 
-						<div class="priceSek">
+						<div class="pillSEK">
 							SEK
 						</div>
 					</span>
@@ -141,11 +146,8 @@ export default {
 .cardContent {
 	display: flex;
 }
-.cardPrice {
-	position: absolute;
-	z-index: 2;
-	margin-top: 10rem;
-	margin-left: 1rem;
+
+.blackPill {
 	border-radius: 10rem;
 	background-color: black;
 	// padding: 0.5rem;
@@ -156,7 +158,14 @@ export default {
 	font-size: 1.1rem;
 }
 
-.priceSek {
+.move {
+	position: absolute;
+	margin-top: 10rem;
+	margin-left: 1rem;
+	z-index: 0;
+}
+
+.pillSEK {
 	position: relative;
 	margin-left: 0.2rem;
 	font-size: 0.65rem;
@@ -170,36 +179,36 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
-	max-width: 10rem;
+	max-width: 20rem;
+	min-width: 10rem;
 	background-color: red;
 }
 
 .modalInfo {
 	display: flex;
 	flex-direction: column;
-	max-width: 10rem;
+	justify-content: space-between;
+	width: 20rem;
 	background-color: green;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	padding-top: 1rem;
+	padding: 1rem;
 }
 .modalImage {
 	width: 100%;
 }
 .modalTitle {
-	font-size: 2.5rem;
-	text-align: left;
-}
-.modalSubtitle {
 	font-size: 1.3rem;
 	text-align: left;
 }
+.modalSubtitle {
+	font-size: 0.8rem;
+	text-align: left;
+}
 .modalTextInfo {
-	font-size: 1rem;
+	font-size: 0.7rem;
 	text-align: left;
 }
 .modalCash {
-	font-size: 2rem;
+	font-size: 1.3rem;
 	text-align: left;
 }
 </style>

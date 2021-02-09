@@ -1,5 +1,5 @@
 <template>
-	<div class="overlay">
+	<div class="overlay" :class="{ show }">
 		<div class="fade-layer" :class="{ show }" @click="$emit('close')"></div>
 		<div class="content" :class="{ show }">
 			<slot></slot>
@@ -16,6 +16,14 @@ export default {
 </script>
 
 <style>
+.overlay {
+	pointer-events: none;
+	z-index: 1;
+}
+.overlay.show {
+	pointer-events: all;
+}
+
 .fade-layer {
 	position: fixed;
 	top: 0;
@@ -24,6 +32,7 @@ export default {
 	right: 0;
 	background-color: rgba(0, 0, 0, 0.25);
 	transition: opacity 0.25s;
+	z-index: 1;
 	pointer-events: none;
 	opacity: 0;
 }
@@ -42,5 +51,6 @@ export default {
 }
 .content.show {
 	opacity: 1;
+	z-index: 1;
 }
 </style>
