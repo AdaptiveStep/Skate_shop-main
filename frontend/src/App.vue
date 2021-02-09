@@ -20,6 +20,12 @@ export default {
 <style lang="scss">
 @import '@/styles/template.scss';
 
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid'; // fas
+@import '~@fortawesome/fontawesome-free/scss/regular'; // far
+@import '~@fortawesome/fontawesome-free/scss/brands'; // fab
+
 body {
 	background-color: $light-grey;
 }
@@ -33,7 +39,7 @@ body {
 
 	margin: 0 auto;
 	max-width: 65rem;
-	background-color: $primary-color;
+	// background-color: $primary-color;
 }
 
 #nav {

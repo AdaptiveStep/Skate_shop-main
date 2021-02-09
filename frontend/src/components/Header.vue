@@ -16,9 +16,13 @@
 
 			<router-link to="/account">My Account</router-link>
 
-			<button class="roundButton bkg-lightgrey">
-				<img src="../../../assets/icon-user-black.svg" />
-			</button>
+			<div class="hasPopcounter">
+				<button class="roundButton bkg-primary">
+					<img src="../../../assets/icon-user-black.svg" />
+				</button>
+
+				<span class="counter">32</span>
+			</div>
 
 			<button class="roundButton bkg-orange">
 				<img src="../../../assets/icon-bag-white.svg" />
@@ -37,6 +41,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/template.scss';
+
 .header {
 	display: flex;
 	// border-bottom: 1px solid #d3d3d3;
@@ -74,5 +80,15 @@ div#header > div {
 
 router-link {
 	background-color: red;
+}
+
+.hasPopcounter .counter {
+	position: absolute;
+	margin-left: -0.8rem;
+	margin-bottom: 10rem;
+	border-radius: 100%;
+	background-color: white;
+	padding: 0.2rem;
+	box-shadow: 0 0 0.4rem $shadow-color;
 }
 </style>

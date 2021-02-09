@@ -5,7 +5,7 @@
 		<div class="hero">
 			<img class="heroImage" src="../../../assets/skate-hero-1.jpg" />
 			<div class="heroText">
-				<h1>Join the rolling family</h1>
+				<p>Join the rolling family</p>
 			</div>
 		</div>
 
@@ -36,10 +36,25 @@
 			</div>
 
 			<div class="column">
-				<p>wow cool stuff here</p>
-				<p>TESTING STUFF YO</p>
-				<h1>WIW THIS WORKS GOOD</h1>
-				<h1>Cowabungdfsaaa</h1>
+				<h1>Register</h1>
+				<div class="inputContainer">
+					<label>Name</label>
+
+					<i class="fa fa-passport icon"> </i>
+					<input class="Field" type="text" />
+				</div>
+				<div class="inputContainer">
+					<label>Email</label>
+
+					<i class="fa fa-envelope icon"> </i>
+					<input class="Field" type="text" />
+				</div>
+				<div class="inputContainer">
+					<label>Password</label>
+
+					<i class="fa fa-key icon"> </i>
+					<input class="Field" type="password" />
+				</div>
 			</div>
 		</div>
 
@@ -79,9 +94,6 @@ export default {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-}
-
-.heroText h1 {
 	font-size: 3rem;
 	color: $primary-color;
 }
@@ -104,11 +116,32 @@ export default {
 .column {
 	padding: 1rem;
 	min-width: 25rem;
+	display: relative;
+}
+.icon {
+	display: absolute;
+	z-index: 2999;
 }
 
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-  }
+.Field {
+	width: 100%;
+	background-color: $light-grey;
+	color: $secondary-color;
+
+	padding: 14px 20px;
+	margin: 0.6rem 0;
+	border-radius: 4px;
+	cursor: pointer;
+
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+.Field:hover {
+	background-color: white;
+}
+.Field:focus {
+	background-color: white;
 }
 </style>
