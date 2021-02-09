@@ -13,6 +13,7 @@
 
 		<div class="header-right">
 			<router-link to="/register">Register </router-link>
+			<router-link to="/products">Products</router-link>
 
 			<router-link to="/account">My Account</router-link>
 
@@ -27,15 +28,27 @@
 			<button class="roundButton bkg-orange">
 				<img src="../../../assets/icon-bag-white.svg" />
 			</button>
+			
+			<div>
+				
+			</div>
+
+			<Overlay :show="false">
+				<p>yo</p>
+			</Overlay>
 		</div>
 	</div>
 </template>
 
 <script>
+import Overlay from '@/components/Overlay.vue'
 export default {
-	name: 'HelloWorld',
+	name: 'Header',
 	props: {
 		msg: String,
+	},
+	components: {
+		Overlay,
 	},
 }
 </script>
