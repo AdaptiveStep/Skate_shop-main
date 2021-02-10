@@ -5,6 +5,8 @@ import Register from '../views/Register.vue'
 import Products from '../views/Products.vue'
 import Account from '../views/Account.vue'
 import MakeOrder from '../views/MakeOrder.vue'
+import AdminProducts from '../views/AdminProducts.vue'
+import Orders from '../views/Orders.vue'
 
 Vue.use(VueRouter)
 
@@ -30,8 +32,12 @@ const routes = [
 		component: Products,
 	},
 	{
-		path: '/orderDone',
-		component: Products,
+		path: '/adminproduct',
+		component: AdminProducts,
+	},
+	{
+		path: '/orders',
+		component: Orders,
 	},
 
 	{

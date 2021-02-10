@@ -230,7 +230,7 @@ export default {
 		return {
 			showMe: false,
 			submitted: false,
-			userLoggedIn: false,
+			userLoggedIn: true,
 		}
 	},
 	computed: {
@@ -335,18 +335,4 @@ export default {
 	display: flex;
 	gap: 1rem;
 }
-
-.linedTitle {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	hr {
-		margin-left: 1rem;
-	}
-}
-
-// .input-field {
-// 	padding: 10px;
-// 	text-align: left;
-// }
 </style>

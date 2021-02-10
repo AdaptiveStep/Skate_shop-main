@@ -13,16 +13,14 @@
 
 		<div class="header-right">
 			<router-link to="/register" v-if="!loggedIn">Register </router-link>
-			<router-link to="/products">Products</router-link>
+			<router-link to="/products" v-if="!loggedInAsAdmin">Products</router-link>
 
-			<div class="loggedIn" v-if="loggedIn">
-				<router-link to="/adminProduct" v-if="loggedInAsAdmin">
-					<p>Admin Products</p></router-link
-				>
-				<router-link to="/adminOrders" v-if="loggedInAsAdmin"
-					>Admin Orders</router-link
-				>
-			</div>
+			<router-link to="/adminproduct" v-if="loggedInAsAdmin && loggedIn">
+				<p>Admin Products</p></router-link
+			>
+			<router-link to="/orders" v-if="loggedInAsAdmin && loggedIn"
+				>Orders</router-link
+			>
 
 			<!-- Login modal -->
 			<div class="bagSpace">
@@ -67,11 +65,7 @@
 					<span class="counter">32</span>
 				</div>
 
-				<Overlay
-					:show="showUserMod"
-					v-on:close="showUserMod = false"
-					
-				>
+				<Overlay :show="showUserMod" v-on:close="showUserMod = false">
 					<div class="arrowContainer ">
 						<div class="triangle-up "></div>
 
@@ -133,7 +127,7 @@ export default {
 			showBag: false,
 			showUserMod: false,
 			showLogin: false,
-			loggedInAsAdmin: false,
+			loggedInAsAdmin: true,
 			loggedIn: true,
 		}
 	},
