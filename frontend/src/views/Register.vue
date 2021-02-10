@@ -2,7 +2,7 @@
 	<div class="register">
 		<!-- <HeaderImage image="@blablbl/..../img.jpg" msg="hejjlo"> -->
 
-		<div class="hero">
+		<div class="hero"> 
 			<img class="heroImage" src="../../../assets/skate-hero-1.jpg" />
 			<div class="heroText">
 				<p>Join the rolling family</p>

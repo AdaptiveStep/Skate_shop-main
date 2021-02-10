@@ -29,6 +29,10 @@ const routes = [
 		path: '/products',
 		component: Products,
 	},
+	{
+		path: '/orderDone',
+		component: Products,
+	},
 
 	{
 		path: '/makeOrder',

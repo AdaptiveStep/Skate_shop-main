@@ -12,11 +12,17 @@
 		<div id="header-middle"></div>
 
 		<div class="header-right">
-			<router-link to="/register">Register </router-link>
+			<router-link to="/register" v-if="!loggedIn">Register </router-link>
 			<router-link to="/products">Products</router-link>
+			<router-link to="/adminProduct" v-if="loggedInAsAdmin"
+				>Admin Products</router-link
+			>
+			<router-link to="/adminOrders" v-if="loggedInAsAdmin"
+				>Admin Orders</router-link
+			>
 
 			<div class="bagSpace">
-				<a href="#login" @click="showLogin = true">Login</a>
+				<a href="#login" v-if="!loggedIn" @click="showLogin = true">Login</a>
 
 				<Overlay :show="showLogin" v-on:close="showLogin = false">
 					<div class="arrowContainer">
@@ -37,12 +43,31 @@
 				</Overlay>
 			</div>
 
-			<router-link to="/account">My Account</router-link>
+			<router-link to="/account" v-if="loggedIn">My Account</router-link>
+
+			<div class="bagSpace">
+				<button @click="showBag = true" class="roundButton bkg-primary">
+					<img src="../../../assets/icon-user-black.svg" />
+				</button>
+				<Overlay :show="showBag" v-on:close="showBag = false">
+					<div class="arrowContainer">
+						<div class="triangle-up "></div>
+
+						<div class="popoverBag">
+							<p>HEEELOO HELLO1</p>
+							<p>HEEELOO HELLO2</p>
+							<p>HEEELOO HELLO3</p>
+							<p>HEEELOO HELLO4</p>
+							<p>HEEELOO HELLO5</p>
+						</div>
+					</div>
+				</Overlay>
+			</div>
 
 			<div class="bagSpace">
 				<div class="hasPopcounter">
-					<button @click="showUserMod = true" class="roundButton bkg-primary">
-						<img src="../../../assets/icon-user-black.svg" />
+					<button @click="showUserMod = true" class="roundButton  bkg-orange">
+						<img src="../../../assets/icon-bag-black.svg" />
 					</button>
 
 					<span class="counter">32</span>
@@ -77,35 +102,19 @@
 									<h1>TOTAL</h1>
 									<h1><b>2097</b></h1>
 								</div>
-
-								<div class="blackPill resizedCartPill">
-									<h1>Take my money</h1>
-								</div>
+								<router-link to="/makeorder"
+									><button
+										@click="showUserMod = false"
+										class="blackPill resizedCartPill"
+									>
+										Take my money
+									</button></router-link
+								>
 							</div>
 						</div>
 					</div>
 				</Overlay>
 			</div>
-
-			<div class="bagSpace">
-				<button @click="showBag = true" class="roundButton bkg-orange">
-					<img src="../../../assets/icon-bag-white.svg" />
-				</button>
-				<Overlay :show="showBag" v-on:close="showBag = false">
-					<div class="arrowContainer">
-						<div class="triangle-up "></div>
-
-						<div class="popoverBag">
-							<p>HEEELOO HELLO1</p>
-							<p>HEEELOO HELLO2</p>
-							<p>HEEELOO HELLO3</p>
-							<p>HEEELOO HELLO4</p>
-							<p>HEEELOO HELLO5</p>
-						</div>
-					</div>
-				</Overlay>
-			</div>
-
 			<div></div>
 
 			<!-- <Overlay :show="false">
@@ -131,6 +140,8 @@ export default {
 			showBag: false,
 			showUserMod: false,
 			showLogin: false,
+			loggedInAsAdmin: false,
+			loggedIn: true,
 		}
 	},
 }
@@ -201,6 +212,7 @@ router-link {
 }
 .overlayBag {
 	position: absolute;
+	z-index: 1;
 }
 
 .triangle-up {
@@ -218,7 +230,6 @@ router-link {
 	transform: translate(0, -10%);
 }
 
-
 .resizedCartPill {
 	width: 15rem;
 	align-self: center;
@@ -226,7 +237,7 @@ router-link {
 }
 
 .loginBtn {
-	margin: 1rem; 
+	margin: 1rem;
 	align-self: center;
 	justify-content: center;
 }
