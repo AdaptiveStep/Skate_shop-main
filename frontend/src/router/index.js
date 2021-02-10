@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import Products from '../views/Products.vue'
 import Account from '../views/Account.vue'
+import MakeOrder from '../views/MakeOrder.vue'
 
 Vue.use(VueRouter)
 
@@ -19,7 +20,6 @@ const routes = [
 		component: Register,
 	},
 
-	
 	{
 		path: '/account',
 		component: Account,
@@ -28,6 +28,11 @@ const routes = [
 	{
 		path: '/products',
 		component: Products,
+	},
+
+	{
+		path: '/makeOrder',
+		component: MakeOrder,
 	},
 
 	{

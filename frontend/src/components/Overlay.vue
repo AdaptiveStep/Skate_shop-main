@@ -11,11 +11,14 @@
 export default {
 	props: {
 		show: Boolean,
+		backdrop: Boolean,
 	},
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '@/styles/template.scss';
+
 .overlay {
 	pointer-events: none;
 	z-index: 1;
@@ -44,10 +47,10 @@ export default {
 	padding: 2rem;
 	transition: opacity 0.25s;
 	opacity: 0;
-	position: fixed;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
+	position: absolute;
+	/* left: 50%;
+	top: 50%; */
+	/* transform: translate(-50%, -50%); */
 }
 .content.show {
 	opacity: 1;

@@ -28,6 +28,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 body {
 	background-color: $light-grey;
+	
 }
 
 #app {

@@ -1,8 +1,8 @@
 <template>
-	<div class="register">
+	<div class="makeOrder">
 		<!-- <HeaderImage image="@blablbl/..../img.jpg" msg="hejjlo"> -->
 
-		<h1>This is an Products page</h1>
+		<h1>This is an MakeOrder page</h1>
 
 		<button @click="tryme">KLICK ME</button>
 
@@ -29,48 +29,51 @@
 					<div class="modalCash">
 						<span>999 sek</span>
 					</div>
-
-					<span class="blackPill">
-						Take my Money
-					</span>
 				</div>
 			</div>
 		</Overlay>
 
-		<div class="productsContainer" v-if="true">
-			<div class="card shadowed">
-				<div class="cardHeader">
-					<span>Tricky</span>
+		<div class="makeOrder"></div>
 
-					<button class="roundButton bkg-secondary">
-						<img src="../../../assets/icon-bag-white.svg" />
-					</button>
-				</div>
-				<div class="cardSubTitle">
-					<span>Unisex</span>
-				</div>
+		<div class="pageFlex">
+			<div class="userCart shadowed">
+				<div class="cartProducts">
+					<div class="cartProduct">
+						<img src="" alt="" class="cartProductImage" />
 
-				<div class="cardContent">
-					<img class="cardImage" src="../../../assets/skateboard-generic.png" />
-
-					<span class="blackPill move">
-						<div class="pillPrice">
-							133300
+						<div class="cartProductDetails">
+							<h1>Greta</h1>
+							<h2>Unisex</h2>
+							<h3>SN112312323245</h3>
 						</div>
-
-						<div class="pillSEK">
-							SEK
+						<div class="cartProductPrice">
+							<h1>999</h1>
 						</div>
-					</span>
+					</div>
+
+					<div class="cartProduct"></div>
+					<div class="cartProduct"></div>
+					<div class="cartProduct"></div>
 				</div>
+				<hr />
+				<div class="cartTotals">
+					<h1>TOTAL</h1>
+					<h1><b>2097</b></h1>
+				</div>
+
 			</div>
 
-			<div class="card shadowed"></div>
-			<div class="card shadowed"></div>
-			<div class="card shadowed"></div>
-			<div class="card shadowed"></div>
-			<div class="card shadowed"></div>
-			<div class="card shadowed"></div>
+			<div class="loginForm">
+				<div class="inputContainer">
+					<input class="Field" type="text" placeholder="Username" />
+					<input class="Field" type="text" placeholder="Username" />
+
+				</div>
+				<div class="inputContainer">
+					<input class="Field" type="password" placeholder="Password" />
+				</div>
+				<div class="blackPill loginBtn">Login</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -101,57 +104,6 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/template.scss';
-
-.headerImage {
-	background-image: '';
-}
-
-.productsContainer {
-	display: flex;
-	gap: 1rem;
-	flex-wrap: wrap;
-	padding: 2rem;
-}
-
-.card {
-	display: flex;
-	background-color: white;
-	width: 12rem;
-	min-height: 15rem;
-	flex-direction: column;
-	// padding: 1rem;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	padding-top: 1rem;
-}
-.cardHeader {
-	display: flex;
-	justify-content: space-between;
-	/* background-color: green; */
-
-	font-size: 2rem;
-	align-items: center;
-}
-.cardSubTitle {
-	display: flex;
-	/* margin: 1rem; */
-	/* background-color: pink; */
-}
-
-.cardImage {
-	width: 100%;
-}
-
-.cardContent {
-	display: flex;
-}
-
-.move {
-	position: absolute;
-	margin-top: 10rem;
-	margin-left: 1rem;
-	z-index: 0;
-}
 
 .modalProduct {
 	display: flex;
@@ -197,5 +149,14 @@ export default {
 .modalCash {
 	font-size: 1.3rem;
 	text-align: left;
+}
+
+.pageFlex {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.userCart {
+	padding: 1rem;
 }
 </style>
