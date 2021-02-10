@@ -1,5 +1,5 @@
 <template>
-	<div class="overlay" :class="{ show }">
+	<div class="overlay" :class="{ show }" v-if="show">
 		<div class="fade-layer" :class="{ show }" @click="$emit('close')"></div>
 		<div class="content" :class="{ show }">
 			<slot></slot>

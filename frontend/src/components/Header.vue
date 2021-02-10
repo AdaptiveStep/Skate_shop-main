@@ -14,56 +14,50 @@
 		<div class="header-right">
 			<router-link to="/register" v-if="!loggedIn">Register </router-link>
 			<router-link to="/products">Products</router-link>
-			<router-link to="/adminProduct" v-if="loggedInAsAdmin"
-				>Admin Products</router-link
-			>
-			<router-link to="/adminOrders" v-if="loggedInAsAdmin"
-				>Admin Orders</router-link
-			>
 
+			<div class="loggedIn" v-if="loggedIn">
+				<router-link to="/adminProduct" v-if="loggedInAsAdmin">
+					<p>Admin Products</p></router-link
+				>
+				<router-link to="/adminOrders" v-if="loggedInAsAdmin"
+					>Admin Orders</router-link
+				>
+			</div>
+
+			<!-- Login modal -->
 			<div class="bagSpace">
-				<a href="#login" v-if="!loggedIn" @click="showLogin = true">Login</a>
+				<button @click="showLogin = true" class="roundButton bkg-primary">
+					<img src="../../../assets/icon-user-black.svg" />
+				</button>
 
 				<Overlay :show="showLogin" v-on:close="showLogin = false">
 					<div class="arrowContainer">
 						<div class="triangle-up "></div>
 
 						<div class="popoverBag">
-							<div class="column loginForm">
+							<div class="column loginForm" v-if="!loggedIn">
 								<div class="inputContainer">
 									<input class="Field" type="text" placeholder="Username" />
 								</div>
 								<div class="inputContainer">
 									<input class="Field" type="password" placeholder="Password" />
 								</div>
-								<div class="blackPill loginBtn">Login</div>
+								<button class="blackPill loginBtn" @click="loggedIn = true">
+									Login
+								</button>
+							</div>
+
+							<div v-else>
+								<button class="blackPill loginBtn" @click="loggedIn = false">
+									Logout
+								</button>
 							</div>
 						</div>
 					</div>
 				</Overlay>
 			</div>
 
-			<router-link to="/account" v-if="loggedIn">My Account</router-link>
-
-			<div class="bagSpace">
-				<button @click="showBag = true" class="roundButton bkg-primary">
-					<img src="../../../assets/icon-user-black.svg" />
-				</button>
-				<Overlay :show="showBag" v-on:close="showBag = false">
-					<div class="arrowContainer">
-						<div class="triangle-up "></div>
-
-						<div class="popoverBag">
-							<p>HEEELOO HELLO1</p>
-							<p>HEEELOO HELLO2</p>
-							<p>HEEELOO HELLO3</p>
-							<p>HEEELOO HELLO4</p>
-							<p>HEEELOO HELLO5</p>
-						</div>
-					</div>
-				</Overlay>
-			</div>
-
+			<!-- Cart modal -->
 			<div class="bagSpace">
 				<div class="hasPopcounter">
 					<button @click="showUserMod = true" class="roundButton  bkg-orange">
@@ -73,7 +67,11 @@
 					<span class="counter">32</span>
 				</div>
 
-				<Overlay :show="showUserMod" v-on:close="showUserMod = false">
+				<Overlay
+					:show="showUserMod"
+					v-on:close="showUserMod = false"
+					
+				>
 					<div class="arrowContainer ">
 						<div class="triangle-up "></div>
 
@@ -115,11 +113,6 @@
 					</div>
 				</Overlay>
 			</div>
-			<div></div>
-
-			<!-- <Overlay :show="false">
-				<p>yo</p>
-			</Overlay> -->
 		</div>
 	</div>
 </template>

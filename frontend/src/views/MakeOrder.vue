@@ -185,7 +185,7 @@
 			<div class="hero">
 				<img class="heroImage" src="../../../assets/skate-hero-1.jpg" />
 				<div class="heroText">
-					<p>Join the rolling family</p>
+					<p>Thank you for your order</p>
 				</div>
 			</div>
 
@@ -212,6 +212,7 @@
 					magna maximus, vel mollis metus blandit.
 					<p>TESTING STUFF YO</p>
 				</span>
+				<button class="submitBtn">Coolio!</button>
 			</div>
 		</div>
 	</div>
@@ -228,8 +229,8 @@ export default {
 	data() {
 		return {
 			showMe: false,
-			submitted: true,
-			userLoggedIn: true,
+			submitted: false,
+			userLoggedIn: false,
 		}
 	},
 	computed: {
