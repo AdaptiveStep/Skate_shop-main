@@ -33,7 +33,7 @@
 						<img src="../../../assets/icon-bag-black.svg" />
 					</button>
 
-					<span class="counter">32</span>
+					<span class="counter">{{ basketCount }}</span>
 				</div>
 
 				<Overlay :show="showUserMod" v-on:close="showUserMod = false">
@@ -43,27 +43,33 @@
 						<div class="popoverBag">
 							<div class="userCart">
 								<div class="cartProducts">
-									<div class="cartProduct">
-										<img src="" alt="" class="cartProductImage" />
+									<div
+										v-for="(item, index) in basket"
+										:key="index"
+										class="cartProduct"
+									>
+										<img
+											:src="require(`../../../assets/${item.imgFile}`)"
+											alt=""
+											class="cartProductImage"
+										/>
 
 										<div class="cartProductDetails">
-											<h1>Greta</h1>
-											<h2>Unisex</h2>
-											<h3>SN112312323245</h3>
+											<h1>{{ item.title }}</h1>
+											<h2>{{ item.category }}</h2>
+											<h3>{{ item.serial }}</h3>
 										</div>
 										<div class="cartProductPrice">
-											<h1>999</h1>
+											<h1>{{ item.price }}</h1>
 										</div>
 									</div>
-
-									<div class="cartProduct"></div>
-									<div class="cartProduct"></div>
-									<div class="cartProduct"></div>
 								</div>
 								<hr />
 								<div class="cartTotals">
 									<h1>TOTAL</h1>
-									<h1><b>2097</b></h1>
+									<h1>
+										<b>{{ basketTotalPrice }}</b>
+									</h1>
 								</div>
 								<router-link to="/makeorder"
 									><button
@@ -85,6 +91,8 @@
 <script>
 import Overlay from '@/components/Overlay.vue'
 import LoginForm from '@/components/LoginForm.vue'
+import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
+
 export default {
 	name: 'Header',
 	props: {
@@ -102,6 +110,10 @@ export default {
 			loggedInAsAdmin: false,
 			loggedIn: true,
 		}
+	},
+	computed: {
+		...mapState(['basket']),
+		...mapGetters(['basketCount', 'basketTotalPrice', 'basketEmpty']),
 	},
 }
 </script>

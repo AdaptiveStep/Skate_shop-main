@@ -149,7 +149,9 @@ $shadow-color: #858585;
 
 .cartProducts {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	max-height: 40rem;
+	overflow: auto;
 	// justify-content: space-between;
 	// width: 100%;
 }
@@ -163,8 +165,8 @@ $shadow-color: #858585;
 }
 
 .cartProductImage {
-	min-width: 3rem;
-	min-height: 3rem;
+	width: 3rem;
+	height: 3rem;
 	background: $primary-color;
 	padding: 1rem;
 }

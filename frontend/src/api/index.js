@@ -1,3 +1,4 @@
+//FUNKAR
 export const login = function(user) {
 	let result = fetch('http://localhost:5000/api/auth', {
 		method: 'POST',
@@ -34,10 +35,10 @@ export const getProductById = function(productId) {
 	return result
 }
 
-export const createProduct = function(product) {
+export const createProduct = function(product, user) {
 	let result = fetch('http://localhost:5000/api/products/', {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
+		headers: { 'Content-Type': 'application/json', Authorization: user.token },
 
 		body: JSON.stringify({
 			title: product.title,
@@ -53,10 +54,10 @@ export const createProduct = function(product) {
 	return result
 }
 
-export const updateProductById = function(product) {
+export const updateProductById = function(product, user) {
 	let result = fetch('http://localhost:5000/api/products/:id', {
 		method: 'PATCH',
-		headers: { 'Content-Type': 'application/json' },
+		headers: { 'Content-Type': 'application/json', Authorization: user.token },
 
 		body: JSON.stringify({
 			title: product.title,
@@ -73,10 +74,10 @@ export const updateProductById = function(product) {
 	return result
 }
 
-export const deleteProductById = function(product) {
+export const deleteProductById = function(product, user) {
 	fetch('http://localhost:5000/api/products/:id', {
 		method: 'DELETE',
-		headers: { 'Content-Type': 'application/json' },
+		headers: { 'Content-Type': 'application/json', Authorization: user.token },
 
 		body: JSON.stringify({
 			id: product.id,
@@ -84,21 +85,25 @@ export const deleteProductById = function(product) {
 	}).then((response) => response.json())
 }
 
-export const createOrder = function(user, items, price) {
-	fetch('http://localhost:5000/api/orders', {
+export const createOrder = function(user, itemIdArray, price) {
+	let result = fetch('http://localhost:5000/api/orders', {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
+		headers: {
+			'Content-Type': 'application/json',
+
+			Authorization:
+				'Bearer' + user.token,
+		},
 
 		body: JSON.stringify({
-			items: items,
-			customer: user.email,
+			items: itemIdArray,
 			orderValue: price,
 			status: 'inProcess',
 		}),
 	}).then((response) => response.json())
+	return result
 }
 
-//??
 export const getAllOrders = function(user) {
 	let result = fetch('http://localhost:5000/api/orders', {
 		method: 'GET',

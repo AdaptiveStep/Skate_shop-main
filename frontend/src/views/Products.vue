@@ -1,12 +1,7 @@
 <template>
-	<div class="register">
-		<!-- <HeaderImage image="@blablbl/..../img.jpg" msg="hejjlo"> -->
-
-		<h1>This is an Products page</h1>
-		<button class="testButton" @click="tryme">TESTAR STORE</button>
-
-		<h1>Some stuff form module {{ giveStuff }}</h1>
-		<Overlay :show="showMe" v-on:close="showMe = false">
+	<div class="product">
+		<!-- <h1>Some stuff form module {{ giveStuff }}</h1> -->
+		<Overlay :show="showProductModal" v-on:close="showProductModal = false">
 			<div class="modalProduct">
 				<div class="modalPic">
 					<img
@@ -17,45 +12,53 @@
 
 				<div class="modalInfo">
 					<div class="modalTitle">
-						<span>GRETA FURY</span>
+						<span>{{ selectedProduct.title }}</span>
 					</div>
 					<div class="modalSubtitle">
-						<span>Unisex</span>
+						<span>{{ selectedProduct.category }}</span>
 					</div>
 					<div class="modalTextInfo">
-						<p>Jag gillar apor som hoppar</p>
+						<p>{{ selectedProduct.longDesc }}</p>
 					</div>
 
 					<div class="modalCash">
-						<span>999 sek</span>
+						<span>{{ selectedProduct.price }}</span>
 					</div>
 
-					<span class="blackPill">
+					<button @click="addToCart(selectedProduct)" class="blackPill">
 						Take my Money
-					</span>
+					</button>
 				</div>
 			</div>
 		</Overlay>
 
 		<div class="productsContainer" v-if="true">
-			<div class="card shadowed" @click="tryme">
+			<div
+				v-for="(item, index) in allProducts"
+				:key="index"
+				class="card shadowed"
+				@click="ShowProductDetails(item)"
+			>
 				<div class="cardHeader">
-					<span>Tricky</span>
+					<span>{{ item.title }}</span>
 
 					<button class="roundButton bkg-secondary">
 						<img src="../../../assets/icon-bag-white.svg" />
 					</button>
 				</div>
 				<div class="cardSubTitle">
-					<span>Unisex</span>
+					<span>{{ item.category }}</span>
 				</div>
 
 				<div class="cardContent">
-					<img class="cardImage" src="../../../assets/skateboard-generic.png" />
+					<img
+						class="cardImage"
+						:src="require(`../../../assets/${item.imgFile}`)"
+					/>
 
 					<span class="blackPill move">
 						<div class="pillPrice">
-							133300
+							{{ item.price }}
 						</div>
 
 						<div class="pillSEK">
@@ -64,20 +67,13 @@
 					</span>
 				</div>
 			</div>
-
-			<div class="card shadowed"></div>
-			<div class="card shadowed"></div>
-			<div class="card shadowed"></div>
-			<div class="card shadowed"></div>
-			<div class="card shadowed"></div>
-			<div class="card shadowed"></div>
 		</div>
 	</div>
 </template>
 
 <script>
 import Overlay from '@/components/Overlay'
-import { mapMutations, mapGetters, mapActions } from 'vuex'
+import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
 	methods: {
@@ -85,25 +81,41 @@ export default {
 			this.$store.commit('coolMutation')
 		},
 
-		// ...mapMutations('localStorage', [
-		// 	'coolMutation', // -> this.someMutation . Dvs använd som om den fanns direkt i topstore
-		// ]),
+		ShowProductDetails(item) {
+			this.selectedProduct = item
+			this.showProductModal = true
+		},
+		urlImage(product) {
+			let tmp = '../../../assets/'
+			let srctemp = tmp + product.imgFile
+			return srctemp
+		},
+
+		...mapMutations(['addToCart']),
+
 		...mapActions([
 			'giveStuff', // -> this.someMutation
+			'loadAllProducts',
 		]),
 	},
 	data() {
 		return {
-			showMe: false,
+			showProductModal: false,
+			selectedProduct: {},
 		}
 	},
 	computed: {
 		showModal() {
-			return this.showMe
+			return this.showProductModal
 		},
+
+		...mapState(['allProducts']),
 	},
 	components: {
 		Overlay,
+	},
+	mounted() {
+		this.loadAllProducts()
 	},
 }
 </script>

@@ -2,7 +2,7 @@
 	<div class="makeOrder">
 		<!-- <HeaderImage image="@blablbl/..../img.jpg" msg="hejjlo"> -->
 
-		<div class="unloggedOrder" v-if="!userLoggedIn && !submitted">
+		<div class="unloggedOrder" v-if="!userLoggedIn && !paymentComplete">
 			<h1>This is an MakeOrder page</h1>
 
 			<button @click="tryme">KLICK ME</button>
@@ -59,7 +59,7 @@
 					<hr />
 					<div class="cartTotals">
 						<h1>TOTAL</h1>
-						<h1><b>2097</b></h1>
+						<h1><b>{2097}</b></h1>
 					</div>
 				</div>
 
@@ -100,7 +100,7 @@
 			</div>
 		</div>
 
-		<div class="loggedInOrder" v-else-if="userLoggedIn && !submitted">
+		<div class="loggedInOrder" v-else-if="userLoggedIn && !paymentComplete">
 			<div class="pageFlex">
 				<div class="userCart">
 					<div class="linedTitle">
@@ -109,27 +109,33 @@
 					</div>
 
 					<div class="cartProducts">
-						<div class="cartProduct">
-							<img src="" alt="" class="cartProductImage" />
+						<div
+							v-for="(item, index) in basket"
+							:key="index"
+							class="cartProduct"
+						>
+							<img
+								:src="require(`../../../assets/${item.imgFile}`)"
+								alt=""
+								class="cartProductImage"
+							/>
 
 							<div class="cartProductDetails">
-								<h1>Greta</h1>
-								<h2>Unisex</h2>
-								<h3>SN112312323245</h3>
+								<h1>{{ item.title }}</h1>
+								<h2>{{ item.category }}</h2>
+								<h3>{{ item.serial }}</h3>
 							</div>
 							<div class="cartProductPrice">
-								<h1>999</h1>
+								<h1>{{ item.price }}</h1>
 							</div>
 						</div>
-
-						<div class="cartProduct"></div>
-						<div class="cartProduct"></div>
-						<div class="cartProduct"></div>
 					</div>
 					<hr />
 					<div class="cartTotals">
 						<h1>TOTAL</h1>
-						<h1><b>2097</b></h1>
+						<h1>
+							<b>{{ basketTotalPrice }}</b>
+						</h1>
 					</div>
 				</div>
 				<div class="multiFormWrapper">
@@ -173,13 +179,13 @@
 							<i class="fa fa-key icon"> </i>
 							<input class="Field" type="text" placeholder="Username" />
 						</div>
-						<button class="blackPill">Take my Money</button>
+						<button @click="Confirm" class="blackPill">Take my Money</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="inProcessOrder" v-else-if="submitted">
+		<div class="inProcessOrder" v-else-if="paymentComplete">
 			<h1>This is an ORDER DONE page</h1>
 
 			<div class="hero">
@@ -212,7 +218,7 @@
 					magna maximus, vel mollis metus blandit.
 					<p>TESTING STUFF YO</p>
 				</span>
-				<button class="submitBtn">Coolio!</button>
+				<button @click="startNewOrder" class="submitBtn">Coolio!</button>
 			</div>
 		</div>
 	</div>
@@ -220,23 +226,36 @@
 
 <script>
 import Overlay from '@/components/Overlay'
+import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
+
 export default {
 	methods: {
 		tryme() {
 			this.showMe = !this.showMe
 		},
+		Confirm() {
+			let tmpuser = this.loggedInUser
+			let items = this.basket.map((x) => x._id)
+			
+			let tmptotalprice = this.basketTotalPrice
+			let payload = { user: tmpuser, items: items, price: tmptotalprice }
+
+			this.placeNewOrder(payload) //Placerar i databas
+			this.completePayment() //Sätter payment som klar, och resettar basket
+		},
+		
+		...mapMutations(['startNewOrder','completePayment']),
+		...mapActions(['placeNewOrder']),
 	},
 	data() {
 		return {
 			showMe: false,
-			submitted: false,
 			userLoggedIn: true,
 		}
 	},
 	computed: {
-		showModal() {
-			return this.showMe
-		},
+		...mapState(['basket', 'paymentComplete', 'loggedInUser']),
+		...mapGetters(['basketCount', 'basketTotalPrice', 'basketEmpty']),
 	},
 	components: {
 		Overlay,

@@ -71,7 +71,7 @@ export default {
 	},
 	data() {
 		return {
-			email: 'admin@example.com',
+			email: 'customer@example.com',
 			password: 'password',
 			showLogin: false,
 		}

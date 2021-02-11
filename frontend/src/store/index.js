@@ -13,8 +13,7 @@ export default new Vuex.Store({
 		loggedInUser: {},
 
 		// Product states
-		selectedProduct: {},
-		Basket: [{ price: 1 }, { price: 10 }, { price: 10 }, { price: 100 }],
+		basket: [],
 
 		paymentComplete: false,
 
@@ -29,25 +28,31 @@ export default new Vuex.Store({
 		// 	api.logInMe()
 		// },
 
-		// UserMutations
-		addToCart(product) {
-			this.Basket.push(product)
+		cacheAllProducts(state, products) {
+			state.allProducts = products
 		},
 
-		removeFromCart(product) {
-			const index = this.Basket.indexOf(product)
+		// UserMutations
+		addToCart(state, product) {
+			state.basket.push(product)
+		},
+
+		removeFromCart(state, product) {
+			const index = state.basket.indexOf(product)
 			if (index > -1) {
-				this.Basket.splice(index, 1)
+				state.basket.splice(index, 1)
 			}
 		},
 
-		completePayment() {
-			this.state.paymentComplete = true
+		completePayment(state) {
+			//För att komma till sidan efter konfirmerat payment
+			state.basket = []
+
+			state.paymentComplete = true
 		},
 
-		startNewOrder() {
-			this.state.Basket = {}
-			this.state.paymentComplete = true
+		startNewOrder(state) {
+			state.paymentComplete = false
 		},
 
 		login(state, user) {
@@ -75,9 +80,21 @@ export default new Vuex.Store({
 			this.commit('logout')
 		},
 
-		loadAllProducts() {
-			//Very dumb
+		async loadAllProducts({ commit }) {
+			let tmp = await api.getAllItems()
+			commit('cacheAllProducts', tmp)
 		},
+
+		async placeNewOrder({ commit, state }, payload) {
+			console.log('THESE ARE THE RESULTS', payload.items)
+
+			let result = await api.createOrder(
+				payload.user,
+				payload.items,
+				payload.price
+			)
+		},
+
 		saveProduct() {
 			//Adds new if it doesnt exist
 		},
@@ -88,15 +105,14 @@ export default new Vuex.Store({
 
 	getters: {
 		basketCount(state) {
-			return state.Basket.length
+			return state.basket.length
 		},
 		basketTotalPrice(state) {
-			let tmp = state.Basket.reduce((sum, next) => sum + next.price, 0)
-			console.log(tmp)
+			let tmp = state.basket.reduce((sum, next) => sum + next.price, 0)
 			return tmp
 		},
 		basketEmpty(state) {
-			return state.Basket.length === 0
+			return state.basket.length === 0
 		},
 		basketAveragePrice(state, getters) {
 			return getters.basketTotalPrice / getters.basketCount
