@@ -102,6 +102,7 @@ $shadow-color: #858585;
 
 .Field {
 	width: 100%;
+
 	background-color: $light-grey;
 	color: $secondary-color;
 
@@ -110,7 +111,7 @@ $shadow-color: #858585;
 	border-radius: 4px;
 	cursor: pointer;
 
-	display: inline-block;
+	display: block;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
 }
@@ -232,12 +233,6 @@ hr {
 		margin: 1rem;
 	}
 	&:active {
-		margin: 2rem;
-	}
-	&:focus {
-		margin: 2rem;
-	}
-	&::selection {
 		margin: 2rem;
 	}
 

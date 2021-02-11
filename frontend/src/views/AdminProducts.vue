@@ -11,21 +11,24 @@
 				<div class="dataInputImage">
 					<label class="button" for="upload">Upload File</label>
 					<input id="upload" type="file" />
+					<img src="" class="cartProductImage" />
 				</div>
-				<div class="datainputLines">
-					<input class="Field" type="text" placeholder="Product Name" />
-					<input class="Field" type="text" placeholder="Product short desc" />
-					<input class="Field" type="text" placeholder="Product Price" />
-					<input class="Field" type="text" placeholder="Product Serial" />
-				</div>
-				<div class="dataInputDescription">
-					<textarea
-						class="Field"
-						type="text"
-						placeholder="Product Description"
-						cols="30"
-						rows="13"
-					/>
+				<div class="allFields">
+					<div class="datainputLines">
+						<input class="Field" type="text" placeholder="Product Name" />
+						<input class="Field" type="text" placeholder="Product short desc" />
+						<input class="Field" type="text" placeholder="Product Price" />
+						<input class="Field" type="text" placeholder="Product Serial" />
+					</div>
+					<div class="dataInputDescription">
+						<textarea
+							class="Field"
+							type="text"
+							placeholder="Product Description"
+							cols="30"
+							rows="13"
+						/>
+					</div>
 				</div>
 			</div>
 			<button>Submit</button>
@@ -147,10 +150,24 @@ export default {
 	flex-direction: column;
 	padding-top: 2rem;
 }
+.allFields {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: space-evenly;
+}
+
 .dataInputs {
 	display: flex;
 	background-color: grey;
 	gap: 1rem;
 	padding: 1rem;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	.dataInputImage {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
 }
 </style>

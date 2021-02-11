@@ -4,7 +4,7 @@
 
 		<h1>This is an Products page</h1>
 
-		<button @click="tryme">KLICK ME</button>
+		<!-- <button @click="tryme">KLICK ME</button> -->
 
 		<Overlay :show="showMe" v-on:close="showMe = false">
 			<div class="modalProduct">
@@ -38,7 +38,7 @@
 		</Overlay>
 
 		<div class="productsContainer" v-if="true">
-			<div class="card shadowed">
+			<div class="card shadowed" @click="tryme">
 				<div class="cardHeader">
 					<span>Tricky</span>
 
@@ -105,6 +105,4 @@ export default {
 .headerImage {
 	background-image: '';
 }
-
-
 </style>

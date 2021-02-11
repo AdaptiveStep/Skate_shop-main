@@ -127,7 +127,7 @@ export default {
 			showBag: false,
 			showUserMod: false,
 			showLogin: false,
-			loggedInAsAdmin: true,
+			loggedInAsAdmin: false,
 			loggedIn: true,
 		}
 	},
