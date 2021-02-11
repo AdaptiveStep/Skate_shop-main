@@ -3,9 +3,9 @@
 		<!-- <HeaderImage image="@blablbl/..../img.jpg" msg="hejjlo"> -->
 
 		<h1>This is an Products page</h1>
+		<button class="testButton" @click="coolMutation">TESTAR STORE</button>
 
-		<!-- <button @click="tryme">KLICK ME</button> -->
-
+		<h1>Some stuff form module {{ giveStuff }}</h1>
 		<Overlay :show="showMe" v-on:close="showMe = false">
 			<div class="modalProduct">
 				<div class="modalPic">
@@ -77,11 +77,17 @@
 
 <script>
 import Overlay from '@/components/Overlay'
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
 	methods: {
 		tryme() {
-			this.showMe = !this.showMe
+			this.$store.commit('coolMutation')
 		},
+
+		...mapMutations('session', [
+			'coolMutation', // -> this.someMutation . Dvs använd som om den fanns direkt i topstore
+		]),
 	},
 	data() {
 		return {
@@ -92,6 +98,9 @@ export default {
 		showModal() {
 			return this.showMe
 		},
+		...mapGetters('session', [
+			'giveStuff', // -> this.someMutation
+		]),
 	},
 	components: {
 		Overlay,
@@ -104,5 +113,10 @@ export default {
 
 .headerImage {
 	background-image: '';
+}
+
+.testButton {
+	height: 5rem;
+	min-width: 10rem;
 }
 </style>

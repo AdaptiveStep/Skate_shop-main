@@ -1,5 +1,5 @@
-export const fun1 = function() {
-	console.log('hej')
+export const logInMe = function() {
+	console.log('logInMe Kördes nu fungerar!')
 }
 
 export const fun2 = function() {

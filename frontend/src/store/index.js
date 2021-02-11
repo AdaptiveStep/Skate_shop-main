@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { sessionModule } from '@/store/modules/sessionHandlers.js'
+
+// import * as api from '@/api/index.js'
 
 Vue.use(Vuex)
 
@@ -15,6 +18,7 @@ export default new Vuex.Store({
 		// sessionStates
 		loggedIn: false,
 		loggedInAsAdmin: false,
+		paymentComplete: false,
 
 		//Admin related states:
 		selectedUser: {},
@@ -23,17 +27,35 @@ export default new Vuex.Store({
 		allProducts: {},
 	},
 	mutations: {
-		SyncSession() {
-			//If there is no state, copy from session. If there is a state, save it to session. Always overwrite.
-			//Only SessionStorage.
-		},
+		// testSTUFF(state) {
+		// 	api.logInMe()
+		// },
 
 		// UserMutations
-		addToCart() {},
-		removeFromCart() {},
-		confirmOrder() {},
+		addToCart(product) {
+			this.Basket.push(product)
+		},
 
-		// adminMutations
+		removeFromCart(product) {
+			const index = this.Basket.indexOf(product)
+			if (index > -1) {
+				this.Basket.splice(index, 1)
+			}
+		},
+
+		completePayment() {
+			this.paymentComplete = true
+		},
+
+		startNewOrder() {
+			this.Basket = {}
+			this.paymentComplete = true
+		},
+
+		// admin Helpers
+		selectUser(user) {
+			this.selectedUser = user
+		},
 	},
 	actions: {
 		login() {},
@@ -49,5 +71,9 @@ export default new Vuex.Store({
 			//Adds new if it doesnt exist
 		},
 	},
-	modules: {},
+	getters: {},
+
+	modules: {
+		session: sessionModule,
+	},
 })
