@@ -23,21 +23,8 @@
 			>
 
 			<!-- Login modal -->
-			<div class="bagSpace">
-				<button @click="showLogin = true" class="roundButton bkg-primary">
-					<img src="../../../assets/icon-user-black.svg" />
-				</button>
 
-				<Overlay :show="showLogin" v-on:close="showLogin = false">
-					<div class="arrowContainer">
-						<div class="triangle-up "></div>
-
-						<div class="popoverBag">
-							<LoginForm></LoginForm>
-						</div>
-					</div>
-				</Overlay>
-			</div>
+			<LoginForm />
 
 			<!-- Cart modal -->
 			<div class="bagSpace">

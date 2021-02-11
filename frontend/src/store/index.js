@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import LocalStorageModule from '@/store/modules/localStorageHandlers.js'
+import createPersistedState from 'vuex-persistedstate'
 
 import * as api from '@/api/index.js'
 
@@ -102,10 +103,9 @@ export default new Vuex.Store({
 		},
 
 		loggedIn(state) {
-			return Object.keys(state.loggedInUser).length >0
+			return Object.keys(state.loggedInUser).length > 0
 		},
 		loggedInAsAdmin(state) {
-      
 			return state.loggedInUser.role === 'admin'
 		},
 	},
@@ -113,4 +113,5 @@ export default new Vuex.Store({
 	modules: {
 		localStorage: LocalStorageModule,
 	},
+	plugins: [createPersistedState()],
 })
