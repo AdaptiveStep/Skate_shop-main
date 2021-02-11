@@ -33,23 +33,7 @@
 						<div class="triangle-up "></div>
 
 						<div class="popoverBag">
-							<div class="column loginForm" v-if="!loggedIn">
-								<div class="inputContainer">
-									<input class="Field" type="text" placeholder="Username" />
-								</div>
-								<div class="inputContainer">
-									<input class="Field" type="password" placeholder="Password" />
-								</div>
-								<button class="blackPill loginBtn" @click="loggedIn = true">
-									Login
-								</button>
-							</div>
-
-							<div v-else>
-								<button class="blackPill loginBtn" @click="loggedIn = false">
-									Logout
-								</button>
-							</div>
+							<LoginForm></LoginForm>
 						</div>
 					</div>
 				</Overlay>
@@ -113,7 +97,7 @@
 
 <script>
 import Overlay from '@/components/Overlay.vue'
-import Dialog from '@/components/Overlay.vue'
+import LoginForm from '@/components/LoginForm.vue'
 export default {
 	name: 'Header',
 	props: {
@@ -121,6 +105,7 @@ export default {
 	},
 	components: {
 		Overlay,
+		LoginForm,
 	},
 	data() {
 		return {

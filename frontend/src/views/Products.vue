@@ -3,7 +3,7 @@
 		<!-- <HeaderImage image="@blablbl/..../img.jpg" msg="hejjlo"> -->
 
 		<h1>This is an Products page</h1>
-		<button class="testButton" @click="coolMutation">TESTAR STORE</button>
+		<button class="testButton" @click="tryme">TESTAR STORE</button>
 
 		<h1>Some stuff form module {{ giveStuff }}</h1>
 		<Overlay :show="showMe" v-on:close="showMe = false">
@@ -77,7 +77,7 @@
 
 <script>
 import Overlay from '@/components/Overlay'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
 	methods: {
@@ -85,8 +85,11 @@ export default {
 			this.$store.commit('coolMutation')
 		},
 
-		...mapMutations('session', [
-			'coolMutation', // -> this.someMutation . Dvs använd som om den fanns direkt i topstore
+		// ...mapMutations('localStorage', [
+		// 	'coolMutation', // -> this.someMutation . Dvs använd som om den fanns direkt i topstore
+		// ]),
+		...mapActions([
+			'giveStuff', // -> this.someMutation
 		]),
 	},
 	data() {
@@ -98,9 +101,6 @@ export default {
 		showModal() {
 			return this.showMe
 		},
-		...mapGetters('session', [
-			'giveStuff', // -> this.someMutation
-		]),
 	},
 	components: {
 		Overlay,

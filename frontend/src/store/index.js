@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { sessionModule } from '@/store/modules/sessionHandlers.js'
+import LocalStorageModule from '@/store/modules/localStorageHandlers.js'
 
-// import * as api from '@/api/index.js'
+import * as api from '@/api/index.js'
 
 Vue.use(Vuex)
 
@@ -13,18 +13,15 @@ export default new Vuex.Store({
 
 		// Product states
 		selectedProduct: {},
-		Basket: {},
+		Basket: [{ price: 1 }, { price: 10 }, { price: 10 }, { price: 100 }],
 
-		// sessionStates
-		loggedIn: false,
-		loggedInAsAdmin: false,
 		paymentComplete: false,
 
 		//Admin related states:
 		selectedUser: {},
 
 		//Cache related states:
-		allProducts: {},
+		allProducts: [],
 	},
 	mutations: {
 		// testSTUFF(state) {
@@ -44,22 +41,38 @@ export default new Vuex.Store({
 		},
 
 		completePayment() {
-			this.paymentComplete = true
+			this.state.paymentComplete = true
 		},
 
 		startNewOrder() {
-			this.Basket = {}
-			this.paymentComplete = true
+			this.state.Basket = {}
+			this.state.paymentComplete = true
+		},
+
+		login(state, user) {
+			//Don't use this. Use action instead.
+			state.loggedInUser = user
+		},
+		logout(state) {
+			//Don't use this. Use action instead.
+			state.loggedInUser = {}
 		},
 
 		// admin Helpers
-		selectUser(user) {
-			this.selectedUser = user
+		selectUser(state, user) {
+			state.selectedUser = user
 		},
 	},
 	actions: {
-		login() {},
-		logout() {},
+		async login({ commit }, user) {
+			let result = await api.login(user)
+			let compiledUser = result.user
+			compiledUser.token = result.token
+			this.commit('login', compiledUser)
+		},
+		logout({ commit }) {
+			this.commit('logout')
+		},
 
 		loadAllProducts() {
 			//Very dumb
@@ -71,9 +84,33 @@ export default new Vuex.Store({
 			//Adds new if it doesnt exist
 		},
 	},
-	getters: {},
+
+	getters: {
+		basketCount(state) {
+			return state.Basket.length
+		},
+		basketTotalPrice(state) {
+			let tmp = state.Basket.reduce((sum, next) => sum + next.price, 0)
+			console.log(tmp)
+			return tmp
+		},
+		basketEmpty(state) {
+			return state.Basket.length === 0
+		},
+		basketAveragePrice(state, getters) {
+			return getters.basketTotalPrice / getters.basketCount
+		},
+
+		loggedIn(state) {
+			return Object.keys(state.loggedInUser).length >0
+		},
+		loggedInAsAdmin(state) {
+      
+			return state.loggedInUser.role === 'admin'
+		},
+	},
 
 	modules: {
-		session: sessionModule,
+		localStorage: LocalStorageModule,
 	},
 })

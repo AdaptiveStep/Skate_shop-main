@@ -7,7 +7,7 @@
 		<slot name="content">
 			<p>Lorem ipsum dolor sit amet consectetur</p>
 		</slot>
-		<button>OK</button>
+		<button @click="$emit('Ok')">OK</button>
 		<button @click="$emit('cancel')">Cancel</button>
 	</article>
 </template>
