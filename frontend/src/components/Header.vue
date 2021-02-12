@@ -34,7 +34,7 @@
 								<img src="../../../assets/icon-bag-black.svg" />
 							</button>
 
-							<span class="counter">{{ basketCount }}</span>
+							<span v-if="!basketEmpty" class="counter">{{ basketCount }}</span>
 						</div>
 
 						<div v-if="showUserMod" class="triangle-up "></div>
@@ -48,7 +48,7 @@
 				>
 					<template>
 						<div class="popoverBag">
-							<Basket withButton="true" v-on:clickBuy="showUserMod = false" />
+							<Basket :withButton="true" v-on:clickBuy="showUserMod = false" />
 						</div>
 					</template>
 				</Overlay>
