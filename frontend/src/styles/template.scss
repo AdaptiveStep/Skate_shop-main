@@ -4,6 +4,12 @@ $orange-color: #f56969;
 $light-grey: #e5e5e5;
 $shadow-color: #858585;
 
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid'; // fas
+@import '~@fortawesome/fontawesome-free/scss/regular'; // far
+@import '~@fortawesome/fontawesome-free/scss/brands'; // fab
+
 .bkg-orange {
 	background-color: $orange-color;
 }
@@ -90,10 +96,12 @@ $shadow-color: #858585;
 }
 
 .column {
-	padding: 1rem;
-	min-width: 25rem;
-	display: relative;
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: column;
 	text-align: left;
+	gap: 1rem;
+	align-items: center;
 }
 .icon {
 	display: absolute;
@@ -101,19 +109,19 @@ $shadow-color: #858585;
 }
 
 .Field {
-	width: 100%;
-
+	width: calc(100% - 4px);
+	height: 2rem;
 	background-color: $light-grey;
 	color: $secondary-color;
-
-	padding: 1rem;
-	margin: 0.6rem 0;
+	text-indent: 1rem;
+	padding: 0;
+	margin: 0;
 	border-radius: 4px;
 	cursor: pointer;
 
 	display: block;
-	border: 1px solid #ccc;
-	box-sizing: border-box;
+	// border: 1px solid #ccc;
+	// box-sizing: border-box;
 }
 
 .Field:hover {
@@ -151,6 +159,7 @@ $shadow-color: #858585;
 	display: flex;
 	flex-direction: column;
 	max-height: 40rem;
+
 	overflow: auto;
 	// justify-content: space-between;
 	// width: 100%;
@@ -168,7 +177,7 @@ $shadow-color: #858585;
 	width: 3rem;
 	height: 3rem;
 	background: $primary-color;
-	padding: 1rem;
+	margin: 0.5rem;
 }
 
 .cartProductDetails {
@@ -326,6 +335,7 @@ hr {
 	position: relative;
 	background-color: $primary-color;
 	box-shadow: 0 0 0.5rem $shadow-color;
+	// margin: 0;
 	padding: 1rem;
 }
 
@@ -343,6 +353,18 @@ hr {
 	border-left: 10px solid transparent;
 	border-right: 10px solid transparent;
 	border-bottom: 20px solid $primary-color;
-	// transform: translate(19rem);
+	transform: translate(50%, 0);
 	z-index: 3;
+	padding-top: 0.5rem;
+}
+
+//_-----------------Only Vue transitions
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.1s ease;
+}
+.fade-enter, .fade-leave-to
+  /* .component-fade-leave-active below version 2.1.8 */ {
+	opacity: 0;
 }

@@ -2,118 +2,48 @@
 	<div class="makeOrder">
 		<!-- <HeaderImage image="@blablbl/..../img.jpg" msg="hejjlo"> -->
 
-		<div class="unloggedOrder" v-if="!loggedIn && !paymentComplete">
-			<h1>Please fill in your details</h1>
+		<transition name="fade" mode="out-in">
+			<div
+				class="unloggedOrder"
+				key="newBuyer"
+				v-if="!loggedIn && !paymentComplete"
+			>
+				<h1>Please fill in your details</h1>
 
-			<Overlay :show="showMe" v-on:close="showMe = false">
-				<div class="modalProduct">
-					<div class="modalPic">
-						<img
-							class="modalImage"
-							src="../../../assets/skateboard-generic.png"
-						/>
-					</div>
-
-					<div class="modalInfo">
-						<div class="modalTitle">
-							<span>GRETA FURY</span>
-						</div>
-						<div class="modalSubtitle">
-							<span>Unisex</span>
-						</div>
-						<div class="modalTextInfo">
-							<p>Jag gillar apor som hoppar</p>
-						</div>
-
-						<div class="modalCash">
-							<span>999 sek</span>
-						</div>
-					</div>
-				</div>
-			</Overlay>
-
-			<div class="makeOrder"></div>
-
-			<div class="pageFlex">
-				<Basket v-on:clickBuy="showUserMod = false" />
-
-				<div class="loginForm">
-					<h1>Your Details</h1>
-					<div class="input-icons">
-						<i class="fa fa-user icon"> </i>
-						<input class="Field" type="text" placeholder="Username" />
-					</div>
-
-					<div class="input-icons">
-						<i class="fa fa-envelope icon"> </i>
-						<input class="Field" type="text" placeholder="Username" />
-					</div>
-
-					<div class="input-icons">
-						<i class="fa fa-key icon"> </i>
-						<input class="Field" type="text" placeholder="Username" />
-					</div>
-					<hr />
-					<h1>Payment</h1>
-					<div class="input-icons">
-						<i class="fa fa-user icon"> </i>
-						<input class="Field" type="text" placeholder="Username" />
-					</div>
-
-					<div class="input-icons">
-						<i class="fa fa-envelope icon"> </i>
-						<input class="Field" type="text" placeholder="Username" />
-					</div>
-
-					<div class="input-icons">
-						<i class="fa fa-key icon"> </i>
-						<input class="Field" type="text" placeholder="Username" />
-					</div>
-					<button class="submitBtn">Submit order</button>
-				</div>
-			</div>
-		</div>
-
-		<div class="loggedInOrder" v-else-if="loggedIn && !paymentComplete">
-			<div class="pageFlex">
-				<TitledContainer title="items">
-					<Basket />
-				</TitledContainer>
-
-				<!-- <div class="userCart">
-					<div class="cartProducts">
-						<div
-							v-for="(item, index) in basket"
-							:key="index"
-							class="cartProduct"
-						>
+				<Overlay :show="showMe" v-on:close="showMe = false">
+					<div class="modalProduct">
+						<div class="modalPic">
 							<img
-								:src="require(`../../../assets/${item.imgFile}`)"
-								alt=""
-								class="cartProductImage"
+								class="modalImage"
+								src="../../../assets/skateboard-generic.png"
 							/>
+						</div>
 
-							<div class="cartProductDetails">
-								<h1>{{ item.title }}</h1>
-								<h2>{{ item.category }}</h2>
-								<h3>{{ item.serial }}</h3>
+						<div class="modalInfo">
+							<div class="modalTitle">
+								<span>GRETA FURY</span>
 							</div>
-							<div class="cartProductPrice">
-								<h1>{{ item.price }}</h1>
+							<div class="modalSubtitle">
+								<span>Unisex</span>
+							</div>
+							<div class="modalTextInfo">
+								<p>Jag gillar apor som hoppar</p>
+							</div>
+
+							<div class="modalCash">
+								<span>999 sek</span>
 							</div>
 						</div>
 					</div>
-					<hr />
-					<div class="cartTotals">
-						<h1>TOTAL</h1>
-						<h1>
-							<b>{{ basketTotalPrice }}</b>
-						</h1>
-					</div>
-				</div> -->
+				</Overlay>
 
-				<div class="multiFormWrapper">
-					<TitledContainer title="Delivery">
+				<div class="makeOrder"></div>
+
+				<div class="pageFlex">
+					<Basket v-on:clickBuy="showUserMod = false" />
+
+					<div class="loginForm">
+						<h1>Your Details</h1>
 						<div class="input-icons">
 							<i class="fa fa-user icon"> </i>
 							<input class="Field" type="text" placeholder="Username" />
@@ -128,9 +58,8 @@
 							<i class="fa fa-key icon"> </i>
 							<input class="Field" type="text" placeholder="Username" />
 						</div>
-					</TitledContainer>
-
-					<TitledContainer title="Payment Details">
+						<hr />
+						<h1>Payment</h1>
 						<div class="input-icons">
 							<i class="fa fa-user icon"> </i>
 							<input class="Field" type="text" placeholder="Username" />
@@ -145,48 +74,98 @@
 							<i class="fa fa-key icon"> </i>
 							<input class="Field" type="text" placeholder="Username" />
 						</div>
-						<button @click="Confirm" class="blackPill">Take my Money</button>
+						<button class="submitBtn">Submit order</button>
+					</div>
+				</div>
+			</div>
+
+			<div
+				class="loggedInOrder"
+				key="oldBuyer"
+				v-else-if="loggedIn && !paymentComplete"
+			>
+				<div class="pageFlex">
+					<TitledContainer title="items">
+						<Basket />
 					</TitledContainer>
+
+					<div class="multiFormWrapper">
+						<TitledContainer title="Delivery">
+							<div class="input-icons">
+								<i class="fa fa-user icon"> </i>
+								<input class="Field" type="text" placeholder="Username" />
+							</div>
+
+							<div class="input-icons">
+								<i class="fa fa-envelope icon"> </i>
+								<input class="Field" type="text" placeholder="Username" />
+							</div>
+
+							<div class="input-icons">
+								<i class="fa fa-key icon"> </i>
+								<input class="Field" type="text" placeholder="Username" />
+							</div>
+						</TitledContainer>
+
+						<TitledContainer title="Payment Details">
+							<div class="input-icons">
+								<i class="fa fa-user icon"> </i>
+								<input class="Field" type="text" placeholder="Username" />
+							</div>
+
+							<div class="input-icons">
+								<i class="fa fa-envelope icon"> </i>
+								<input class="Field" type="text" placeholder="Username" />
+							</div>
+
+							<div class="input-icons">
+								<i class="fa fa-key icon"> </i>
+								<input class="Field" type="text" placeholder="Username" />
+							</div>
+							<button @click="Confirm" class="blackPill">Take my Money</button>
+						</TitledContainer>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="inProcessOrder" v-else-if="paymentComplete">
-			<h1>This is an ORDER DONE page</h1>
+			<div class="inProcessOrder" key="completeBuy" v-else-if="paymentComplete">
+				<h1>This is an ORDER DONE page</h1>
 
-			<div class="hero">
-				<img class="heroImage" src="../../../assets/skate-hero-1.jpg" />
-				<div class="heroText">
-					<p>Thank you for your order</p>
+				<div class="hero">
+					<img class="heroImage" src="../../../assets/skate-hero-1.jpg" />
+					<div class="heroText">
+						<p>Thank you for your order</p>
+					</div>
+				</div>
+
+				<div class="column">
+					<h1>Cowabunga</h1>
+					<h3>
+						arcu posuere, nec condimentum diam ultrices. Cras fermentum commodo
+						tellus at ullamcorper. Fusce euismod pretium tellus, sit amet
+						iaculis sem molestie eu. Pellentesque tristique diam sit amet magna
+						maximus, vel mollis metus blandit.
+					</h3>
+					<span>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget ex
+						nec purus auctor mollis ac ut nulla. Vivamus maximus, sapien sit
+						amet rhoncus sodales, ligula quam tincidunt tellus, sit amet
+						vestibulum velit orci et nisl. Nullam aliquet lorem sed tellus
+						vestibulum dictum. Etiam efficitur tristique ligula et interdum. In
+						hac habitasse platea dictumst. Donec rhoncus maximus orci vel
+						tempus. Quisque interdum leo consequat aliquet posuere. Pellentesque
+						habitant morbi tristique senectus et netus et malesuada fames ac
+						turpis egestas. Aliquam pulvinar libero et arcu posuere, nec
+						condimentum diam ultrices. Cras fermentum commodo tellus at
+						ullamcorper. Fusce euismod pretium tellus, sit amet iaculis sem
+						molestie eu. Pellentesque tristique diam sit amet magna maximus, vel
+						mollis metus blandit.
+						<p>TESTING STUFF YO</p>
+					</span>
+					<button @click="startNewOrder" class="submitBtn">Coolio!</button>
 				</div>
 			</div>
-
-			<div class="column">
-				<h1>Cowabunga</h1>
-				<h3>
-					arcu posuere, nec condimentum diam ultrices. Cras fermentum commodo
-					tellus at ullamcorper. Fusce euismod pretium tellus, sit amet iaculis
-					sem molestie eu. Pellentesque tristique diam sit amet magna maximus,
-					vel mollis metus blandit.
-				</h3>
-				<span>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget ex
-					nec purus auctor mollis ac ut nulla. Vivamus maximus, sapien sit amet
-					rhoncus sodales, ligula quam tincidunt tellus, sit amet vestibulum
-					velit orci et nisl. Nullam aliquet lorem sed tellus vestibulum dictum.
-					Etiam efficitur tristique ligula et interdum. In hac habitasse platea
-					dictumst. Donec rhoncus maximus orci vel tempus. Quisque interdum leo
-					consequat aliquet posuere. Pellentesque habitant morbi tristique
-					senectus et netus et malesuada fames ac turpis egestas. Aliquam
-					pulvinar libero et arcu posuere, nec condimentum diam ultrices. Cras
-					fermentum commodo tellus at ullamcorper. Fusce euismod pretium tellus,
-					sit amet iaculis sem molestie eu. Pellentesque tristique diam sit amet
-					magna maximus, vel mollis metus blandit.
-					<p>TESTING STUFF YO</p>
-				</span>
-				<button @click="startNewOrder" class="submitBtn">Coolio!</button>
-			</div>
-		</div>
+		</transition>
 	</div>
 </template>
 

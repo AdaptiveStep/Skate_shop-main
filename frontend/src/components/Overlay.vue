@@ -64,7 +64,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	transform: translate(-65%, 0);
-	width: 26rem;
+	max-width: 26rem;
 }
 
 .contentPopup.show {

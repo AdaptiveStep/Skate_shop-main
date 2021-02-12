@@ -1,7 +1,9 @@
 <template>
 	<div id="app">
 		<Header />
-		<router-view />
+		<transition name="fade" mode="out-in">
+			<router-view />
+		</transition>
 	</div>
 </template>
 
@@ -20,15 +22,10 @@ export default {
 <style lang="scss">
 @import '@/styles/template.scss';
 
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/solid'; // fas
-@import '~@fortawesome/fontawesome-free/scss/regular'; // far
-@import '~@fortawesome/fontawesome-free/scss/brands'; // fab
+
 
 body {
 	background-color: $light-grey;
-	
 }
 
 #app {
