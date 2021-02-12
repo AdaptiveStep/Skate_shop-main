@@ -1,7 +1,4 @@
 <template>
-	<!-- <div id="nav">
-	</div> -->
-
 	<div id="nav" class="header">
 		<div id="logo">
 			<router-link to="/">
@@ -23,7 +20,6 @@
 			>
 
 			<!-- Login modal -->
-
 			<LoginForm />
 
 			<!-- Cart modal -->
@@ -42,45 +38,6 @@
 
 						<div class="popoverBag">
 							<Basket v-on:clickBuy="showUserMod = false" />
-							<!-- <div class="userCart">
-								<div class="cartProducts">
-									<div
-										v-for="(item, index) in basket"
-										:key="index"
-										class="cartProduct"
-									>
-										<img
-											:src="require(`../../../assets/${item.imgFile}`)"
-											alt=""
-											class="cartProductImage"
-										/>
-
-										<div class="cartProductDetails">
-											<h1>{{ item.title }}</h1>
-											<h2>{{ item.category }}</h2>
-											<h3>{{ item.serial }}</h3>
-										</div>
-										<div class="cartProductPrice">
-											<h1>{{ item.price }}</h1>
-										</div>
-									</div>
-								</div>
-								<hr />
-								<div class="cartTotals">
-									<h1>TOTAL</h1>
-									<h1>
-										<b>{{ basketTotalPrice }}</b>
-									</h1>
-								</div>
-								<router-link to="/makeorder"
-									><button
-										@click="showUserMod = false"
-										class="blackPill resizedCartPill"
-									>
-										Take my money
-									</button></router-link
-								>
-							</div> -->
 						</div>
 					</div>
 				</Overlay>

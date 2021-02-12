@@ -35,37 +35,7 @@
 			<div class="makeOrder"></div>
 
 			<div class="pageFlex">
-				<div class="userCart shadowed">
-					<div class="cartProducts">
-						<div
-							v-for="(item, index) in basket"
-							:key="index"
-							class="cartProduct"
-						>
-							<img
-								:src="require(`../../../assets/${item.imgFile}`)"
-								alt=""
-								class="cartProductImage"
-							/>
-
-							<div class="cartProductDetails">
-								<h1>{{ item.title }}</h1>
-								<h2>{{ item.category }}</h2>
-								<h3>{{ item.serial }}</h3>
-							</div>
-							<div class="cartProductPrice">
-								<h1>{{ item.price }}</h1>
-							</div>
-						</div>
-					</div>
-					<hr />
-					<div class="cartTotals">
-						<h1>TOTAL</h1>
-						<h1>
-							<b>{{ basketTotalPrice }}</b>
-						</h1>
-					</div>
-				</div>
+				<Basket v-on:clickBuy="showUserMod = false" />
 
 				<div class="loginForm">
 					<h1>Your Details</h1>
@@ -106,12 +76,11 @@
 
 		<div class="loggedInOrder" v-else-if="loggedIn && !paymentComplete">
 			<div class="pageFlex">
-				<div class="userCart">
-					<div class="linedTitle">
-						<span>Items</span>
-						<hr />
-					</div>
+				<TitledContainer title="items">
+					<Basket />
+				</TitledContainer>
 
+				<!-- <div class="userCart">
 					<div class="cartProducts">
 						<div
 							v-for="(item, index) in basket"
@@ -141,13 +110,10 @@
 							<b>{{ basketTotalPrice }}</b>
 						</h1>
 					</div>
-				</div>
+				</div> -->
+
 				<div class="multiFormWrapper">
-					<div class="loginFormCompact">
-						<div class="linedTitle">
-							<span>Delivery</span>
-							<hr />
-						</div>
+					<TitledContainer title="Delivery">
 						<div class="input-icons">
 							<i class="fa fa-user icon"> </i>
 							<input class="Field" type="text" placeholder="Username" />
@@ -162,13 +128,9 @@
 							<i class="fa fa-key icon"> </i>
 							<input class="Field" type="text" placeholder="Username" />
 						</div>
-					</div>
+					</TitledContainer>
 
-					<div class="loginFormCompact">
-						<div class="linedTitle">
-							<span>Payment details</span>
-							<hr />
-						</div>
+					<TitledContainer title="Payment Details">
 						<div class="input-icons">
 							<i class="fa fa-user icon"> </i>
 							<input class="Field" type="text" placeholder="Username" />
@@ -184,7 +146,7 @@
 							<input class="Field" type="text" placeholder="Username" />
 						</div>
 						<button @click="Confirm" class="blackPill">Take my Money</button>
-					</div>
+					</TitledContainer>
 				</div>
 			</div>
 		</div>
@@ -230,6 +192,8 @@
 
 <script>
 import Overlay from '@/components/Overlay'
+import Basket from '@/components/Basket'
+import TitledContainer from '@/components/TitledContainer'
 import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
@@ -269,6 +233,8 @@ export default {
 	},
 	components: {
 		Overlay,
+		Basket,
+		TitledContainer,
 	},
 }
 </script>
@@ -329,8 +295,8 @@ export default {
 	gap: 1rem;
 }
 
+//Remove when cart is done
 .userCart {
-	padding: 1rem;
 }
 
 .submitBtn {
