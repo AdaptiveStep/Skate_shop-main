@@ -2,10 +2,8 @@
 	<div class="makeOrder">
 		<!-- <HeaderImage image="@blablbl/..../img.jpg" msg="hejjlo"> -->
 
-		<div class="unloggedOrder" v-if="!userLoggedIn && !paymentComplete">
-			<h1>This is an MakeOrder page</h1>
-
-			<button @click="tryme">KLICK ME</button>
+		<div class="unloggedOrder" v-if="!loggedIn && !paymentComplete">
+			<h1>Please fill in your details</h1>
 
 			<Overlay :show="showMe" v-on:close="showMe = false">
 				<div class="modalProduct">
@@ -39,27 +37,33 @@
 			<div class="pageFlex">
 				<div class="userCart shadowed">
 					<div class="cartProducts">
-						<div class="cartProduct">
-							<img src="" alt="" class="cartProductImage" />
+						<div
+							v-for="(item, index) in basket"
+							:key="index"
+							class="cartProduct"
+						>
+							<img
+								:src="require(`../../../assets/${item.imgFile}`)"
+								alt=""
+								class="cartProductImage"
+							/>
 
 							<div class="cartProductDetails">
-								<h1>Greta</h1>
-								<h2>Unisex</h2>
-								<h3>SN112312323245</h3>
+								<h1>{{ item.title }}</h1>
+								<h2>{{ item.category }}</h2>
+								<h3>{{ item.serial }}</h3>
 							</div>
 							<div class="cartProductPrice">
-								<h1>999</h1>
+								<h1>{{ item.price }}</h1>
 							</div>
 						</div>
-
-						<div class="cartProduct"></div>
-						<div class="cartProduct"></div>
-						<div class="cartProduct"></div>
 					</div>
 					<hr />
 					<div class="cartTotals">
 						<h1>TOTAL</h1>
-						<h1><b>{2097}</b></h1>
+						<h1>
+							<b>{{ basketTotalPrice }}</b>
+						</h1>
 					</div>
 				</div>
 
@@ -100,7 +104,7 @@
 			</div>
 		</div>
 
-		<div class="loggedInOrder" v-else-if="userLoggedIn && !paymentComplete">
+		<div class="loggedInOrder" v-else-if="loggedIn && !paymentComplete">
 			<div class="pageFlex">
 				<div class="userCart">
 					<div class="linedTitle">
@@ -236,15 +240,15 @@ export default {
 		Confirm() {
 			let tmpuser = this.loggedInUser
 			let items = this.basket.map((x) => x._id)
-			
+
 			let tmptotalprice = this.basketTotalPrice
 			let payload = { user: tmpuser, items: items, price: tmptotalprice }
 
 			this.placeNewOrder(payload) //Placerar i databas
 			this.completePayment() //Sätter payment som klar, och resettar basket
 		},
-		
-		...mapMutations(['startNewOrder','completePayment']),
+
+		...mapMutations(['startNewOrder', 'completePayment']),
 		...mapActions(['placeNewOrder']),
 	},
 	data() {
@@ -255,7 +259,13 @@ export default {
 	},
 	computed: {
 		...mapState(['basket', 'paymentComplete', 'loggedInUser']),
-		...mapGetters(['basketCount', 'basketTotalPrice', 'basketEmpty']),
+		...mapGetters([
+			'basketCount',
+			'basketTotalPrice',
+			'basketEmpty',
+			'loggedIn',
+			'loggedInAsAdmin',
+		]),
 	},
 	components: {
 		Overlay,

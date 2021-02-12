@@ -41,7 +41,8 @@
 						<div class="triangle-up "></div>
 
 						<div class="popoverBag">
-							<div class="userCart">
+							<Basket v-on:clickBuy="showUserMod = false" />
+							<!-- <div class="userCart">
 								<div class="cartProducts">
 									<div
 										v-for="(item, index) in basket"
@@ -79,7 +80,7 @@
 										Take my money
 									</button></router-link
 								>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</Overlay>
@@ -91,6 +92,8 @@
 <script>
 import Overlay from '@/components/Overlay.vue'
 import LoginForm from '@/components/LoginForm.vue'
+import Basket from '@/components/Basket.vue'
+
 import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
@@ -101,6 +104,7 @@ export default {
 	components: {
 		Overlay,
 		LoginForm,
+		Basket,
 	},
 	data() {
 		return {
