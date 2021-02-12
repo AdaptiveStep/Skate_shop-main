@@ -106,7 +106,7 @@ $shadow-color: #858585;
 	background-color: $light-grey;
 	color: $secondary-color;
 
-	padding: 14px 20px;
+	padding: 1rem;
 	margin: 0.6rem 0;
 	border-radius: 4px;
 	cursor: pointer;
@@ -319,4 +319,30 @@ hr {
 .modalCash {
 	font-size: 1.3rem;
 	text-align: left;
+}
+
+//-----------------Popup
+.popoverBag {
+	position: relative;
+	background-color: $primary-color;
+	box-shadow: 0 0 0.5rem $shadow-color;
+	padding: 1rem;
+}
+
+.bagSpace {
+	position: static;
+}
+.overlayBag {
+	position: absolute;
+	z-index: 1;
+}
+
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 20px solid $primary-color;
+	// transform: translate(19rem);
+	z-index: 3;
 }

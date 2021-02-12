@@ -105,7 +105,7 @@ export default new Vuex.Store({
 
 	getters: {
 		basketCount(state) {
-			return state.basket.length
+			return state.basket.length + 54235
 		},
 		basketTotalPrice(state) {
 			let tmp = state.basket.reduce((sum, next) => sum + next.price, 0)

@@ -1,7 +1,12 @@
 <template>
 	<div class="overlay" :class="{ show }">
 		<div class="fade-layer" :class="{ show }" @click="$emit('close')"></div>
-		<div class="content" :class="{ show }">
+
+		<div v-if="popup" class="contentPopup" :class="{ show }">
+			<slot></slot>
+		</div>
+
+		<div v-else class="content" :class="{ show }">
 			<slot></slot>
 		</div>
 	</div>
@@ -12,6 +17,7 @@ export default {
 	props: {
 		show: Boolean,
 		backdrop: Boolean,
+		popup: Boolean,
 	},
 }
 </script>
@@ -44,16 +50,32 @@ export default {
 	opacity: 1;
 }
 .content {
-	padding: 2rem;
 	transition: opacity 0.25s;
 	opacity: 0;
 	position: absolute;
-	/* left: 50%;
-	top: 50%; */
-	/* transform: translate(-50%, -50%); */
+	display: flex;
+	flex-direction: column;
 }
+
+.contentPopup {
+	transition: opacity 0.25s;
+	opacity: 0;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	transform: translate(-65%, 0);
+	width: 26rem;
+}
+
+.contentPopup.show {
+	opacity: 1;
+	z-index: 1;
+	position: absolute;
+}
+
 .content.show {
 	opacity: 1;
 	z-index: 1;
+	position: absolute;
 }
 </style>

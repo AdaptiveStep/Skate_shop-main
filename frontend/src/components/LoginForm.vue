@@ -4,9 +4,9 @@
 			<img src="../../../assets/icon-user-black.svg" />
 		</button>
 
-		<Overlay :show="showLogin" v-on:close="showLogin = false">
-			<div class="arrowContainer"  v-if="showLogin">
-				<div class="triangle-up "></div>
+		<Overlay :popup="true" :show="showLogin" v-on:close="showLogin = false">
+			<template  v-if="showLogin">
+				<!-- <div class="triangle-up "></div> -->
 
 				<div class="popoverBag">
 					<div class="loginForm">
@@ -42,7 +42,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</template>
 		</Overlay>
 	</div>
 </template>
@@ -102,36 +102,7 @@ export default {
 	box-shadow: 0 0 0.4rem $shadow-color;
 }
 
-.popoverBag {
-	position: relative;
-	background-color: $primary-color;
-	transform: translate(-50%, 0);
-	box-shadow: 0 0 0.5rem $shadow-color;
-	padding: 1rem;
-}
 
-.bagSpace {
-	position: static;
-}
-.overlayBag {
-	position: absolute;
-	z-index: 1;
-}
-
-.triangle-up {
-	width: 0;
-	height: 0;
-	border-left: 10px solid transparent;
-	border-right: 10px solid transparent;
-	border-bottom: 20px solid $primary-color;
-	transform: translate(-85%, 0);
-	z-index: 1;
-}
-.arrowContainer {
-	display: flex;
-	flex-direction: column;
-	transform: translate(0, -10%);
-}
 
 
 .loginBtn {

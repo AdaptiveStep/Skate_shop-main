@@ -6,7 +6,7 @@
 			</router-link>
 		</div>
 
-		<div id="header-middle"></div>
+		<!-- <div id="header-middle"></div> -->
 
 		<div class="header-right">
 			<router-link to="/register" v-if="!loggedIn">Register </router-link>
@@ -25,21 +25,32 @@
 			<!-- Cart modal -->
 			<div class="bagSpace">
 				<div class="hasPopcounter">
-					<button @click="showUserMod = true" class="roundButton  bkg-orange">
-						<img src="../../../assets/icon-bag-black.svg" />
-					</button>
+					<div class="arrowBox">
+						<div class="counterAndButton">
+							<button
+								@click="showUserMod = true"
+								class="roundButton  bkg-orange"
+							>
+								<img src="../../../assets/icon-bag-black.svg" />
+							</button>
 
-					<span class="counter">{{ basketCount }}</span>
+							<span class="counter">{{ basketCount }}</span>
+						</div>
+
+						<div v-if="showUserMod" class="triangle-up "></div>
+					</div>
 				</div>
 
-				<Overlay :show="showUserMod" v-on:close="showUserMod = false">
-					<div class="arrowContainer ">
-						<div class="triangle-up "></div>
-
+				<Overlay
+					:popup="true"
+					:show="showUserMod"
+					v-on:close="showUserMod = false"
+				>
+					<template>
 						<div class="popoverBag">
 							<Basket v-on:clickBuy="showUserMod = false" />
 						</div>
-					</div>
+					</template>
 				</Overlay>
 			</div>
 		</div>
@@ -88,6 +99,8 @@ export default {
 	overflow: hidden;
 	align-items: center;
 	flex-wrap: wrap;
+	justify-content: space-between;
+	flex-direction: row;
 }
 
 div#header > div {
@@ -104,18 +117,17 @@ div#header > div {
 
 #header-middle {
 	flex-grow: 4;
-
-	display: flex;
-	gap: 1rem;
-	border-color: green;
 }
 
 .header-right {
 	display: flex;
 	gap: 1rem;
 	align-items: center;
-	border-color: blue;
 }
+
+// .popupOverlay {
+// 	transform: translate(-50%);
+// }
 
 router-link {
 	background-color: red;
@@ -129,37 +141,7 @@ router-link {
 	background-color: white;
 	padding: 0.2rem;
 	box-shadow: 0 0 0.4rem $shadow-color;
-}
-
-.popoverBag {
-	position: relative;
-	background-color: $primary-color;
-	transform: translate(-50%, 0);
-	box-shadow: 0 0 0.5rem $shadow-color;
-	padding: 1rem;
-}
-
-.bagSpace {
-	position: static;
-}
-.overlayBag {
-	position: absolute;
-	z-index: 1;
-}
-
-.triangle-up {
-	width: 0;
-	height: 0;
-	border-left: 10px solid transparent;
-	border-right: 10px solid transparent;
-	border-bottom: 20px solid $primary-color;
-	transform: translate(-85%, 0);
-	z-index: 1;
-}
-.arrowContainer {
-	display: flex;
-	flex-direction: column;
-	transform: translate(0, -10%);
+	z-index: 2;
 }
 
 .resizedCartPill {
@@ -172,5 +154,20 @@ router-link {
 	margin: 1rem;
 	align-self: center;
 	justify-content: center;
+}
+.arrowBox {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.counterAndButton {
+	z-index: 2;
+}
+/* On screens that are 600px wide or less, the background color is olive */
+@media screen and (max-width: 40rem) {
+	.header {
+		flex-direction: column;
+	}
 }
 </style>
