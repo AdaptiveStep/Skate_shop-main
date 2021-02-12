@@ -48,7 +48,7 @@
 				>
 					<template>
 						<div class="popoverBag">
-							<Basket v-on:clickBuy="showUserMod = false" />
+							<Basket withButton="true" v-on:clickBuy="showUserMod = false" />
 						</div>
 					</template>
 				</Overlay>
@@ -123,15 +123,16 @@ div#header > div {
 	display: flex;
 	gap: 1rem;
 	align-items: center;
+	min-height: 5rem;
 }
 
 // .popupOverlay {
 // 	transform: translate(-50%);
 // }
 
-router-link {
-	background-color: red;
-}
+// router-link {
+// 	background-color: red;
+// }
 
 .hasPopcounter .counter {
 	position: absolute;
@@ -162,7 +163,6 @@ router-link {
 }
 
 .counterAndButton {
-	z-index: 2;
 }
 /* On screens that are 600px wide or less, the background color is olive */
 @media screen and (max-width: 40rem) {

@@ -77,40 +77,8 @@
 		<div class="loggedInOrder" v-else-if="loggedIn && !paymentComplete">
 			<div class="pageFlex">
 				<TitledContainer title="items">
-					<Basket />
+					<Basket withButton="true" />
 				</TitledContainer>
-
-				<!-- <div class="userCart">
-					<div class="cartProducts">
-						<div
-							v-for="(item, index) in basket"
-							:key="index"
-							class="cartProduct"
-						>
-							<img
-								:src="require(`../../../assets/${item.imgFile}`)"
-								alt=""
-								class="cartProductImage"
-							/>
-
-							<div class="cartProductDetails">
-								<h1>{{ item.title }}</h1>
-								<h2>{{ item.category }}</h2>
-								<h3>{{ item.serial }}</h3>
-							</div>
-							<div class="cartProductPrice">
-								<h1>{{ item.price }}</h1>
-							</div>
-						</div>
-					</div>
-					<hr />
-					<div class="cartTotals">
-						<h1>TOTAL</h1>
-						<h1>
-							<b>{{ basketTotalPrice }}</b>
-						</h1>
-					</div>
-				</div> -->
 
 				<div class="multiFormWrapper">
 					<TitledContainer title="Delivery">

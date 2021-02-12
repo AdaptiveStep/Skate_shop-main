@@ -1,24 +1,27 @@
 <template>
 	<div class="userCart" v-bind:class="{ shadowed }">
 		<div class="cartProducts">
-			<div v-for="(item, index) in basket" :key="index" class="cartProduct">
-				<img
-					:src="require(`../../../assets/${item.imgFile}`)"
-					alt=""
-					class="cartProductImage"
-				/>
+			<div v-for="(item, index) in basket" :key="index" class="productHolder">
+				<div class="cartProduct">
+					<img
+						:src="require(`../../../assets/${item.imgFile}`)"
+						alt=""
+						class="cartProductImage"
+					/>
 
-				<div class="cartProductDetails">
-					<h1>{{ item.title }}</h1>
-					<h2>{{ item.category }}</h2>
-					<h3>{{ item.serial }}</h3>
+					<div class="cartProductDetails">
+						<h1>{{ item.title }}</h1>
+						<h2>{{ item.category }}</h2>
+						<h3>{{ item.serial }}</h3>
+					</div>
+					<div class="cartProductPrice">
+						<h1>{{ item.price }}</h1>
+					</div>
 				</div>
-				<div class="cartProductPrice">
-					<h1>{{ item.price }}</h1>
-				</div>
+				<hr />
 			</div>
 		</div>
-		<hr />
+		<hr style="border: 1px dashed $primary-color" />
 		<div class="cartTotals">
 			<h1>TOTAL</h1>
 			<h1>
@@ -26,12 +29,11 @@
 			</h1>
 		</div>
 
-		<router-link to="/makeorder" v-if="true"
+		<router-link to="/makeorder" v-if="withButton"
 			><button @click="$emit('clickBuy')" class="blackPill resizedCartPill">
 				Take my money
 			</button></router-link
 		>
-
 	</div>
 </template>
 
@@ -42,6 +44,10 @@ export default {
 	name: 'Basket',
 	props: {
 		shadowed: {
+			default: false,
+			type: Boolean,
+		},
+		withButton: {
 			default: false,
 			type: Boolean,
 		},
@@ -62,4 +68,13 @@ export default {
 
 <style lang="scss">
 @import '@/styles/template.scss';
+
+.productHolder {
+	display: flex;
+	flex-direction: column;
+	hr {
+		border: 1px solid rgba(0, 0, 0, 0.06);
+	}
+	padding-right: 1rem;
+}
 </style>

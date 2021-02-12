@@ -1,32 +1,29 @@
 <template>
 	<div class="bagSpace">
-		<button @click="showLogin = true" class="roundButton bkg-primary">
-			<img src="../../../assets/icon-user-black.svg" />
-		</button>
+		<div class="arrowBox">
+			<button @click="showLogin = true" class="roundButton bkg-primary">
+				<img src="../../../assets/icon-user-black.svg" />
+			</button>
+			<div v-if="showLogin" class="triangle-up "></div>
+		</div>
 
 		<Overlay :popup="true" :show="showLogin" v-on:close="showLogin = false">
-			<template  v-if="showLogin">
-				<!-- <div class="triangle-up "></div> -->
-
+			<template v-if="showLogin">
 				<div class="popoverBag">
 					<div class="loginForm">
 						<div class="column loginForm" v-if="!loggedIn">
-							<div class="inputContainer">
-								<input
-									class="Field"
-									v-model="email"
-									type="text"
-									placeholder="Username"
-								/>
-							</div>
-							<div class="inputContainer">
-								<input
-									class="Field"
-									type="password"
-									v-model="password"
-									placeholder="Password"
-								/>
-							</div>
+							<input
+								class="Field"
+								v-model="email"
+								type="text"
+								placeholder="Username"
+							/>
+							<input
+								class="Field"
+								type="password"
+								v-model="password"
+								placeholder="Password"
+							/>
 							<button
 								class="blackPill loginBtn"
 								@click="loginButtonPressed({ email, password })"
@@ -55,12 +52,12 @@ export default {
 	name: 'Header',
 	methods: {
 		loginButtonPressed(user) {
-			this.showLogin= false,
+			this.showLogin = false
 			this.login(user)
 		},
 
 		logoutButtonPressed() {
-			this.showLogin= false,
+			this.showLogin = false
 			this.logout()
 		},
 
@@ -101,9 +98,6 @@ export default {
 	padding: 0.2rem;
 	box-shadow: 0 0 0.4rem $shadow-color;
 }
-
-
-
 
 .loginBtn {
 	margin: 1rem;

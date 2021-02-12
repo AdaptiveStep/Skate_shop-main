@@ -90,10 +90,12 @@ $shadow-color: #858585;
 }
 
 .column {
-	padding: 1rem;
-	min-width: 25rem;
-	display: relative;
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: column;
 	text-align: left;
+	gap: 1rem;
+	align-items: center;
 }
 .icon {
 	display: absolute;
@@ -101,19 +103,19 @@ $shadow-color: #858585;
 }
 
 .Field {
-	width: 100%;
-
+	width: calc(100% - 4px);
+	height: 2rem;
 	background-color: $light-grey;
 	color: $secondary-color;
-
-	padding: 1rem;
-	margin: 0.6rem 0;
+	text-indent: 1rem;
+	padding: 0;
+	margin: 0;
 	border-radius: 4px;
 	cursor: pointer;
 
 	display: block;
-	border: 1px solid #ccc;
-	box-sizing: border-box;
+	// border: 1px solid #ccc;
+	// box-sizing: border-box;
 }
 
 .Field:hover {
@@ -154,6 +156,7 @@ $shadow-color: #858585;
 	overflow: auto;
 	// justify-content: space-between;
 	// width: 100%;
+	
 }
 
 .cartProduct {
@@ -326,6 +329,7 @@ hr {
 	position: relative;
 	background-color: $primary-color;
 	box-shadow: 0 0 0.5rem $shadow-color;
+	// margin: 0;
 	padding: 1rem;
 }
 
@@ -343,6 +347,7 @@ hr {
 	border-left: 10px solid transparent;
 	border-right: 10px solid transparent;
 	border-bottom: 20px solid $primary-color;
-	// transform: translate(19rem);
+	transform: translate(50%, 0);
 	z-index: 3;
+	padding-top: 0.5rem;
 }
