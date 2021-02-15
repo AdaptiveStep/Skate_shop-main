@@ -52,6 +52,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	background-color: black;
 	// padding: 0.5rem;
 	padding: 0.3rem 0.8rem;
+	margin: 1rem;
 	color: $primary-color;
 
 	display: flex;
@@ -110,7 +111,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 .Field {
 	width: calc(100% - 4px);
-	height: 2rem;
+	min-height: 2rem;
 	background-color: $light-grey;
 	color: $secondary-color;
 	text-indent: 1rem;
@@ -241,6 +242,7 @@ hr {
 	padding-left: 1rem;
 	padding-right: 1rem;
 	padding-top: 1rem;
+	justify-content: space-between;
 	&:hover {
 		margin: 1rem;
 	}
@@ -272,12 +274,14 @@ hr {
 
 .cardContent {
 	display: flex;
+	justify-content: flex-end;
+	flex-direction: column;
 }
 
 // For the price in cards
 .move {
 	position: absolute;
-	margin-top: 10rem;
+	margin: 1rem;
 	margin-left: 1rem;
 	z-index: 0;
 }
@@ -376,7 +380,7 @@ hr {
 }
 .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
 	opacity: 0;
-	transform: translateY(30px)
+	transform: translateY(30px);
 }
 
 ///---------------------------------------

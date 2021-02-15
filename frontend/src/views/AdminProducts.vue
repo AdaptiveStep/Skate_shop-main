@@ -7,54 +7,192 @@
 				<span>Add/Edit</span>
 				<hr />
 			</div>
-			<div class="dataInputs">
-				<div class="dataInputImage">
-					<label class="button" for="upload">Upload File</label>
-					<input id="upload" type="file" />
-					<img src="" class="cartProductImage" />
+			<form @submit="NewProductSubmit(newProduct)" class="dataInputs">
+				<div class="dataInputImages">
+					<img
+						v-for="(item, index) in allFiles"
+						:key="index"
+						tabindex="0"
+						class="selectNewProductImage"
+						:src="require(`../../../assets/${item}`)"
+						@click="setNewProductPath(item)"
+					/>
 				</div>
 				<div class="allFields">
 					<div class="datainputLines">
-						<input class="Field" type="text" placeholder="Product Name" />
-						<input class="Field" type="text" placeholder="Product short desc" />
-						<input class="Field" type="text" placeholder="Product Price" />
-						<input class="Field" type="text" placeholder="Product Serial" />
+						<input
+							v-model="newProduct.title"
+							class="Field"
+							type="text"
+							placeholder="Product Name"
+							required
+						/>
+						<input
+							v-model="newProduct.price"
+							class="Field"
+							type="number"
+							placeholder="Product Price"
+							required
+						/>
+						<select v-model="newProduct.category">
+							<option
+								v-for="(item, key) in categories"
+								:key="key"
+								v-bind:value="item.value"
+							>
+								{{ item.text }}
+							</option>
+						</select>
+
+						<input
+							v-model="newProduct.shortDesc"
+							class="Field"
+							type="text"
+							placeholder="Product short desc"
+							required
+						/>
 					</div>
 					<div class="dataInputDescription">
 						<textarea
+							v-model="newProduct.longDesc"
 							class="Field"
 							type="text"
 							placeholder="Product Description"
-							cols="30"
-							rows="13"
+							rows="9"
+							cols="50"
 						/>
 					</div>
 				</div>
-			</div>
-			<button>Submit</button>
+				<!-- <button @click="">Submit</button> -->
+				<input class="blackPill" type="submit" value="Create New Product" />
+			</form>
+
+			<Overlay :show="showProductModal" v-on:close="showProductModal = false">
+				<div class="modalProduct">
+					<div class="modalPic">
+						<img
+							class="modalImage"
+							:src="require(`../../../assets/${selectedProduct.imgFile}`)"
+						/>
+					</div>
+
+					<div class="modalInfo">
+						<div class="modalTitle">
+							<span>{{ selectedProduct.title }}</span>
+						</div>
+						<div class="modalSubtitle">
+							<span>{{ selectedProduct.shortDesc }}</span>
+						</div>
+						<div class="modalTextInfo">
+							<p>{{ selectedProduct.longDesc }}</p>
+						</div>
+
+						<div class="modalCash">
+							<span>{{ selectedProduct.price }}</span>
+						</div>
+						<div class="loginFormCompact">
+							<div class="linedTitle">
+								<span>Put new info</span>
+								<hr />
+							</div>
+							<div class="input-icons">
+								<input
+									v-model="selectedProduct.title"
+									class="Field"
+									type="text"
+									:placeholder="selectedProduct.title"
+								/>
+							</div>
+
+							<div class="input-icons">
+								<input
+									v-model="selectedProduct.shortDesc"
+									class="Field"
+									type="text"
+									:placeholder="selectedProduct.shortDesc"
+								/>
+							</div>
+							<select v-model="selectedProduct.category">
+								<option
+									v-for="(item, key) in categories"
+									:key="key"
+									v-bind:value="item.value"
+								>
+									{{ item.text }}
+								</option>
+							</select>
+							<div class="input-icons">
+								<textarea
+									v-model="selectedProduct.longDesc"
+									class="Field"
+									type="text"
+									:placeholder="selectedProduct.longDesc"
+									rows="9"
+								/>
+							</div>
+							<div class="input-icons">
+								<input
+									v-model="selectedProduct.price"
+									class="Field"
+									type="text"
+									:placeholder="selectedProduct.price"
+								/>
+							</div>
+							<div class="input-icons">
+								<input
+									disabled
+									v-model="selectedProduct.serial"
+									class="Field"
+									type="text"
+									:placeholder="selectedProduct.serial"
+								/>
+							</div>
+
+							<button @click="saveProduct(selectedProduct)" class="blackPill">
+								Save Product
+							</button>
+
+							<button
+								@click="
+									deleteProductById(selectedProduct)
+									showProductModal = false
+								"
+								class="blackPill"
+							>
+								Delete Product
+							</button>
+						</div>
+					</div>
+				</div>
+			</Overlay>
 
 			<div class="productsContainer" v-if="true">
-				<div class="card shadowed" @click="tryme">
+				<div
+					v-for="(item, index) in allProducts"
+					:key="index"
+					class="card shadowed"
+					@click="ShowProductDetails(item)"
+				>
 					<div class="cardHeader">
-						<span>Tricky</span>
+						<span>{{ item.title }}</span>
 
 						<button class="roundButton bkg-orange">
 							<img src="../../../assets/icon-edit-white.svg" />
 						</button>
 					</div>
 					<div class="cardSubTitle">
-						<span>Unisex</span>
+						<span>{{ item.shortDesc }}</span>
 					</div>
 
 					<div class="cardContent">
 						<img
 							class="cardImage"
-							src="../../../assets/skateboard-generic.png"
+							:src="require(`../../../assets/${item.imgFile}`)"
 						/>
 
 						<span class="blackPill move">
 							<div class="pillPrice">
-								133300
+								{{ item.price }}
 							</div>
 
 							<div class="pillSEK">
@@ -63,17 +201,10 @@
 						</span>
 					</div>
 				</div>
-
-				<div class="card shadowed"></div>
-				<div class="card shadowed"></div>
-				<div class="card shadowed"></div>
-				<div class="card shadowed"></div>
-				<div class="card shadowed"></div>
-				<div class="card shadowed"></div>
 			</div>
 		</div>
 
-		<Overlay :show="showMe" v-on:close="showMe = false">
+		<!-- <Overlay :show="showMe" v-on:close="showMe = false">
 			<div class="modalProduct">
 				<div class="modalPic">
 					<img
@@ -120,24 +251,98 @@
 					</div>
 				</div>
 			</div>
-		</Overlay>
+		</Overlay> -->
 	</div>
 </template>
 
 <script>
 import Overlay from '@/components/Overlay'
+import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
+
 export default {
 	methods: {
 		tryme() {
-			this.showMe = !this.showMe
+			this.$store.commit('coolMutation')
+		},
+
+		ShowProductDetails(item) {
+			this.selectedProduct = item
+			this.showProductModal = true
+		},
+		urlImage(product) {
+			let tmp = '../../../assets/'
+			let srctemp = tmp + product.imgFile
+			return srctemp
+		},
+		NewProductSubmit(product) {
+			this.createProduct(product)
+			this.newProduct = {
+				title: 'Unnamed Product',
+				price: 100,
+				shortDesc: 'Unisex',
+				category: 'clothes',
+				longDesc: 'No description given',
+				imgFile: 'hoodie-ash.png',
+				serial: '00000000000',
+			}
+		},
+
+		...mapMutations(['addToCart']),
+
+		...mapActions([
+			'giveStuff', // -> this.someMutation
+			'loadAllProducts',
+			'saveProduct',
+			'createProduct',
+			'deleteProductById',
+		]),
+		setNewProductPath(path) {
+			this.newProduct.imgFile = path
+			console.log(path)
 		},
 	},
 	data() {
-		return { showMe: false }
+		return {
+			showProductModal: false,
+			selectedProduct: {
+				title: 'Put new title',
+				price: 100,
+				shortDesc: 'new Description',
+				category: 'Unisex',
+				longDesc: 'No description given',
+				imgFile: 'hoodie-ash.png',
+			},
+			on: true,
+			newProduct: {
+				title: 'Unnamed Product',
+				price: 100,
+				shortDesc: 'Unisex',
+				category: 'clothes',
+				longDesc: 'No description given',
+				imgFile: 'hoodie-ash.png',
+				serial: '00000000000',
+			},
+			selectedCategory: 'clothes',
+			categories: [
+				{ text: 'Clothes', value: 'clothes' },
+				{ text: 'Board', value: 'board' },
+				{ text: 'Wheels', value: 'wheels' },
+			],
+		}
 	},
-	computed: {},
+	computed: {
+		showModal() {
+			return this.showProductModal
+		},
+
+		...mapState(['allProducts']),
+		...mapGetters(['allFiles']),
+	},
 	components: {
 		Overlay,
+	},
+	mounted() {
+		this.loadAllProducts()
 	},
 }
 </script>
@@ -164,10 +369,17 @@ export default {
 	padding: 1rem;
 	justify-content: space-evenly;
 	flex-wrap: wrap;
-	.dataInputImage {
+	.dataInputImages {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		gap: 1rem;
+		flex-wrap: wrap;
+		max-width: 15rem;
+
+		.selectNewProductImage {
+			width: 3rem;
+			height: 3rem;
+		}
 	}
 }
 </style>
