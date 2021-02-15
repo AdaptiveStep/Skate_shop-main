@@ -7,38 +7,72 @@
 				<span>Add/Edit</span>
 				<hr />
 			</div>
-			<div class="dataInputs">
-				<div class="dataInputImage">
-					<label class="button" for="upload">Upload File</label>
-					<input id="upload" type="file" />
-					<img src="" class="cartProductImage" />
+			<form @submit="NewProductSubmit(newProduct)" class="dataInputs">
+				<div class="dataInputImages">
+					<img
+						v-for="(item, index) in allFiles"
+						:key="index"
+						tabindex="0"
+						class="selectNewProductImage"
+						:src="require(`../../../assets/${item}`)"
+						@click="setNewProductPath(item)"
+					/>
 				</div>
 				<div class="allFields">
 					<div class="datainputLines">
-						<input class="Field" type="text" placeholder="Product Name" />
-						<input class="Field" type="text" placeholder="Product short desc" />
-						<input class="Field" type="text" placeholder="Product Price" />
-						<input class="Field" type="text" placeholder="Product Serial" />
+						<input
+							v-model="newProduct.title"
+							class="Field"
+							type="text"
+							placeholder="Product Name"
+							required
+						/>
+						<input
+							v-model="newProduct.price"
+							class="Field"
+							type="number"
+							placeholder="Product Price"
+							required
+						/>
+						<select v-model="newProduct.category">
+							<option
+								v-for="(item, key) in categories"
+								:key="key"
+								v-bind:value="item.value"
+							>
+								{{ item.text }}
+							</option>
+						</select>
+
+						<input
+							v-model="newProduct.shortDesc"
+							class="Field"
+							type="text"
+							placeholder="Product short desc"
+							required
+						/>
 					</div>
 					<div class="dataInputDescription">
 						<textarea
+							v-model="newProduct.longDesc"
 							class="Field"
 							type="text"
 							placeholder="Product Description"
-							cols="30"
-							rows="13"
+							rows="9"
+							cols="50"
 						/>
 					</div>
 				</div>
-			</div>
-			<button>Submit</button>
+				<!-- <button @click="">Submit</button> -->
+				<input class="blackPill" type="submit" value="Create New Product" />
+			</form>
 
 			<Overlay :show="showProductModal" v-on:close="showProductModal = false">
 				<div class="modalProduct">
 					<div class="modalPic">
 						<img
 							class="modalImage"
-							src="../../../assets/skateboard-generic.png"
+							:src="require(`../../../assets/${selectedProduct.imgFile}`)"
 						/>
 					</div>
 
@@ -63,7 +97,7 @@
 							</div>
 							<div class="input-icons">
 								<input
-								v-model="selectedProduct.title"
+									v-model="selectedProduct.title"
 									class="Field"
 									type="text"
 									:placeholder="selectedProduct.title"
@@ -78,19 +112,54 @@
 									:placeholder="selectedProduct.shortDesc"
 								/>
 							</div>
-
+							<select v-model="selectedProduct.category">
+								<option
+									v-for="(item, key) in categories"
+									:key="key"
+									v-bind:value="item.value"
+								>
+									{{ item.text }}
+								</option>
+							</select>
+							<div class="input-icons">
+								<textarea
+									v-model="selectedProduct.longDesc"
+									class="Field"
+									type="text"
+									:placeholder="selectedProduct.longDesc"
+									rows="9"
+								/>
+							</div>
 							<div class="input-icons">
 								<input
-								v-model="selectedProduct.price"
-
+									v-model="selectedProduct.price"
 									class="Field"
 									type="text"
 									:placeholder="selectedProduct.price"
 								/>
 							</div>
+							<div class="input-icons">
+								<input
+									disabled
+									v-model="selectedProduct.serial"
+									class="Field"
+									type="text"
+									:placeholder="selectedProduct.serial"
+								/>
+							</div>
 
 							<button @click="saveProduct(selectedProduct)" class="blackPill">
 								Save Product
+							</button>
+
+							<button
+								@click="
+									deleteProductById(selectedProduct)
+									showProductModal = false
+								"
+								class="blackPill"
+							>
+								Delete Product
 							</button>
 						</div>
 					</div>
@@ -205,6 +274,18 @@ export default {
 			let srctemp = tmp + product.imgFile
 			return srctemp
 		},
+		NewProductSubmit(product) {
+			this.createProduct(product)
+			this.newProduct = {
+				title: 'Unnamed Product',
+				price: 100,
+				shortDesc: 'Unisex',
+				category: 'clothes',
+				longDesc: 'No description given',
+				imgFile: 'hoodie-ash.png',
+				serial: '00000000000',
+			}
+		},
 
 		...mapMutations(['addToCart']),
 
@@ -212,13 +293,41 @@ export default {
 			'giveStuff', // -> this.someMutation
 			'loadAllProducts',
 			'saveProduct',
+			'createProduct',
+			'deleteProductById',
 		]),
+		setNewProductPath(path) {
+			this.newProduct.imgFile = path
+			console.log(path)
+		},
 	},
 	data() {
 		return {
 			showProductModal: false,
-			selectedProduct: {},
+			selectedProduct: {
+				title: 'Put new title',
+				price: 100,
+				shortDesc: 'new Description',
+				category: 'Unisex',
+				longDesc: 'No description given',
+				imgFile: 'hoodie-ash.png',
+			},
 			on: true,
+			newProduct: {
+				title: 'Unnamed Product',
+				price: 100,
+				shortDesc: 'Unisex',
+				category: 'clothes',
+				longDesc: 'No description given',
+				imgFile: 'hoodie-ash.png',
+				serial: '00000000000',
+			},
+			selectedCategory: 'clothes',
+			categories: [
+				{ text: 'Clothes', value: 'clothes' },
+				{ text: 'Board', value: 'board' },
+				{ text: 'Wheels', value: 'wheels' },
+			],
 		}
 	},
 	computed: {
@@ -227,6 +336,7 @@ export default {
 		},
 
 		...mapState(['allProducts']),
+		...mapGetters(['allFiles']),
 	},
 	components: {
 		Overlay,
@@ -259,10 +369,17 @@ export default {
 	padding: 1rem;
 	justify-content: space-evenly;
 	flex-wrap: wrap;
-	.dataInputImage {
+	.dataInputImages {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		gap: 1rem;
+		flex-wrap: wrap;
+		max-width: 15rem;
+
+		.selectNewProductImage {
+			width: 3rem;
+			height: 3rem;
+		}
 	}
 }
 </style>

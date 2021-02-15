@@ -111,7 +111,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 .Field {
 	width: calc(100% - 4px);
-	height: 2rem;
+	min-height: 2rem;
 	background-color: $light-grey;
 	color: $secondary-color;
 	text-indent: 1rem;
