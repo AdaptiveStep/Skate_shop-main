@@ -2,30 +2,42 @@
 	<div class="userCart" v-bind:class="{ shadowed }">
 		<div v-if="!basketEmpty">
 			<div class="cartProducts">
-				<div v-for="(item, index) in basket" :key="index" class="productHolder">
-					<div class="cartProduct">
-						<img
-							:src="require(`../../../assets/${item.imgFile}`)"
-							alt=""
-							class="cartProductImage shadowed"
-						/>
+				<transition-group name="list">
+					<div
+						v-for="(item, index) in basket"
+						:key="index"
+						class="productHolder"
+					>
+						<div class="cartProduct">
+							<img
+								:src="require(`../../../assets/${item.imgFile}`)"
+								alt=""
+								class="cartProductImage"
+							/>
 
-						<div class="cartProductDetails">
-							<h1>{{ item.title }}</h1>
-							<h2>{{ item.category }}</h2>
-							<h3>{{ item.serial }}</h3>
+							<div class="cartProductDetails">
+								<h1>{{ item.title }}</h1>
+								<h2>{{ item.category }}</h2>
+								<h3>{{ item.serial }}</h3>
+							</div>
+							<div class="cartProductPrice">
+								<h1>{{ item.price }}</h1>
+							</div>
+							<div class="modifiers">
+								<i
+									class="fas fa-plus-square shadowed"
+									@click="addToCart(item)"
+								></i>
+								<i
+									class="fas fa-minus-circle shadowed"
+									@click="removeFromCart(item)"
+								></i>
+							</div>
 						</div>
-						<div class="cartProductPrice">
-							<h1>{{ item.price }}</h1>
-						</div>
-						<div class="modifiers">
-							
-							<i class="fas fa-plus-square shadowed"></i>
-							<i class="fas fa-minus-circle shadowed"></i>
-						</div>
+
+						<hr />
 					</div>
-					<hr />
-				</div>
+				</transition-group>
 			</div>
 			<hr style="border: 1px dashed $primary-color" />
 			<div class="cartTotals">
@@ -73,6 +85,9 @@ export default {
 		...mapState(['basket']),
 		...mapGetters(['basketCount', 'basketTotalPrice', 'basketEmpty']),
 	},
+	methods: {
+		...mapMutations(['removeFromCart', 'addToCart']),
+	},
 }
 </script>
 
@@ -93,7 +108,6 @@ export default {
 	justify-content: space-evenly;
 	color: $primary-color;
 	gap: 0.1rem;
-	
 
 	.fas {
 		width: 1.5rem;

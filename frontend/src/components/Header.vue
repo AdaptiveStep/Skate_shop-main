@@ -79,13 +79,11 @@ export default {
 			showBag: false,
 			showUserMod: false,
 			showLogin: false,
-			loggedInAsAdmin: false,
-			loggedIn: true,
 		}
 	},
 	computed: {
 		...mapState(['basket']),
-		...mapGetters(['basketCount', 'basketTotalPrice', 'basketEmpty']),
+		...mapGetters(['basketCount', 'basketTotalPrice', 'basketEmpty', 'loggedIn', 'loggedInAsAdmin']),
 	},
 }
 </script>
