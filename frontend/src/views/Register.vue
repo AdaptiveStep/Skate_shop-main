@@ -10,58 +10,49 @@
 		</div>
 
 		<div class="twoWrappers">
-			<div class="column">
+			<div class="cut">
 				<h1>Cowabunga</h1>
-				<h3>
+				<h3 class="">
 					arcu posuere, nec condimentum diam ultrices. Cras fermentum commodo
 					tellus at ullamcorper. Fusce euismod pretium tellus, sit amet iaculis
 					sem molestie eu. Pellentesque tristique diam sit amet magna maximus,
 					vel mollis metus blandit.
 				</h3>
-				<span>
+				<span class="">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget ex
 					nec purus auctor mollis ac ut nulla. Vivamus maximus, sapien sit amet
 					rhoncus sodales, ligula quam tincidunt tellus, sit amet vestibulum
 					velit orci et nisl. Nullam aliquet lorem sed tellus vestibulum dictum.
 					Etiam efficitur tristique ligula et interdum. In hac habitasse platea
-					dictumst. Donec rhoncus maximus orci vel tempus. Quisque interdum leo
-					consequat aliquet posuere. Pellentesque habitant morbi tristique
-					senectus et netus et malesuada fames ac turpis egestas. Aliquam
-					pulvinar libero et arcu posuere, nec condimentum diam ultrices. Cras
-					fermentum commodo tellus at ullamcorper. Fusce euismod pretium tellus,
-					sit amet iaculis sem molestie eu. Pellentesque tristique diam sit amet
-					magna maximus, vel mollis metus blandit.
-					<p>TESTING STUFF YO</p>
 				</span>
 			</div>
 
-			<div class="column">
+			<div class="inputLength">
 				<h1>Register</h1>
 				<div class="inputContainer">
-					<label>Name</label>
-
-					<i class="fa fa-passport icon"> </i>
-					<input class="Field" type="text" />
+					<i class="fa fa-user icon"> </i>
+					<input class="Field" type="text" placeholder="Name" />
 				</div>
 				<div class="inputContainer">
-					<label>Email</label>
-
 					<i class="fa fa-envelope icon"> </i>
-					<input class="Field" type="text" />
+					<input class="Field" type="text" placeholder="Email" />
 				</div>
 				<div class="inputContainer">
-					<label>Password</label>
-
 					<i class="fa fa-key icon"> </i>
-					<input class="Field" type="password" />
+					<input class="Field" type="password" placeholder="Password" />
 				</div>
+				<div class="inputContainer">
+					<button @click="hejsan" class="blackPill">Register</button>
+				</div>
+
 			</div>
+
+			
 		</div>
 
 		<!-- <h1>This is an register page</h1> -->
 	</div>
 </template>
-´
 <script>
 export default {
 	name: 'Register',
@@ -74,12 +65,44 @@ export default {
 		toggleModal() {
 			this.showModal = !this.showModal
 		},
+		hejsan () {
+			console.log('hejhej')
+		}
 	},
 	components: {},
 }
 </script>
 <style scoped lang="scss">
 @import '@/styles/template.scss';
+
+
+
+
+
+.inputLength {
+	width: 100%;
+}
+
+.inputContainer i {
+	position: absolute;
+}
+.inputContainer {
+	width: 100%;
+	padding-top: 1rem;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.icon {
+	padding: 10px;
+}
+
+.cut {
+	width: 100%;
+}
+
+
+
 
 
 </style>
