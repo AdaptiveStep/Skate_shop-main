@@ -83,14 +83,15 @@ export const updateProductById = function(product, user) {
 }
 
 export const deleteProductById = function(product, user) {
-	fetch('http://localhost:5000/api/products/:id', {
+	let endpoint = 'http://localhost:5000/api/products/' + product._id
+	let result = fetch(endpoint, {
 		method: 'DELETE',
-		headers: { 'Content-Type': 'application/json', Authorization: user.token },
-
-		body: JSON.stringify({
-			id: product.id,
-		}),
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + user.token,
+		},
 	}).then((response) => response.json())
+	return result
 }
 
 export const createOrder = function(user, itemIdArray, price) {
