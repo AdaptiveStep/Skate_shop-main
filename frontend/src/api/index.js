@@ -55,9 +55,17 @@ export const createProduct = function(product, user) {
 }
 
 export const updateProductById = function(product, user) {
-	let result = fetch('http://localhost:5000/api/products/:id', {
+	console.log('USER now', user)
+	console.log('Product now', product)
+
+	let endpoint = 'http://localhost:5000/api/products/' + product._id
+	let result = fetch(endpoint, {
 		method: 'PATCH',
-		headers: { 'Content-Type': 'application/json', Authorization: user.token },
+		headers: {
+			'Content-Type': 'application/json',
+
+			Authorization: 'Bearer ' + user.token,
+		},
 
 		body: JSON.stringify({
 			title: product.title,
@@ -67,7 +75,7 @@ export const updateProductById = function(product, user) {
 			longDesc: product.longDesc,
 			imgFile: product.imgFile,
 			serial: product.serial,
-			id: product.id,
+			id: product._id,
 		}),
 	}).then((response) => response.json())
 
@@ -91,8 +99,7 @@ export const createOrder = function(user, itemIdArray, price) {
 		headers: {
 			'Content-Type': 'application/json',
 
-			Authorization:
-				'Bearer' + user.token,
+			Authorization: 'Bearer' + user.token,
 		},
 
 		body: JSON.stringify({

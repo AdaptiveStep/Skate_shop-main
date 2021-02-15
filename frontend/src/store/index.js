@@ -86,7 +86,7 @@ export default new Vuex.Store({
 		},
 
 		async placeNewOrder({ commit, state }, payload) {
-			console.log('THESE ARE THE RESULTS', payload.items)
+			// console.log('THESE ARE THE RESULTS', payload.items)
 
 			let result = await api.createOrder(
 				payload.user,
@@ -95,8 +95,10 @@ export default new Vuex.Store({
 			)
 		},
 
-		saveProduct() {
-			//Adds new if it doesnt exist
+		async saveProduct({ state, dispatch }, product) {
+			console.log('SAVING STUFF', product)
+			let result = await api.updateProductById(product, state.loggedInUser)
+			dispatch('loadAllProducts')
 		},
 		saveUser() {
 			//Adds new if it doesnt exist

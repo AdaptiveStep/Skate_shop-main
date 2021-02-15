@@ -33,28 +33,97 @@
 			</div>
 			<button>Submit</button>
 
+			<Overlay :show="showProductModal" v-on:close="showProductModal = false">
+				<div class="modalProduct">
+					<div class="modalPic">
+						<img
+							class="modalImage"
+							src="../../../assets/skateboard-generic.png"
+						/>
+					</div>
+
+					<div class="modalInfo">
+						<div class="modalTitle">
+							<span>{{ selectedProduct.title }}</span>
+						</div>
+						<div class="modalSubtitle">
+							<span>{{ selectedProduct.shortDesc }}</span>
+						</div>
+						<div class="modalTextInfo">
+							<p>{{ selectedProduct.longDesc }}</p>
+						</div>
+
+						<div class="modalCash">
+							<span>{{ selectedProduct.price }}</span>
+						</div>
+						<div class="loginFormCompact">
+							<div class="linedTitle">
+								<span>Put new info</span>
+								<hr />
+							</div>
+							<div class="input-icons">
+								<input
+								v-model="selectedProduct.title"
+									class="Field"
+									type="text"
+									:placeholder="selectedProduct.title"
+								/>
+							</div>
+
+							<div class="input-icons">
+								<input
+									v-model="selectedProduct.shortDesc"
+									class="Field"
+									type="text"
+									:placeholder="selectedProduct.shortDesc"
+								/>
+							</div>
+
+							<div class="input-icons">
+								<input
+								v-model="selectedProduct.price"
+
+									class="Field"
+									type="text"
+									:placeholder="selectedProduct.price"
+								/>
+							</div>
+
+							<button @click="saveProduct(selectedProduct)" class="blackPill">
+								Save Product
+							</button>
+						</div>
+					</div>
+				</div>
+			</Overlay>
+
 			<div class="productsContainer" v-if="true">
-				<div class="card shadowed" @click="tryme">
+				<div
+					v-for="(item, index) in allProducts"
+					:key="index"
+					class="card shadowed"
+					@click="ShowProductDetails(item)"
+				>
 					<div class="cardHeader">
-						<span>Tricky</span>
+						<span>{{ item.title }}</span>
 
 						<button class="roundButton bkg-orange">
 							<img src="../../../assets/icon-edit-white.svg" />
 						</button>
 					</div>
 					<div class="cardSubTitle">
-						<span>Unisex</span>
+						<span>{{ item.shortDesc }}</span>
 					</div>
 
 					<div class="cardContent">
 						<img
 							class="cardImage"
-							src="../../../assets/skateboard-generic.png"
+							:src="require(`../../../assets/${item.imgFile}`)"
 						/>
 
 						<span class="blackPill move">
 							<div class="pillPrice">
-								133300
+								{{ item.price }}
 							</div>
 
 							<div class="pillSEK">
@@ -63,17 +132,10 @@
 						</span>
 					</div>
 				</div>
-
-				<div class="card shadowed"></div>
-				<div class="card shadowed"></div>
-				<div class="card shadowed"></div>
-				<div class="card shadowed"></div>
-				<div class="card shadowed"></div>
-				<div class="card shadowed"></div>
 			</div>
 		</div>
 
-		<Overlay :show="showMe" v-on:close="showMe = false">
+		<!-- <Overlay :show="showMe" v-on:close="showMe = false">
 			<div class="modalProduct">
 				<div class="modalPic">
 					<img
@@ -120,24 +182,57 @@
 					</div>
 				</div>
 			</div>
-		</Overlay>
+		</Overlay> -->
 	</div>
 </template>
 
 <script>
 import Overlay from '@/components/Overlay'
+import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
+
 export default {
 	methods: {
 		tryme() {
-			this.showMe = !this.showMe
+			this.$store.commit('coolMutation')
 		},
+
+		ShowProductDetails(item) {
+			this.selectedProduct = item
+			this.showProductModal = true
+		},
+		urlImage(product) {
+			let tmp = '../../../assets/'
+			let srctemp = tmp + product.imgFile
+			return srctemp
+		},
+
+		...mapMutations(['addToCart']),
+
+		...mapActions([
+			'giveStuff', // -> this.someMutation
+			'loadAllProducts',
+			'saveProduct',
+		]),
 	},
 	data() {
-		return { showMe: false }
+		return {
+			showProductModal: false,
+			selectedProduct: {},
+			on: true,
+		}
 	},
-	computed: {},
+	computed: {
+		showModal() {
+			return this.showProductModal
+		},
+
+		...mapState(['allProducts']),
+	},
 	components: {
 		Overlay,
+	},
+	mounted() {
+		this.loadAllProducts()
 	},
 }
 </script>
