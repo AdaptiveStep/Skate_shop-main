@@ -8,10 +8,11 @@
 				key="newBuyer"
 				v-if="!loggedIn && !paymentComplete"
 			>
-				<h1>Please fill in your details</h1>
 
 				<Overlay :show="showMe" v-on:close="showMe = false">
+
 					<div class="modalProduct">
+
 						<div class="modalPic">
 							<img
 								class="modalImage"
@@ -43,37 +44,39 @@
 					<Basket v-on:clickBuy="showUserMod = false" />
 
 					<div class="loginForm">
-						<h1>Your Details</h1>
-						<div class="input-icons">
-							<i class="fa fa-user icon"> </i>
-							<input class="Field" type="text" placeholder="Username" />
-						</div>
+						<h1 class="yourDetails">Your Details</h1>
+							<div class="gapping">
+								<input class="Field" placeholder="Your name" type="text">
+							</div>
 
-						<div class="input-icons">
-							<i class="fa fa-envelope icon"> </i>
-							<input class="Field" type="text" placeholder="Username" />
-						</div>
-
-						<div class="input-icons">
-							<i class="fa fa-key icon"> </i>
-							<input class="Field" type="text" placeholder="Username" />
-						</div>
+							<div class="gapping">
+								<input class="Field" placeholder="Street" type="text">
+							</div>
+							<div class="inline gapping">
+								<div>
+									<input class="Field" placeholder="ZIP code">
+								</div>
+								<div>
+									<input class="Field" placeholder="City">
+								</div>
+							</div>
 						<hr />
-						<h1>Payment</h1>
-						<div class="input-icons">
-							<i class="fa fa-user icon"> </i>
-							<input class="Field" type="text" placeholder="Username" />
-						</div>
+						<h1 class="payment">Payment</h1>
+							<div class="gapping">
+								<input class="Field" placeholder="Card Owner" type="text">
+							</div>
 
-						<div class="input-icons">
-							<i class="fa fa-envelope icon"> </i>
-							<input class="Field" type="text" placeholder="Username" />
-						</div>
-
-						<div class="input-icons">
-							<i class="fa fa-key icon"> </i>
-							<input class="Field" type="text" placeholder="Username" />
-						</div>
+							<div class="gapping">
+								<input class="Field" placeholder="Card Number" type="text">
+							</div>
+							<div class="inline gapping">
+								<div>
+									<input class="Field" placeholder="Valid until" type="text">
+								</div>
+								<div>
+									<input class="Field" placeholder="CCV" type="text">
+								</div>
+							</div>
 						<button class="submitBtn">Submit order</button>
 					</div>
 				</div>
@@ -90,39 +93,46 @@
 					</TitledContainer>
 
 					<div class="multiFormWrapper">
-						<TitledContainer title="Delivery">
-							<div class="input-icons">
-								<i class="fa fa-user icon"> </i>
-								<input class="Field" type="text" placeholder="Username" />
+						<TitledContainer class="fixa" title="Delivery">
+							<div class="gapping">
+								<input v-model="loggedInUser.name" class="Field" placeholder="Name" type="text">
 							</div>
 
-							<div class="input-icons">
-								<i class="fa fa-envelope icon"> </i>
-								<input class="Field" type="text" placeholder="Username" />
+							<div class="gapping">
+								<input v-model="loggedInUser.adress.street" class="Field" placeholder="Street adress" type="text">
+							</div>
+							<div class="inline gapping">
+								<div>
+									<input v-model="loggedInUser.adress.zip" class="Field" placeholder="City">
+								</div>
+								<div>
+									<input v-model="loggedInUser.adress.city" class="Field" placeholder="Zip Code">
+								</div>
 							</div>
 
-							<div class="input-icons">
-								<i class="fa fa-key icon"> </i>
-								<input class="Field" type="text" placeholder="Username" />
-							</div>
+								<button @click="hej" class="blackPill">Update</button>
+
 						</TitledContainer>
 
-						<TitledContainer title="Payment Details">
-							<div class="input-icons">
-								<i class="fa fa-user icon"> </i>
-								<input class="Field" type="text" placeholder="Username" />
+						<TitledContainer class="fixa" title="Payment Details">
+							<div class="gapping">
+								<input class="Field" placeholder="Card owner" type="text">
 							</div>
 
-							<div class="input-icons">
-								<i class="fa fa-envelope icon"> </i>
-								<input class="Field" type="text" placeholder="Username" />
+							<div class="gapping">
+								<input class="Field" placeholder="Card Number" type="text">
 							</div>
-
-							<div class="input-icons">
-								<i class="fa fa-key icon"> </i>
-								<input class="Field" type="text" placeholder="Username" />
+							<div class="inline gapping">
+								<div>
+									<input class="Field" placeholder="Valid until" type="text">
+								</div>
+								<div>
+									<input class="Field" placeholder="CCV" type="text">
+								</div>
 							</div>
-							<button @click="Confirm" class="blackPill">Take my Money</button>
+							<div class="forBut">
+								<button @click="Confirm" class="blackPill">Take my Money</button>
+							</div>
 						</TitledContainer>
 					</div>
 				</div>
@@ -189,6 +199,9 @@ export default {
 
 			this.placeNewOrder(payload) //Placerar i databas
 			this.completePayment() //Sätter payment som klar, och resettar basket
+		},
+		hej() {
+			console.log('hej')
 		},
 
 		...mapMutations(['startNewOrder', 'completePayment']),
@@ -284,6 +297,7 @@ export default {
 	color: $light-grey;
 	padding: 0.5rem;
 	min-width: 10rem;
+	margin-top: 1rem;
 }
 
 // ------------------------
@@ -294,6 +308,12 @@ export default {
 .input-icons {
 	display: flex;
 	flex-direction: column;
+	margin: 1rem;
+}
+
+.input-icons-extend {
+	width: 100%;
+	display: table;
 }
 
 .icon {
@@ -309,4 +329,56 @@ export default {
 	display: flex;
 	gap: 1rem;
 }
+
+
+
+
+
+
+// Tillfälligt
+
+.yourDetails {
+	padding-right: 11rem;
+}
+
+.payment {
+	padding-right: 14rem;
+
+}
+
+.fixa {
+	width: 19rem;
+}
+
+.forBut {
+	padding-top: 1rem;
+	padding-left: 9rem;
+}
+
+.gapping {
+	padding-top: 1rem;
+}
+
+input {
+  width: 100%;
+  display: block;
+
+}
+
+div.inline {
+  width: 100%;
+  display: table;
+
+}
+
+div.inline div {
+  display: table-cell;
+
+}
+
+div.inline div:nth-child(n+2) {
+   padding-left: 10px;
+}
+
+
 </style>
