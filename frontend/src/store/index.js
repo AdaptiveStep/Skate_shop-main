@@ -13,7 +13,12 @@ export default new Vuex.Store({
 		loggedInUser: {},
 
 		// Product states
-		basket: [],
+		//basket: [],
+
+		basketItems: [
+			{ productId: 'x12', amount: 3 },
+			{ productId: 'nnvd', amount: 1 },
+		],
 
 		paymentComplete: false,
 
@@ -22,20 +27,22 @@ export default new Vuex.Store({
 
 		//Cache related states:
 		allProducts: [],
+		allProdDictionary: [],
 	},
 	mutations: {
-		// testSTUFF(state) {
-		// 	api.logInMe()
-		// },
-
 		cacheAllProducts(state, products) {
-			state.allProducts = products
+			// state.allProducts = products
+			products.map((p) => {
+				state.allProdDictionary[p.id] = p
+			})
 		},
 
 		// UserMutations
 		addToCart(state, product) {
 			state.basket.push(product)
 		},
+
+		productIsInCart(product) {},
 
 		removeFromCart(state, product) {
 			const index = state.basket.indexOf(product)
@@ -46,8 +53,7 @@ export default new Vuex.Store({
 
 		completePayment(state) {
 			//För att komma till sidan efter konfirmerat payment
-			state.basket = []
-
+			state.basketItems = []
 			state.paymentComplete = true
 		},
 
@@ -87,7 +93,6 @@ export default new Vuex.Store({
 
 		async placeNewOrder({ commit, state }, payload) {
 			// console.log('THESE ARE THE RESULTS', payload.items)
-
 			let result = await api.createOrder(
 				payload.user,
 				payload.items,
@@ -108,7 +113,6 @@ export default new Vuex.Store({
 			let result = await api.deleteProductById(product, state.loggedInUser)
 			dispatch('loadAllProducts')
 		},
-
 		saveUser() {
 			//Adds new if it doesnt exist
 		},
@@ -119,7 +123,10 @@ export default new Vuex.Store({
 			return state.basket.length
 		},
 		basketTotalPrice(state) {
-			let tmp = state.basket.reduce((sum, next) => sum + next.price, 0)
+			let tmp = state.basket.reduce(
+				(sum, next) => sum + next.amount * next.price,
+				0
+			)
 			return tmp
 		},
 		basketEmpty(state) {
@@ -142,6 +149,13 @@ export default new Vuex.Store({
 				tmpFiles.push(key.slice(2))
 			})
 			return tmpFiles
+		},
+		basket(state) {
+			let mappedList = state.cartItems.map((item) => ({
+				product: state.allProdDictionary[item.productId],
+				amount: item.amount,
+			}))
+			return mappedList
 		},
 	},
 
