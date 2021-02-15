@@ -94,12 +94,21 @@ export default new Vuex.Store({
 				payload.price
 			)
 		},
+		async createProduct({ state, dispatch }, product) {
+			let result = await api.createProduct(product, state.loggedInUser)
+			dispatch('loadAllProducts')
+		},
 
 		async saveProduct({ state, dispatch }, product) {
-			console.log('SAVING STUFF', product)
 			let result = await api.updateProductById(product, state.loggedInUser)
 			dispatch('loadAllProducts')
 		},
+
+		async deleteProductById({ state, dispatch }, product) {
+			let result = await api.deleteProductById(product, state.loggedInUser)
+			dispatch('loadAllProducts')
+		},
+
 		saveUser() {
 			//Adds new if it doesnt exist
 		},
@@ -125,6 +134,14 @@ export default new Vuex.Store({
 		},
 		loggedInAsAdmin(state) {
 			return state.loggedInUser.role === 'admin'
+		},
+		allFiles() {
+			const req = require.context('../../../assets/', true, /\.(png)$/i)
+			let tmpFiles = []
+			req.keys().map((key) => {
+				tmpFiles.push(key.slice(2))
+			})
+			return tmpFiles
 		},
 	},
 

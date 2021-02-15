@@ -38,7 +38,10 @@ export const getProductById = function(productId) {
 export const createProduct = function(product, user) {
 	let result = fetch('http://localhost:5000/api/products/', {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json', Authorization: user.token },
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer' + user.token,
+		},
 
 		body: JSON.stringify({
 			title: product.title,
@@ -117,7 +120,7 @@ export const getAllOrders = function(user) {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: user.token,
+			Authorization: 'Bearer' + user.token,
 		},
 	}).then((response) => response.json())
 
