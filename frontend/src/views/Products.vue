@@ -1,6 +1,5 @@
 <template>
 	<div class="product">
-
 		<!-- <h1>Some stuff form module {{ giveStuff }}</h1> -->
 		<Overlay :show="showProductModal" v-on:close="showProductModal = false">
 			<div class="modalProduct">
@@ -112,6 +111,7 @@ export default {
 		},
 
 		...mapState(['allProducts']),
+		...mapGetters(['basket']),
 	},
 	components: {
 		Overlay,
@@ -133,5 +133,4 @@ export default {
 	height: 5rem;
 	min-width: 10rem;
 }
-
 </style>

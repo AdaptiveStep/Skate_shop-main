@@ -82,8 +82,15 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(['basket']),
-		...mapGetters(['basketCount', 'basketTotalPrice', 'basketEmpty', 'loggedIn', 'loggedInAsAdmin']),
+		// ...mapState(['basket']),
+		...mapGetters([
+			'basketCount',
+			'basketTotalPrice',
+			'basketEmpty',
+			'loggedIn',
+			'loggedInAsAdmin',
+			'basket',
+		]),
 	},
 }
 </script>

@@ -10,31 +10,34 @@
 					>
 						<div class="cartProduct">
 							<img
-								:src="require(`../../../assets/${item.imgFile}`)"
+								:src="require(`../../../assets/${item.product.imgFile}`)"
 								alt=""
 								class="cartProductImage"
 							/>
 
 							<div class="cartProductDetails">
-								<h1>{{ item.title }}</h1>
-								<h2>{{ item.category }}</h2>
-								<h3>{{ item.serial }}</h3>
+								<h1>{{ item.product.title }}</h1>
+								<h2>{{ item.product.category }}</h2>
+								<h3>{{ item.product.serial }}</h3>
 							</div>
 							<div class="cartProductPrice">
-								<h1>{{ item.price }}</h1>
+								<h1>{{ item.product.price }}</h1>
 							</div>
+
 							<div class="modifiers">
 								<i
 									class="fas fa-plus-square shadowed"
-									@click="addToCart(item)"
+									@click="addToCart(item.product)"
 								></i>
 								<i
 									class="fas fa-minus-circle shadowed"
-									@click="removeFromCart(item)"
+									@click="removeFromCart(item.product)"
 								></i>
 							</div>
 						</div>
-
+						<div>
+							<h1>Amount: {{ item.amount }}</h1>
+						</div>
 						<hr />
 					</div>
 				</transition-group>
@@ -82,8 +85,8 @@ export default {
 		return {}
 	},
 	computed: {
-		...mapState(['basket']),
-		...mapGetters(['basketCount', 'basketTotalPrice', 'basketEmpty']),
+		// ...mapState(['basket']),
+		...mapGetters(['basketCount', 'basketTotalPrice', 'basketEmpty', 'basket']),
 	},
 	methods: {
 		...mapMutations(['removeFromCart', 'addToCart']),

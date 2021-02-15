@@ -16,8 +16,8 @@ export default new Vuex.Store({
 		//basket: [],
 
 		basketItems: [
-			{ productId: 'x12', amount: 3 },
-			{ productId: 'nnvd', amount: 1 },
+			// { _id: 'x12', amount: 3 },
+			// { _id: 'nnvd', amount: 1 },
 		],
 
 		paymentComplete: false,
@@ -31,25 +31,44 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		cacheAllProducts(state, products) {
-			// state.allProducts = products
-			products.map((p) => {
-				state.allProdDictionary[p.id] = p
-			})
+			state.allProducts = products
+
+			let tmplist = {}
+			products.map((item) => (tmplist[item._id] = item))
+			state.allProdDictionary = tmplist
 		},
 
 		// UserMutations
 		addToCart(state, product) {
-			state.basket.push(product)
+			let exists = state.basketItems.some((p) => p._id === product._id)
+			if (exists) {
+				const withId = (p) => p._id === product._id
+				let pIndex = state.basketItems.findIndex(withId)
+				state.basketItems[pIndex].amount += 1
+			} else {
+				let tmpobj = {
+					_id: product._id,
+					amount: 1,
+				}
+				state.basketItems.push(tmpobj)
+			}
+			// console.log(lol)
 		},
-
-		productIsInCart(product) {},
 
 		removeFromCart(state, product) {
-			const index = state.basket.indexOf(product)
+			const index = state.basketItems.findIndex( (p) => p._id === product._id)
+			console.log(index)
 			if (index > -1) {
-				state.basket.splice(index, 1)
+				if(state.basketItems[index].amount===1){
+					state.basketItems.splice(index, 1)
+				}
+				else
+				{
+					state.basketItems[index].amount -= 1
+				}
 			}
 		},
+		
 
 		completePayment(state) {
 			//För att komma till sidan efter konfirmerat payment
@@ -119,18 +138,21 @@ export default new Vuex.Store({
 	},
 
 	getters: {
-		basketCount(state) {
-			return state.basket.length
+		basketCount(state, getters) {
+			return state.basketItems.reduce((x, next) => x + next.amount, 0)
 		},
-		basketTotalPrice(state) {
-			let tmp = state.basket.reduce(
-				(sum, next) => sum + next.amount * next.price,
-				0
-			)
-			return tmp
+		basketTotalPrice(state, getters) {
+			let tmp = Object.entries(getters.basket)
+
+			const reducer = (accumulator, currentValue) =>
+				accumulator + currentValue.[1].amount*currentValue.[1].product.price
+
+			const newnum = tmp.reduce(reducer, 0)
+			// console.log(tmp)
+			return newnum
 		},
-		basketEmpty(state) {
-			return state.basket.length === 0
+		basketEmpty(state, getters) {
+			return getters.basketCount === 0
 		},
 		basketAveragePrice(state, getters) {
 			return getters.basketTotalPrice / getters.basketCount
@@ -150,13 +172,19 @@ export default new Vuex.Store({
 			})
 			return tmpFiles
 		},
+
 		basket(state) {
-			let mappedList = state.cartItems.map((item) => ({
-				product: state.allProdDictionary[item.productId],
-				amount: item.amount,
-			}))
-			return mappedList
+			let tmpbasket = {}
+			state.basketItems.map((item) => {
+				tmpbasket[item._id] = {
+					product: state.allProdDictionary[item._id],
+					amount: item.amount,
+				}
+			})
+
+			return tmpbasket
 		},
+		
 	},
 
 	modules: {
