@@ -28,6 +28,8 @@ export default new Vuex.Store({
 		//Cache related states:
 		allProducts: [],
 		allProdDictionary: [],
+
+		allOrders: [],
 	},
 	mutations: {
 		cacheAllProducts(state, products) {
@@ -93,6 +95,10 @@ export default new Vuex.Store({
 		selectUser(state, user) {
 			state.selectedUser = user
 		},
+
+		cacheAllOrders(state, orders){
+			state.allOrders = orders
+		}
 	},
 	actions: {
 		//#region User CRUDs
@@ -145,6 +151,8 @@ export default new Vuex.Store({
 		},
 		//#endregion
 
+
+		
 		//#region order CRUDs
 		async placeNewOrder({ commit, state }, payload) {
 			// console.log('THESE ARE THE RESULTS', payload.items)
@@ -154,6 +162,16 @@ export default new Vuex.Store({
 				payload.price
 			)
 		},
+
+		async getAllOrders({state,commit}) {
+			let result = await api.getAllOrders(state.loggedInUser)
+			commit('cacheAllOrders',result)
+			
+			console.log('THESE ARE THE RESULTS', state.allOrders)
+
+			return result;
+		},
+
 		//#endregion		
 	},
 

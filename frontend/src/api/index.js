@@ -1,4 +1,3 @@
-//FUNKAR
 export const login = function(user) {
 	let result = fetch('http://localhost:5000/api/auth', {
 		method: 'POST',
@@ -40,7 +39,7 @@ export const createProduct = function(product, user) {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer' + user.token,
+			Authorization: 'Bearer ' + user.token,
 		},
 
 		body: JSON.stringify({
@@ -103,7 +102,7 @@ export const createOrder = function(user, itemIdArray, price) {
 		headers: {
 			'Content-Type': 'application/json',
 
-			Authorization: 'Bearer' + user.token,
+			Authorization: 'Bearer ' + user.token,
 		},
 
 		body: JSON.stringify({
@@ -120,7 +119,7 @@ export const getAllOrders = function(user) {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer' + user.token,
+			Authorization: 'Bearer ' + user.token,
 		},
 	}).then((response) => response.json())
 
