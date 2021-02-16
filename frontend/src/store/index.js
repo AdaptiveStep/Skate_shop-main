@@ -132,6 +132,18 @@ export default new Vuex.Store({
 			let result = await api.deleteProductById(product, state.loggedInUser)
 			dispatch('loadAllProducts')
 		},
+
+		async createUser({dispatch}, user){
+			let result = await api.createUser(user)
+			if(result.message === "User registered!"){
+				console.log("ITS WORKING")
+				dispatch("login",user)
+			}
+			else if(result.message === "Email already exists"){
+				console.log("Do stuff for email that exist, popup maybe")
+			}
+		},
+
 		saveUser() {
 			//Adds new if it doesnt exist
 		},

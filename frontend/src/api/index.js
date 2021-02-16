@@ -130,14 +130,10 @@ export const getAllOrders = function(user) {
 export const createUser = function(user) {
 	let result = fetch('http://localhost:5000/api/register', {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json', Authorization: user.token },
+		headers: { 'Content-Type': 'application/json' },
 
-		body: JSON.stringify({
-			email: user.email,
-			password: user.password,
-			name: user.name,
-			role: user.role,
-			adress: user.adress,
-		}),
+		body: JSON.stringify(user),
 	}).then((response) => response.json())
+
+	return result
 }

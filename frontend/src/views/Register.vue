@@ -2,7 +2,7 @@
 	<div class="register">
 		<!-- <HeaderImage image="@blablbl/..../img.jpg" msg="hejjlo"> -->
 
-		<div class="hero"> 
+		<div class="hero">
 			<img class="heroImage" src="../../../assets/skate-hero-1.jpg" />
 			<div class="heroText">
 				<p>Join the rolling family</p>
@@ -27,57 +27,93 @@
 				</span>
 			</div>
 
-			<div class="inputLength">
+			<div v-if="!loggedIn" class="inputLength">
 				<h1>Register</h1>
 				<div class="inputContainer">
 					<i class="fa fa-user icon"> </i>
-					<input class="Field" type="text" placeholder="Name" />
+					<input
+						v-model="user.name"
+						class="Field"
+						type="text"
+						placeholder="Name"
+					/>
 				</div>
 				<div class="inputContainer">
 					<i class="fa fa-envelope icon"> </i>
-					<input class="Field" type="text" placeholder="Email" />
+					<input
+						v-model="user.email"
+						class="Field"
+						type="text"
+						placeholder="Email"
+					/>
 				</div>
 				<div class="inputContainer">
 					<i class="fa fa-key icon"> </i>
-					<input class="Field" type="password" placeholder="Password" />
+					<input
+						v-model="user.password"
+						class="Field"
+						type="password"
+						placeholder="Password"
+					/>
 				</div>
 				<div class="inputContainer">
-					<button @click="hejsan" class="blackPill">Register</button>
+					<button @click="createUserSimple()" class="blackPill">
+						Register
+					</button>
 				</div>
-
 			</div>
-
-			
+			<div v-else>
+				<h1>Tack för att du är medlem hos oss!</h1>
+			</div>
 		</div>
 
 		<!-- <h1>This is an register page</h1> -->
 	</div>
 </template>
 <script>
+import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
+
 export default {
 	name: 'Register',
 	data() {
 		return {
 			showModal: false,
+			user: {
+				name: '',
+				email: '',
+				password: '',
+				repeatPassword: '',
+				role: 'customer',
+			},
 		}
 	},
 	methods: {
 		toggleModal() {
 			this.showModal = !this.showModal
 		},
-		hejsan () {
+		hejsan() {
 			console.log('hejhej')
-		}
+		},
+		createUserSimple() {
+			let newUser = {
+				name: this.user.name,
+				email: this.user.email,
+				password: this.user.password,
+				repeatPassword: this.user.password,
+				role: 'customer',
+			}
+			this.createUser(newUser)
+		},
+		...mapActions(['createUser']),
+	},
+	computed: {
+		...mapGetters(['loggedIn']),
 	},
 	components: {},
 }
 </script>
 <style scoped lang="scss">
 @import '@/styles/template.scss';
-
-
-
-
 
 .inputLength {
 	width: 100%;
@@ -100,9 +136,4 @@ export default {
 .cut {
 	width: 100%;
 }
-
-
-
-
-
 </style>
