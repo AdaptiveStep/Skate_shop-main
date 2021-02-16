@@ -1,7 +1,7 @@
 <template>
 	<div class="orders">
 		<h1>Orders</h1>
-		<h1>{{ prodsByIdArray(inProcessOrders[0].items) }}</h1>
+		<!-- <h1>{{ prodsByIdArray(inProcessOrders[0].items) }}</h1> -->
 		<button @click="getAllOrders">TESTA MIG PLZ</button>
 		<div class="rows">
 			<div class="linedTitle">
@@ -52,21 +52,14 @@ export default {
 			this.showProductModal = true
 		},
 		...mapActions(['getAllOrders', 'loadAllProducts']),
+		...mapGetters(['prodsByIdArray']),
 	},
 	data() {
-		return {
-			showProductModal: false,
-			selectedProduct: {},
-		}
+		return {}
 	},
 
 	computed: {
-		...mapGetters([
-			'inProcessOrders',
-			'doneOrders',
-			'prodById',
-			'prodsByIdArray',
-		]),
+		...mapGetters(['inProcessOrders', 'doneOrders', 'prodById']),
 	},
 	components: {
 		// Overlay,

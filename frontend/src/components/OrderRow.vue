@@ -1,16 +1,48 @@
 <template>
 	<div class="oneOrder">
+		<Overlay :show="showProductModal" v-on:close="showProductModal = false">
+			<div class="modalProduct">
+				<div class="modalPic">
+					<img
+						class="modalImage"
+						src="../../../assets/skateboard-generic.png"
+					/>
+					<!-- src="../../../assets/skateboard-generic.png" -->
+					<!-- :src="require(`../../../assets/${selectedProduct.imgFile}`)" -->
+				</div>
+
+				<div class="modalInfo">
+					<div class="modalTitle">
+						<span>{{ selectedProduct.title }}</span>
+					</div>
+					<div class="modalSubtitle">
+						<span>{{ selectedProduct.category }}</span>
+					</div>
+					<div class="modalTextInfo">
+						<p>{{ selectedProduct.longDesc }}</p>
+					</div>
+
+					<div class="modalCash">
+						<span>{{ selectedProduct.price }}</span>
+					</div>
+				</div>
+			</div>
+		</Overlay>
+
 		<div class="infoWrapper">
 			<div class="orderProducts ">
-				<div
-					v-for="(product, index) in order.items"
+				<img
+					v-for="(product, index) in productsInOrder"
 					:key="index"
 					@click="viewProductDetails(product)"
-					src=""
+					src="../../../assets/skateboard-generic.png"
 					alt=""
 					class="productImage shadowed"
 					tabindex="0"
 				/>
+
+				<!-- src="../../../assets/skateboard-generic.png" -->
+				<!-- :src="require(`../../../assets/${selectedProduct.imgFile}`)" -->
 			</div>
 
 			<div class="orderDetails ">
@@ -23,7 +55,7 @@
 			</div>
 		</div>
 
-		<div class="modifiers  ">
+		<div class="modifiers rowButtons ">
 			<i class="fas fa-check-circle"></i>
 			<i class="fas fa-minus-circle"></i>
 		</div>
@@ -32,6 +64,7 @@
 
 <script>
 import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
+import Overlay from '@/components/Overlay'
 
 export default {
 	props: {
@@ -39,14 +72,25 @@ export default {
 	},
 	methods: {
 		viewProductDetails(product) {
-			this.selectedProduct = product
-			this.showProductModal = true
+			// this.selectedProduct = product
+			// this.showProductModal = true
+			console.log('PRODUCT', product.title)
+			console.log('this.order', this.order)
+			let tmp = this.prodById('LZKzvIin1TUdAQXo')
+			console.log('TMP STUFF', tmp)
 		},
 	},
 	data() {
 		return {
 			showProductModal: false,
-			selectedProduct: {},
+			selectedProduct: {
+				title: 'test',
+				price: '111',
+				shortDesc: 'test',
+				longDesc: 'test',
+				imgFile: 'skateboard-generic.png',
+				_id: '',
+			},
 		}
 	},
 	computed: {
@@ -54,10 +98,14 @@ export default {
 			var date = new Date(this.order.timeStamp * 1000)
 			return date.toDateString()
 		},
-		...mapGetters(['loggedInAsAdmin', 'prodsByArray']),
+		...mapGetters(['loggedInAsAdmin', 'prodsByIdArray', 'prodById']),
+
+		productsInOrder() {
+			return this.prodsByIdArray(this.order.items)
+		},
 	},
 	components: {
-		// Overlay,
+		Overlay,
 	},
 }
 </script>
@@ -70,9 +118,12 @@ export default {
 	flex-direction: row;
 	justify-content: space-around;
 	// flex-wrap: nowrap;
-	background-color: $primary-color;
+	background-color: $light-grey;
 	gap: 0.5rem;
 	border-radius: 10px;
+	&:hover {
+		background-color: $primary-color;
+	}
 }
 .orderProducts {
 	display: flex;
@@ -92,13 +143,13 @@ export default {
 	border-radius: 10%;
 	width: 3rem;
 	height: 3rem;
-	background-color: red;
+	background-color: $shadow-color;
 
 	&:hover {
-		background-color: green;
+		background-color: $primary-color;
 	}
 	&:focus {
-		background-color: green;
+		background-color: $orange-color;
 	}
 }
 .orderDetails {
@@ -131,5 +182,8 @@ export default {
 	display: flex;
 	flex-wrap: wrap;
 	flex-grow: 4;
+}
+.rowButtons {
+	width: 5rem;
 }
 </style>

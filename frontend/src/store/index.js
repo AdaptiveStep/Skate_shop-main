@@ -242,12 +242,12 @@ export default new Vuex.Store({
 		//#endregion
 		
 		//#region Order Getters
-		inProcessOrders(state,getters){
+		inProcessOrders(n,getters){
 			// return state.allOrders.filter(x => x.status === "inProcess")
 			return getters.filteredOrders(x => x.status === "inProcess")
 
 		},
-		doneOrders(state,getters){
+		doneOrders(n,getters){
 			// return state.allOrders.filter(x => x.status === "done")
 			return getters.filteredOrders(x => x.status === "done")
 		},
@@ -256,14 +256,14 @@ export default new Vuex.Store({
 			return filter => state.allOrders.filter(filter)
 		},
 
-		prodById: (state) => (pid) => {
-			//get cached version
-			return state.allProdDictionary[pid]
+		prodById(state){
+			return pid => state.allProdDictionary[pid]
 		},
 			
-		prodsByIdArray: (state,getters) => (parray) => {
-			return parray.map(id => getters.prodById(id))
+		prodsByIdArray(n,getters){
+			return parray => parray.map(id => getters.prodById(id))
 		} 
+		
 		
 		
 		// {

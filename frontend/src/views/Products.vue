@@ -6,9 +6,11 @@
 				<div class="modalPic">
 					<img
 						class="modalImage"
-						src="../../../assets/skateboard-generic.png"
+						:src="require(`../../../assets/${selectedProduct.imgFile}`)"
 					/>
 				</div>
+				<!-- src="../../../assets/skateboard-generic.png" -->
+				<!-- :src="require(`../../../assets/${selectedProduct.imgFile}`)" -->
 
 				<div class="modalInfo">
 					<div class="modalTitle">
@@ -101,7 +103,14 @@ export default {
 	data() {
 		return {
 			showProductModal: false,
-			selectedProduct: {},
+			selectedProduct: {
+				title: '',
+				price: '',
+				shortDesc: '',
+				longDesc: '',
+				imgFile: 'skateboard-generic.png',
+				_id: '',
+			},
 			on: true,
 		}
 	},
