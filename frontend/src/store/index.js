@@ -31,12 +31,6 @@ export default new Vuex.Store({
 			// {...},
 			// {....}
 		],
-		allOrdersDictionary:[
-			// {_id: fm3k32, items:[productObjects], orderValue, status, timestamp},
-			// {...},
-			// {....}
-
-		]
 	},
 	mutations: {
 		cacheAllProducts(state, products) {
@@ -96,6 +90,7 @@ export default new Vuex.Store({
 		logout(state) {
 			//Don't use this. Use action instead.
 			state.loggedInUser = {}
+			state.allOrders=[]
 		},
 		//#endregion
 
@@ -118,11 +113,12 @@ export default new Vuex.Store({
 	},
 	actions: {
 		//#region User CRUDs
-		async login({ commit }, user) {
+		async login({ commit,dispatch }, user) {
 			let result = await api.login(user)
 			let compiledUser = result.user
 			compiledUser.token = result.token
-			this.commit('login', compiledUser)
+			commit('login', compiledUser)
+			dispatch('getAllOrders')
 		},
 		logout({ commit }) {
 			this.commit('logout')
@@ -132,11 +128,10 @@ export default new Vuex.Store({
 		async createUser({dispatch}, user){
 			let result = await api.createUser(user)
 			if(result.message === "User registered!"){
-				console.log("ITS WORKING")
 				dispatch("login",user)
 			}
 			else if(result.message === "Email already exists"){
-				console.log("Do stuff for email that exist, popup maybe")
+				console.log("Email already exists")
 			}
 		},
 

@@ -56,8 +56,12 @@
 		</div>
 
 		<div v-if="loggedInAsAdmin" class="modifiers rowButtons">
-			<i v-if="order.status === 'inProcess'" class="fas fa-check-circle"></i>
-			<i v-if="order.status === 'done'" class="fas fa-minus-circle"></i>
+			<i
+				v-if="order.status === 'inProcess'"
+				class="fas fa-check-circle"
+				@click="dothis"
+			></i>
+			<i v-if="order.status === 'done'" class="fas fa-minus-circle" @click="dothis"></i>
 		</div>
 	</div>
 </template>
@@ -74,10 +78,9 @@ export default {
 		viewProductDetails(product) {
 			this.selectedProduct = product
 			this.showProductModal = true
-			// console.log('PRODUCT', product)
-			// console.log('this.order', this.order)
-			// let tmp = this.prodById('LZKzvIin1TUdAQXo')
-			// console.log('prodById result', tmp)
+		},
+		dothis() {
+			console.log('PRESSED')
 		},
 	},
 	data() {

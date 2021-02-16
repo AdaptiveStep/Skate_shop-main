@@ -62,7 +62,7 @@ export default {
 		// Overlay,
 		OrderRow,
 	},
-	created() {
+	mounted() {
 		this.loadAllProducts()
 		this.getAllOrders()
 	},
