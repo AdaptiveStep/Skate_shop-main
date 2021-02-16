@@ -105,24 +105,5 @@ export default {
 	}
 	padding-right: 1rem;
 }
-.modifiers {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	color: $primary-color;
-	gap: 0.1rem;
 
-	.fas {
-		width: 1.5rem;
-		height: 1.5rem;
-		background-color: $secondary-color;
-		border-radius: 50%;
-		text-align: center;
-		padding: 0.1rem;
-		font-size: 2rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-}
 </style>

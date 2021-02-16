@@ -362,6 +362,34 @@ hr {
 	padding-top: 0.5rem;
 }
 
+/////////////////--------Buttons
+.modifiers {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	color: $primary-color;
+	gap: 0.1rem;
+
+	padding: 1rem;
+
+	.fas {
+		// width: 1.5rem;
+		// height: 1.5rem;
+		background-color: $secondary-color;
+		border-radius: 50%;
+		text-align: center;
+		padding: 0.1rem;
+		font-size: 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&:hover {
+			background-color: $shadow-color;
+		}
+	}
+}
+
 //_-----------------Only Vue transitions
 
 .fade-enter-active,

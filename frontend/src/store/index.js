@@ -95,6 +95,7 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
+		//#region User CRUDs
 		async login({ commit }, user) {
 			let result = await api.login(user)
 			let compiledUser = result.user
@@ -104,34 +105,7 @@ export default new Vuex.Store({
 		logout({ commit }) {
 			this.commit('logout')
 		},
-
-		async loadAllProducts({ commit }) {
-			let tmp = await api.getAllItems()
-			commit('cacheAllProducts', tmp)
-		},
-
-		async placeNewOrder({ commit, state }, payload) {
-			// console.log('THESE ARE THE RESULTS', payload.items)
-			let result = await api.createOrder(
-				payload.user,
-				payload.items,
-				payload.price
-			)
-		},
-		async createProduct({ state, dispatch }, product) {
-			let result = await api.createProduct(product, state.loggedInUser)
-			dispatch('loadAllProducts')
-		},
-
-		async saveProduct({ state, dispatch }, product) {
-			let result = await api.updateProductById(product, state.loggedInUser)
-			dispatch('loadAllProducts')
-		},
-
-		async deleteProductById({ state, dispatch }, product) {
-			let result = await api.deleteProductById(product, state.loggedInUser)
-			dispatch('loadAllProducts')
-		},
+		
 
 		async createUser({dispatch}, user){
 			let result = await api.createUser(user)
@@ -147,6 +121,40 @@ export default new Vuex.Store({
 		saveUser() {
 			//Adds new if it doesnt exist
 		},
+		//#endregion
+
+		//#region product CRUDs
+		async loadAllProducts({ commit }) {
+			let tmp = await api.getAllItems()
+			commit('cacheAllProducts', tmp)
+		},
+
+		async createProduct({ state, dispatch }, product) {
+			let result = await api.createProduct(product, state.loggedInUser)
+			dispatch('loadAllProducts')
+		},
+
+		async saveProduct({ state, dispatch }, product) {
+			let result = await api.updateProductById(product, state.loggedInUser)
+			dispatch('loadAllProducts')
+		},
+
+		async deleteProductById({ state, dispatch }, product) {
+			let result = await api.deleteProductById(product, state.loggedInUser)
+			dispatch('loadAllProducts')
+		},
+		//#endregion
+
+		//#region order CRUDs
+		async placeNewOrder({ commit, state }, payload) {
+			// console.log('THESE ARE THE RESULTS', payload.items)
+			let result = await api.createOrder(
+				payload.user,
+				payload.items,
+				payload.price
+			)
+		},
+		//#endregion		
 	},
 
 	getters: {
