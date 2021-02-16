@@ -182,7 +182,7 @@ export default new Vuex.Store({
 			let result = await api.getAllOrders(state.loggedInUser)
 			commit('cacheAllOrders',result)
 			
-			console.log('THESE ARE THE RESULTS', state.allOrders)
+			// console.log('THESE ARE THE RESULTS', state.allOrders)
 
 			return result;
 		},
@@ -256,14 +256,19 @@ export default new Vuex.Store({
 			return filter => state.allOrders.filter(filter)
 		},
 
-		prodById(state){
+		prodById: (state) => (pid) => {
 			//get cached version
-			return pid => state.allProdDictionary[pid]
+			return state.allProdDictionary[pid]
 		},
 			
-		prodsByIdArray(getters){
-			return parray => parray.map(id => getters.prodById(id))
-		}
+		prodsByIdArray: (state,getters) => (parray) => {
+			return parray.map(id => getters.prodById(id))
+		} 
+		
+		
+		// {
+		// 	return parray.map(id => getters.prodById(id))
+		// }
 		//#endregion
 	},
 

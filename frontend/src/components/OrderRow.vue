@@ -54,6 +54,7 @@ export default {
 			var date = new Date(this.order.timeStamp * 1000)
 			return date.toDateString()
 		},
+		...mapGetters(['loggedInAsAdmin', 'prodsByArray']),
 	},
 	components: {
 		// Overlay,

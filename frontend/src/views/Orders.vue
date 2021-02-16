@@ -1,7 +1,7 @@
 <template>
 	<div class="orders">
 		<h1>Orders</h1>
-		<h1>{{ prodById('Z1O21NjX4kAQ8ggN') }}</h1>
+		<h1>{{ prodsByIdArray(inProcessOrders[0].items) }}</h1>
 		<button @click="getAllOrders">TESTA MIG PLZ</button>
 		<div class="rows">
 			<div class="linedTitle">
