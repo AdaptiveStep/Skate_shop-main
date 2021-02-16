@@ -143,7 +143,7 @@
 							</div>
 							<div class="forBut">
 								<button @click="Confirm" class="blackPill">
-									Take my Money WOW
+									Take my Money
 								</button>
 							</div>
 						</TitledContainer>
@@ -365,8 +365,7 @@ export default {
 }
 
 .forBut {
-	padding-top: 1rem;
-	padding-left: 9rem;
+	
 }
 
 .gapping {

@@ -100,12 +100,13 @@ export default new Vuex.Store({
 		},
 
 		cacheAllOrders(state, orders){
-			
-			
 			state.allOrders = orders
-
-			
 		},
+		removeCachedOrder(state, order){
+			let tmp = state.allOrders.findIndex(x=> x._id === order._id)
+			tmp>=0 ? state.allOrders.splice(tmp,1): "";
+			console.log("tmp",tmp)
+		}
 		//#endregion
 
 

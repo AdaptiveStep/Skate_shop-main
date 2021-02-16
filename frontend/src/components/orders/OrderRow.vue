@@ -59,9 +59,13 @@
 			<i
 				v-if="order.status === 'inProcess'"
 				class="fas fa-check-circle"
-				@click="dothis"
+				@click="finishOrder(order)"
 			></i>
-			<i v-if="order.status === 'done'" class="fas fa-minus-circle" @click="dothis"></i>
+			<i
+				v-if="order.status === 'done'"
+				class="fas fa-minus-circle"
+				@click="finishOrder(order)"
+			></i>
 		</div>
 	</div>
 </template>
@@ -82,6 +86,11 @@ export default {
 		dothis() {
 			console.log('PRESSED')
 		},
+		finishOrder(order) {
+			this.$emit('finishOrder', order)
+			this.removeCachedOrder(order)
+		},
+		...mapMutations(['removeCachedOrder']),
 	},
 	data() {
 		return {

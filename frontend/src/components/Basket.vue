@@ -4,8 +4,8 @@
 			<div class="cartProducts">
 				<transition-group name="list">
 					<div
-						v-for="(item, index) in basket"
-						:key="index"
+						v-for="item in basket"
+						:key="item.product._id"
 						class="productHolder"
 					>
 						<div class="cartProduct">

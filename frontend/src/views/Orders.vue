@@ -1,35 +1,35 @@
 <template>
-	<transition name="fade" mode="out-in">
-		<div class="orders">
-			<div v-if="loggedIn" class="loggedIn">
-				<h1>Orders</h1>
-				<div class="rows">
-					<div class="linedTitle">
-						<span>In Progress</span>
-						<hr />
-					</div>
-					<div class="orderList">
-						<div v-for="(order, index) in inProcessOrders" :key="index">
-							<OrderRow v-bind:order="order" />
-						</div>
-					</div>
+	<div class="orders">
+		<div v-if="loggedIn" class="loggedIn">
+			<h1>Orders</h1>
+			<div class="rows">
+				<div class="linedTitle">
+					<span>In Progress</span>
+					<hr />
 				</div>
-
-				<div class="rows">
-					<div class="linedTitle">
-						<span>Done</span>
-						<hr />
-					</div>
-					<div class="orderList">
-						<div v-for="(order, index) in doneOrders" :key="index">
+				<div>
+					<transition-group name="list" class="orderList">
+						<div v-for="order in inProcessOrders" :key="order._id">
 							<OrderRow v-bind:order="order" />
 						</div>
+					</transition-group>
+				</div>
+			</div>
+
+			<div class="rows">
+				<div class="linedTitle">
+					<span>Done</span>
+					<hr />
+				</div>
+				<div class="orderList">
+					<div v-for="(order, index) in doneOrders" :key="index">
+						<OrderRow v-bind:order="order" />
 					</div>
 				</div>
 			</div>
-			<div v-else class="notLoggedIn">Please log in to view this page</div>
 		</div>
-	</transition>
+		<div v-else class="notLoggedIn">Please log in to view this page</div>
+	</div>
 </template>
 
 <script>
@@ -42,6 +42,7 @@ export default {
 		viewProductDetails() {
 			this.showProductModal = true
 		},
+
 		...mapActions(['getAllOrders', 'loadAllProducts']),
 		...mapGetters(['prodsByIdArray']),
 	},

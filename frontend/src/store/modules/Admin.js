@@ -9,8 +9,8 @@ export default {
 	},
 	actions: {},
 	getters: {
-		sampleStorage() {
-			return 'storageID'
+		Active() {
+			return 'AdminModuleID'
 		},
 	},
 }
