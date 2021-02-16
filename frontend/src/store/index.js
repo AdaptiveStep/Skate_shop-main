@@ -257,7 +257,23 @@ export default new Vuex.Store({
 		},
 
 		prodById(state){
-			return pid => state.allProdDictionary[pid]
+			return pid => {
+				let tmp = state.allProdDictionary[pid]
+				if(! (tmp===undefined))
+				{
+					return tmp
+
+				}else{
+					return {
+						title: 'Unknown Product',
+						price: '0',
+						shortDesc: 'Unknown' ,
+						longDesc: 'No description. This product cannot be found in the database',
+						imgFile: 'notfound.png',
+						_id: '',
+					}
+				}
+			}
 		},
 			
 		prodsByIdArray(n,getters){
