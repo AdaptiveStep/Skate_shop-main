@@ -2,7 +2,7 @@
 	<div class="bagSpace">
 		<div class="arrowBox">
 			<button @click="showLogin = true" class="roundButton bkg-primary">
-				<img src="../../../assets/icon-user-black.svg" />
+				<img src="@/assets/icon-user-black.svg" />
 			</button>
 			<div v-if="showLogin" class="triangle-up "></div>
 		</div>

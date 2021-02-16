@@ -2,7 +2,7 @@
 	<div id="nav" class="header">
 		<div id="logo">
 			<router-link to="/">
-				<img src="../../../assets/sinus-logo.svg" />
+				<img src="@/assets/sinus-logo.svg" />
 			</router-link>
 		</div>
 
@@ -29,7 +29,7 @@
 								@click="showUserMod = true"
 								class="roundButton  bkg-orange"
 							>
-								<img src="../../../assets/icon-bag-black.svg" />
+								<img src="@/assets/icon-bag-black.svg" />
 							</button>
 
 							<span v-if="!basketEmpty" class="counter">{{ basketCount }}</span>

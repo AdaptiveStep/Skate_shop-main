@@ -84,8 +84,9 @@ export default {
 .orderList {
 	display: flex;
 	gap: 0.5rem;
-	flex-direction: column;
+	flex-direction: column-reverse;
 }
+
 .orderList .order {
 	height: 4rem;
 	background-color: $primary-color;

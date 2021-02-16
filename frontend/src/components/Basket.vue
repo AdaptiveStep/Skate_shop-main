@@ -10,7 +10,7 @@
 					>
 						<div class="cartProduct">
 							<img
-								:src="require(`../../../assets/${item.product.imgFile}`)"
+								:src="require(`@/assets/${item.product.imgFile}`)"
 								alt=""
 								class="cartProductImage"
 							/>

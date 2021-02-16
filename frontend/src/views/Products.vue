@@ -6,11 +6,11 @@
 				<div class="modalPic">
 					<img
 						class="modalImage"
-						:src="require(`../../../assets/${selectedProduct.imgFile}`)"
+						:src="require(`@/${selectedProduct.imgFile}`)"
 					/>
 				</div>
-				<!-- src="../../../assets/skateboard-generic.png" -->
-				<!-- :src="require(`../../../assets/${selectedProduct.imgFile}`)" -->
+				<!-- src="@/assets/skateboard-generic.png" -->
+				<!-- :src="require(`@/assets/${selectedProduct.imgFile}`)" -->
 
 				<div class="modalInfo">
 					<div class="modalTitle">
@@ -45,7 +45,7 @@
 					<span>{{ item.title }}</span>
 
 					<button class="roundButton bkg-secondary">
-						<img src="../../../assets/icon-bag-white.svg" />
+						<img src="@/assets/icon-bag-white.svg" />
 					</button>
 				</div>
 				<div class="cardSubTitle">
@@ -53,10 +53,7 @@
 				</div>
 
 				<div class="cardContent">
-					<img
-						class="cardImage"
-						:src="require(`../../../assets/${item.imgFile}`)"
-					/>
+					<img class="cardImage" :src="require(`@/assets/${item.imgFile}`)" />
 
 					<span class="blackPill move">
 						<div class="pillPrice">
@@ -88,7 +85,7 @@ export default {
 			this.showProductModal = true
 		},
 		urlImage(product) {
-			let tmp = '../../../assets/'
+			let tmp = '@/assets/'
 			let srctemp = tmp + product.imgFile
 			return srctemp
 		},

@@ -220,7 +220,7 @@ export default new Vuex.Store({
 			return state.loggedInUser.role === 'admin'
 		},
 		allFiles() {
-			const req = require.context('../../../assets/', true, /\.(png)$/i)
+			const req = require.context('@/assets/', true, /\.(png)$/i)
 			let tmpFiles = []
 			req.keys().map((key) => {
 				tmpFiles.push(key.slice(2))

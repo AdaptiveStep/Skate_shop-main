@@ -5,10 +5,10 @@
 				<div class="modalPic">
 					<img
 						class="modalImage"
-						:src="require(`../../../assets/${selectedProduct.imgFile}`)"
+						:src="require(`@/assets/${selectedProduct.imgFile}`)"
 					/>
-					<!-- src="../../../assets/skateboard-generic.png" -->
-					<!-- :src="require(`../../../assets/${selectedProduct.imgFile}`)" -->
+					<!-- src="@/assets/skateboard-generic.png" -->
+					<!-- :src="require(`@/assets/${selectedProduct.imgFile}`)" -->
 				</div>
 
 				<div class="modalInfo">
@@ -35,14 +35,14 @@
 					v-for="(product, index) in productsInOrder"
 					:key="index"
 					@click="viewProductDetails(product)"
-					:src="require(`../../../assets/${product.imgFile}`)"
+					:src="require(`@/assets/${product.imgFile}`)"
 					alt=""
 					class="productImage shadowed"
 					tabindex="0"
 				/>
 
-				<!-- src="../../../assets/skateboard-generic.png" -->
-				<!-- :src="require(`../../../assets/${product.imgFile}`)" -->
+				<!-- src="@/assets/skateboard-generic.png" -->
+				<!-- :src="require(`@/assets/${product.imgFile}`)" -->
 			</div>
 
 			<div class="orderDetails ">

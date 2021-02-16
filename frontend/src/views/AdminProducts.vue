@@ -14,7 +14,7 @@
 						:key="index"
 						tabindex="0"
 						class="selectNewProductImage"
-						:src="require(`../../../assets/${item}`)"
+						:src="require(`@/assets/${item}`)"
 						@click="setNewProductPath(item)"
 					/>
 				</div>
@@ -72,7 +72,7 @@
 					<div class="modalPic">
 						<img
 							class="modalImage"
-							:src="require(`../../../assets/${selectedProduct.imgFile}`)"
+							:src="require(`@/assets/${selectedProduct.imgFile}`)"
 						/>
 					</div>
 
@@ -177,7 +177,7 @@
 						<span>{{ item.title }}</span>
 
 						<button class="roundButton bkg-orange">
-							<img src="../../../assets/icon-edit-white.svg" />
+							<img src="@/assets/icon-edit-white.svg" />
 						</button>
 					</div>
 					<div class="cardSubTitle">
@@ -185,10 +185,7 @@
 					</div>
 
 					<div class="cardContent">
-						<img
-							class="cardImage"
-							:src="require(`../../../assets/${item.imgFile}`)"
-						/>
+						<img class="cardImage" :src="require(`@/assets/${item.imgFile}`)" />
 
 						<span class="blackPill move">
 							<div class="pillPrice">
@@ -209,7 +206,7 @@
 				<div class="modalPic">
 					<img
 						class="modalImage"
-						src="../../../assets/skateboard-generic.png"
+						src="@/assets/skateboard-generic.png"
 					/>
 				</div>
 
@@ -270,7 +267,7 @@ export default {
 			this.showProductModal = true
 		},
 		urlImage(product) {
-			let tmp = '../../../assets/'
+			let tmp = '@/assets/'
 			let srctemp = tmp + product.imgFile
 			return srctemp
 		},

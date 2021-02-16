@@ -11,10 +11,7 @@
 				<Overlay :show="showMe" v-on:close="showMe = false">
 					<div class="modalProduct">
 						<div class="modalPic">
-							<img
-								class="modalImage"
-								src="../../../assets/skateboard-generic.png"
-							/>
+							<img class="modalImage" src="@/assets/skateboard-generic.png" />
 						</div>
 
 						<div class="modalInfo">
@@ -158,7 +155,7 @@
 				<h1>This is an ORDER DONE page</h1>
 
 				<div class="hero">
-					<img class="heroImage" src="../../../assets/skate-hero-1.jpg" />
+					<img class="heroImage" src="@/assets/skate-hero-1.jpg" />
 					<div class="heroText">
 						<p>Thank you for your order</p>
 					</div>
