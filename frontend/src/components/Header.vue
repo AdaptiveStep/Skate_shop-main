@@ -15,9 +15,7 @@
 			<router-link to="/adminproduct" v-if="loggedInAsAdmin && loggedIn">
 				<p>Admin Products</p></router-link
 			>
-			<router-link to="/orders" v-if="loggedInAsAdmin && loggedIn"
-				>Orders</router-link
-			>
+			<router-link to="/orders" v-if="loggedIn">Orders</router-link>
 
 			<!-- Login modal -->
 			<LoginForm />

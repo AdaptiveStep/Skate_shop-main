@@ -1,7 +1,7 @@
 <template>
 	<div class="orders">
 		<h1>Orders</h1>
-
+		<button @click="getAllOrders"> TESTA MIG PLZ</button>
 		<div class="rows">
 			<div class="linedTitle">
 				<span>In Progress</span>
@@ -97,11 +97,14 @@
 
 <script>
 import Overlay from '@/components/Overlay'
+import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
+
 export default {
 	methods: {
 		viewProductDetails() {
 			this.showProductModal = true
 		},
+		...mapActions(['getAllOrders']),
 	},
 	data() {
 		return {
@@ -113,6 +116,9 @@ export default {
 	components: {
 		Overlay,
 	},
+	mount(){
+		this.getAllOrders()
+	}
 }
 </script>
 
@@ -144,7 +150,7 @@ export default {
 	flex-wrap: wrap;
 	// background-color: red;
 	justify-content: flex-start;
-	
+
 	max-height: 10rem;
 	max-width: 20rem;
 	min-width: 5rem;
