@@ -3,8 +3,8 @@
 export default {
 	state: () => ({}),
 	mutations: {
-		coolMutation() {
-			console.log('MODULE FUNGERAR WOHO')
+		ActivationMutation() {
+			console.log('Activated')
 		},
 
 		//Session mutations
@@ -25,8 +25,8 @@ export default {
 	},
 	actions: {},
 	getters: {
-		giveStuff() {
-			return 'WOW MODULE VALUE'
+		syncStorage() {
+			return 'storageID'
 		},
 	},
 }

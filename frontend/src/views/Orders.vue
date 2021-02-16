@@ -1,49 +1,40 @@
 <template>
-	<div class="orders">
-		<h1>Orders</h1>
-		<!-- <h1>{{ prodsByIdArray(inProcessOrders[0].items) }}</h1> -->
-		<button @click="getAllOrders">TESTA MIG PLZ</button>
-		<div class="rows">
-			<div class="linedTitle">
-				<span>In Progress</span>
-				<hr />
-			</div>
-			<div class="orderList">
-				<div v-for="(order, index) in inProcessOrders" :key="index">
-					<OrderRow v-bind:order="order" />
-				</div>
-			</div>
-		</div>
-
-		<div class="rows">
-			<div class="linedTitle">
-				<span>Done</span>
-				<hr />
-			</div>
-			<div class="orderList">
-				<div class="cartProduct">
-					<img src="" alt="" class="cartProductImage" />
-
-					<div class="cartProductDetails">
-						<span><b>Orderid:</b> 14321354</span>
-						<span><b>Date</b>2020/12/5 24:43:23</span>
-						<span>Orderid: 14321354</span>
+	<transition name="fade" mode="out-in">
+		<div class="orders">
+			<div v-if="loggedIn" class="loggedIn">
+				<h1>Orders</h1>
+				<div class="rows">
+					<div class="linedTitle">
+						<span>In Progress</span>
+						<hr />
 					</div>
-					<div class="cartProductPrice">
-						<span><b>Order value:</b> 999</span>
+					<div class="orderList">
+						<div v-for="(order, index) in inProcessOrders" :key="index">
+							<OrderRow v-bind:order="order" />
+						</div>
 					</div>
 				</div>
 
-				<div class="order">another other here</div>
-				<div class="order">another other here</div>
+				<div class="rows">
+					<div class="linedTitle">
+						<span>Done</span>
+						<hr />
+					</div>
+					<div class="orderList">
+						<div v-for="(order, index) in doneOrders" :key="index">
+							<OrderRow v-bind:order="order" />
+						</div>
+					</div>
+				</div>
 			</div>
+			<div v-else class="notLoggedIn">Please log in to view this page</div>
 		</div>
-	</div>
+	</transition>
 </template>
 
 <script>
 // import Overlay from '@/components/Overlay'
-import OrderRow from '@/components/OrderRow'
+import OrderRow from '@/components/orders/OrderRow'
 import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
@@ -59,7 +50,13 @@ export default {
 	},
 
 	computed: {
-		...mapGetters(['inProcessOrders', 'doneOrders', 'prodById']),
+		...mapGetters([
+			'inProcessOrders',
+			'doneOrders',
+			'prodById',
+			'loggedIn',
+			'loggedInAsAdmin',
+		]),
 	},
 	components: {
 		// Overlay,

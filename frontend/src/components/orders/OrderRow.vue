@@ -55,9 +55,9 @@
 			</div>
 		</div>
 
-		<div class="modifiers rowButtons ">
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-minus-circle"></i>
+		<div v-if="loggedInAsAdmin" class="modifiers rowButtons">
+			<i v-if="order.status === 'inProcess'" class="fas fa-check-circle"></i>
+			<i v-if="order.status === 'done'" class="fas fa-minus-circle"></i>
 		</div>
 	</div>
 </template>
@@ -99,7 +99,7 @@ export default {
 			return date.toDateString()
 		},
 		...mapGetters(['loggedInAsAdmin', 'prodsByIdArray', 'prodById']),
-		...mapState(['allProdDictionary']),
+		...mapState(['allProdDictionary', 'loggedIn']),
 
 		productsInOrder() {
 			return this.prodsByIdArray(this.order.items)
@@ -120,8 +120,10 @@ export default {
 	justify-content: space-around;
 	// flex-wrap: nowrap;
 	background-color: $light-grey;
-	gap: 0.5rem;
+	// gap: 0.5rem;
+	padding: 1rem;
 	border-radius: 10px;
+	transition: background-color 0.5s ease;
 	&:hover {
 		background-color: $primary-color;
 	}
@@ -186,7 +188,7 @@ export default {
 	flex-wrap: wrap;
 	flex-grow: 4;
 }
-.rowButtons {
-	width: 5rem;
-}
+// .rowButtons {
+// 	width: 3rem;
+// }
 </style>

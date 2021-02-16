@@ -242,14 +242,14 @@ export default new Vuex.Store({
 		//#endregion
 		
 		//#region Order Getters
-		inProcessOrders(n,getters){
-			// return state.allOrders.filter(x => x.status === "inProcess")
-			return getters.filteredOrders(x => x.status === "inProcess")
+		inProcessOrders(state,getters){
+			return state.allOrders.filter(x => x.status === "inProcess")
+			//return getters.filteredOrders(x => x.status === "inProcess")
 
 		},
-		doneOrders(n,getters){
-			// return state.allOrders.filter(x => x.status === "done")
-			return getters.filteredOrders(x => x.status === "done")
+		doneOrders(state,getters){
+			return state.allOrders.filter(x => x.status === "done")
+			//return getters.filteredOrders(x => x.status === "done")
 		},
 
 		filteredOrders(state){

@@ -365,9 +365,9 @@ hr {
 /////////////////--------Buttons
 .modifiers {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	justify-content: center;
 	align-items: center;
 	color: $secondary-color;
 	gap: 0.1rem;
@@ -389,7 +389,7 @@ hr {
 			background-color: $shadow-color;
 		}
 		&:active {
-			transition: background-color 0.2s ease;
+			transition: background-color 0.01s ease-out;
 			background-color: $orange-color;
 		}
 	}

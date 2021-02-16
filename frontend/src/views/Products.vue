@@ -6,7 +6,7 @@
 				<div class="modalPic">
 					<img
 						class="modalImage"
-						:src="require(`@/${selectedProduct.imgFile}`)"
+						:src="require(`@/assets/${selectedProduct.imgFile}`)"
 					/>
 				</div>
 				<!-- src="@/assets/skateboard-generic.png" -->
@@ -122,7 +122,7 @@ export default {
 	components: {
 		Overlay,
 	},
-	mounted() {
+	created() {
 		this.loadAllProducts()
 	},
 }
