@@ -1,7 +1,7 @@
 <template>
 	<div class="orders">
 		<h1>Orders</h1>
-		<button @click="getAllOrders"> TESTA MIG PLZ</button>
+		<button @click="getAllOrders">TESTA MIG PLZ</button>
 		<div class="rows">
 			<div class="linedTitle">
 				<span>In Progress</span>
@@ -32,6 +32,7 @@
 					<div class="cartProductPrice ">
 						<span><b>Order value:</b> 999</span>
 					</div>
+
 					<div class="modifiers  ">
 						<i class="fas fa-check-circle" tabindex="0"></i>
 					</div>
@@ -112,13 +113,15 @@ export default {
 			selectedProduct: {},
 		}
 	},
-	computed: {},
+	computed: {
+		...mapGetters(['inProcessOrders']),
+	},
 	components: {
 		Overlay,
 	},
-	mount(){
+	mount() {
 		this.getAllOrders()
-	}
+	},
 }
 </script>
 
@@ -167,8 +170,6 @@ export default {
 		}
 		&:focus {
 			background-color: green;
-			width: 2rem;
-			height: 2rem;
 		}
 	}
 }

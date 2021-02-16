@@ -223,6 +223,21 @@ export default new Vuex.Store({
 			return tmpbasket
 		},
 		
+		//Order Getters
+		inProcessOrders(state,getters){
+			// return state.allOrders.filter(x => x.status === "inProcess")
+			return getters.filteredOrders(x => x.status === "inProcess")
+
+		},
+		doneOrders(state,getters){
+			// return state.allOrders.filter(x => x.status === "done")
+			return getters.filteredOrders(x => x.status === "done")
+		},
+
+		filteredOrders(state){
+			return filter => state.allOrders.filter(filter)
+		}
+
 	},
 
 	modules: {
