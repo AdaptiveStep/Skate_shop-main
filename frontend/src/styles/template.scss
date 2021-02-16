@@ -365,17 +365,17 @@ hr {
 /////////////////--------Buttons
 .modifiers {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: space-evenly;
-	color: $primary-color;
+	align-items: center;
+	color: $secondary-color;
 	gap: 0.1rem;
-
 	padding: 1rem;
-
 	.fas {
 		// width: 1.5rem;
 		// height: 1.5rem;
-		background-color: $secondary-color;
+		// background-color: $secondary-color;
 		border-radius: 50%;
 		text-align: center;
 		padding: 0.1rem;
@@ -383,9 +383,14 @@ hr {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		transition: background-color 1s ease;
 
 		&:hover {
 			background-color: $shadow-color;
+		}
+		&:active {
+			transition: background-color 0.2s ease;
+			background-color: $orange-color;
 		}
 	}
 }
