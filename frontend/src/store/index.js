@@ -12,9 +12,6 @@ export default new Vuex.Store({
 		//General states
 		loggedInUser: {},
 
-		// Product states
-		//basket: [],
-
 		basketItems: [
 			// { _id: 'x12', amount: 3 },
 			// { _id: 'nnvd', amount: 1 },
@@ -29,7 +26,17 @@ export default new Vuex.Store({
 		allProducts: [],
 		allProdDictionary: [],
 
-		allOrders: [],
+		allOrders: [
+			// {_id: fm3k32, items:[...productids], orderValue, status, timestamp},
+			// {...},
+			// {....}
+		],
+		allOrdersDictionary:[
+			// {_id: fm3k32, items:[productObjects], orderValue, status, timestamp},
+			// {...},
+			// {....}
+
+		]
 	},
 	mutations: {
 		cacheAllProducts(state, products) {
@@ -40,7 +47,7 @@ export default new Vuex.Store({
 			state.allProdDictionary = tmplist
 		},
 
-		// UserMutations
+		//#region UserMutations
 		addToCart(state, product) {
 			let exists = state.basketItems.some((p) => p._id === product._id)
 			if (exists) {
@@ -90,15 +97,24 @@ export default new Vuex.Store({
 			//Don't use this. Use action instead.
 			state.loggedInUser = {}
 		},
+		//#endregion
 
-		// admin Helpers
+		//#region admin Helpers
 		selectUser(state, user) {
 			state.selectedUser = user
 		},
 
 		cacheAllOrders(state, orders){
+			
+			
 			state.allOrders = orders
-		}
+
+			
+		},
+		//#endregion
+
+
+			
 	},
 	actions: {
 		//#region User CRUDs
@@ -152,7 +168,6 @@ export default new Vuex.Store({
 		//#endregion
 
 
-		
 		//#region order CRUDs
 		async placeNewOrder({ commit, state }, payload) {
 			// console.log('THESE ARE THE RESULTS', payload.items)
@@ -176,6 +191,8 @@ export default new Vuex.Store({
 	},
 
 	getters: {
+
+		//#region Basket Getters
 		basketCount(state, getters) {
 			return state.basketItems.reduce((x, next) => x + next.amount, 0)
 		},
@@ -222,8 +239,9 @@ export default new Vuex.Store({
 
 			return tmpbasket
 		},
+		//#endregion
 		
-		//Order Getters
+		//#region Order Getters
 		inProcessOrders(state,getters){
 			// return state.allOrders.filter(x => x.status === "inProcess")
 			return getters.filteredOrders(x => x.status === "inProcess")
@@ -236,8 +254,17 @@ export default new Vuex.Store({
 
 		filteredOrders(state){
 			return filter => state.allOrders.filter(filter)
-		}
+		},
 
+		prodById(state){
+			//get cached version
+			return pid => state.allProdDictionary[pid]
+		},
+			
+		prodsByIdArray(getters){
+			return parray => parray.map(id => getters.prodById(id))
+		}
+		//#endregion
 	},
 
 	modules: {

@@ -1,6 +1,7 @@
 <template>
 	<div class="orders">
 		<h1>Orders</h1>
+		<h1>{{ prodById('Z1O21NjX4kAQ8ggN') }}</h1>
 		<button @click="getAllOrders">TESTA MIG PLZ</button>
 		<div class="rows">
 			<div class="linedTitle">
@@ -8,37 +9,6 @@
 				<hr />
 			</div>
 			<div class="orderList">
-				<!-- <div
-					v-for="(order, index) in inProcessOrders"
-					:key="index"
-					class="oneOrder"
-				>
-					<div class="orderProducts ">
-						<div
-							v-for="(item, index) in order.items"
-							:key="index"
-							@click="viewProductDetails"
-							src=""
-							alt=""
-							class="cartProductImage shadowed"
-							tabindex="0"
-						/>
-					</div>
-
-					<div class="orderDetails ">
-						<span><b>Orderid:</b> {{ order._id }}</span>
-						<span><b>Date: </b>{{ order.timeStamp }}</span>
-						<span>Orderid: 14321354</span>
-					</div>
-					<div class="cartProductPrice ">
-						<span><b>Order value:</b> {{ order.orderValue }}</span>
-					</div>
-
-					<div class="modifiers  ">
-						<i class="fas fa-check-circle" tabindex="0"></i>
-						<i class="fas fa-minus-circle" tabindex="0"></i>
-					</div>
-				</div> -->
 				<div v-for="(order, index) in inProcessOrders" :key="index">
 					<OrderRow v-bind:order="order" />
 				</div>
@@ -81,7 +51,7 @@ export default {
 		viewProductDetails() {
 			this.showProductModal = true
 		},
-		...mapActions(['getAllOrders']),
+		...mapActions(['getAllOrders', 'loadAllProducts']),
 	},
 	data() {
 		return {
@@ -89,14 +59,21 @@ export default {
 			selectedProduct: {},
 		}
 	},
+
 	computed: {
-		...mapGetters(['inProcessOrders', 'doneOrders']),
+		...mapGetters([
+			'inProcessOrders',
+			'doneOrders',
+			'prodById',
+			'prodsByIdArray',
+		]),
 	},
 	components: {
 		// Overlay,
 		OrderRow,
 	},
-	mount() {
+	created() {
+		this.loadAllProducts()
 		this.getAllOrders()
 	},
 }
