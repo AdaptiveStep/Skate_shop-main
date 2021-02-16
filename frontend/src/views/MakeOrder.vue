@@ -8,11 +8,8 @@
 				key="newBuyer"
 				v-if="!loggedIn && !paymentComplete"
 			>
-
 				<Overlay :show="showMe" v-on:close="showMe = false">
-
 					<div class="modalProduct">
-
 						<div class="modalPic">
 							<img
 								class="modalImage"
@@ -45,38 +42,38 @@
 
 					<div class="loginForm">
 						<h1 class="yourDetails">Your Details</h1>
-							<div class="gapping">
-								<input class="Field" placeholder="Your name" type="text">
-							</div>
+						<div class="gapping">
+							<input class="Field" placeholder="Your name" type="text" />
+						</div>
 
-							<div class="gapping">
-								<input class="Field" placeholder="Street" type="text">
+						<div class="gapping">
+							<input class="Field" placeholder="Street" type="text" />
+						</div>
+						<div class="inline gapping">
+							<div>
+								<input class="Field" placeholder="ZIP code" />
 							</div>
-							<div class="inline gapping">
-								<div>
-									<input class="Field" placeholder="ZIP code">
-								</div>
-								<div>
-									<input class="Field" placeholder="City">
-								</div>
+							<div>
+								<input class="Field" placeholder="City" />
 							</div>
+						</div>
 						<hr />
 						<h1 class="payment">Payment</h1>
-							<div class="gapping">
-								<input class="Field" placeholder="Card Owner" type="text">
-							</div>
+						<div class="gapping">
+							<input class="Field" placeholder="Card Owner" type="text" />
+						</div>
 
-							<div class="gapping">
-								<input class="Field" placeholder="Card Number" type="text">
+						<div class="gapping">
+							<input class="Field" placeholder="Card Number" type="text" />
+						</div>
+						<div class="inline gapping">
+							<div>
+								<input class="Field" placeholder="Valid until" type="text" />
 							</div>
-							<div class="inline gapping">
-								<div>
-									<input class="Field" placeholder="Valid until" type="text">
-								</div>
-								<div>
-									<input class="Field" placeholder="CCV" type="text">
-								</div>
+							<div>
+								<input class="Field" placeholder="CCV" type="text" />
 							</div>
+						</div>
 						<button class="submitBtn">Submit order</button>
 					</div>
 				</div>
@@ -95,43 +92,62 @@
 					<div class="multiFormWrapper">
 						<TitledContainer class="fixa" title="Delivery">
 							<div class="gapping">
-								<input v-model="loggedInUser.name" class="Field" placeholder="Name" type="text">
+								<input
+									v-model="loggedInUser.name"
+									class="Field"
+									placeholder="Name"
+									type="text"
+								/>
 							</div>
 
 							<div class="gapping">
-								<input v-model="loggedInUser.adress.street" class="Field" placeholder="Street adress" type="text">
+								<input
+									v-model="loggedInUser.adress.street"
+									class="Field"
+									placeholder="Street adress"
+									type="text"
+								/>
 							</div>
 							<div class="inline gapping">
 								<div>
-									<input v-model="loggedInUser.adress.zip" class="Field" placeholder="City">
+									<input
+										v-model="loggedInUser.adress.zip"
+										class="Field"
+										placeholder="City"
+									/>
 								</div>
 								<div>
-									<input v-model="loggedInUser.adress.city" class="Field" placeholder="Zip Code">
+									<input
+										v-model="loggedInUser.adress.city"
+										class="Field"
+										placeholder="Zip Code"
+									/>
 								</div>
 							</div>
 
-								<button @click="hej" class="blackPill">Update</button>
-
+							<button @click="hej" class="blackPill">Update</button>
 						</TitledContainer>
 
 						<TitledContainer class="fixa" title="Payment Details">
 							<div class="gapping">
-								<input class="Field" placeholder="Card owner" type="text">
+								<input class="Field" placeholder="Card owner" type="text" />
 							</div>
 
 							<div class="gapping">
-								<input class="Field" placeholder="Card Number" type="text">
+								<input class="Field" placeholder="Card Number" type="text" />
 							</div>
 							<div class="inline gapping">
 								<div>
-									<input class="Field" placeholder="Valid until" type="text">
+									<input class="Field" placeholder="Valid until" type="text" />
 								</div>
 								<div>
-									<input class="Field" placeholder="CCV" type="text">
+									<input class="Field" placeholder="CCV" type="text" />
 								</div>
 							</div>
 							<div class="forBut">
-								<button @click="Confirm" class="blackPill">Take my Money</button>
+								<button @click="Confirm" class="blackPill">
+									Take my Money WOW
+								</button>
 							</div>
 						</TitledContainer>
 					</div>
@@ -192,7 +208,13 @@ export default {
 		},
 		Confirm() {
 			let tmpuser = this.loggedInUser
-			let items = this.basket.map((x) => x._id)
+
+			let items = []
+			for (let it of this.basketItems) {
+				for (let index = 0; index < it.amount; index++) {
+					items.push(it._id)
+				}
+			}
 
 			let tmptotalprice = this.basketTotalPrice
 			let payload = { user: tmpuser, items: items, price: tmptotalprice }
@@ -214,13 +236,14 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(['basket', 'paymentComplete', 'loggedInUser']),
+		...mapState(['paymentComplete', 'loggedInUser', 'basketItems']),
 		...mapGetters([
 			'basketCount',
 			'basketTotalPrice',
 			'basketEmpty',
 			'loggedIn',
 			'loggedInAsAdmin',
+			'basket',
 		]),
 	},
 	components: {
@@ -330,11 +353,6 @@ export default {
 	gap: 1rem;
 }
 
-
-
-
-
-
 // Tillfälligt
 
 .yourDetails {
@@ -343,7 +361,6 @@ export default {
 
 .payment {
 	padding-right: 14rem;
-
 }
 
 .fixa {
@@ -360,25 +377,20 @@ export default {
 }
 
 input {
-  width: 100%;
-  display: block;
-
+	width: 100%;
+	display: block;
 }
 
 div.inline {
-  width: 100%;
-  display: table;
-
+	width: 100%;
+	display: table;
 }
 
 div.inline div {
-  display: table-cell;
-
+	display: table-cell;
 }
 
-div.inline div:nth-child(n+2) {
-   padding-left: 10px;
+div.inline div:nth-child(n + 2) {
+	padding-left: 10px;
 }
-
-
 </style>
