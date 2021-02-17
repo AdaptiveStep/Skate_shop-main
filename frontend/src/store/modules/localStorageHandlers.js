@@ -1,10 +1,11 @@
 //Local storage can only store strings.
 
 export default {
+	namespaced: false,
 	state: () => ({}),
 	mutations: {
-		coolMutation() {
-			console.log('MODULE FUNGERAR WOHO')
+		ActivationMutation() {
+			console.log('Activated')
 		},
 
 		//Session mutations
@@ -25,8 +26,8 @@ export default {
 	},
 	actions: {},
 	getters: {
-		giveStuff() {
-			return 'WOW MODULE VALUE'
+		oneStorage() {
+			return 'storageID'
 		},
 	},
 }

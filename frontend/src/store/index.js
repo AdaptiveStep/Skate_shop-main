@@ -1,6 +1,13 @@
+//Author Hariz Hasecic 2015
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import LocalStorageModule from '@/store/modules/localStorageHandlers.js'
+import Admin from '@/store/modules/AdminModule.js'
+import Basket from '@/store/modules/BasketModule.js'
+import Orders from '@/store/modules/OrdersModule.js'
+import Product from '@/store/modules/ProductModule.js'
+
 import createPersistedState from 'vuex-persistedstate'
 
 import * as api from '@/api/index.js'
@@ -11,9 +18,6 @@ export default new Vuex.Store({
 	state: {
 		//General states
 		loggedInUser: {},
-
-		// Product states
-		//basket: [],
 
 		basketItems: [
 			// { _id: 'x12', amount: 3 },
@@ -29,7 +33,11 @@ export default new Vuex.Store({
 		allProducts: [],
 		allProdDictionary: [],
 
-		allOrders: [],
+		allOrders: [
+			// {_id: fm3k32, items:[...productids], orderValue, status, timestamp},
+			// {...},
+			// {....}
+		],
 	},
 	mutations: {
 		cacheAllProducts(state, products) {
@@ -40,7 +48,7 @@ export default new Vuex.Store({
 			state.allProdDictionary = tmplist
 		},
 
-		// UserMutations
+		//#region UserMutations
 		addToCart(state, product) {
 			let exists = state.basketItems.some((p) => p._id === product._id)
 			if (exists) {
@@ -54,23 +62,19 @@ export default new Vuex.Store({
 				}
 				state.basketItems.push(tmpobj)
 			}
-			// console.log(lol)
 		},
 
 		removeFromCart(state, product) {
-			const index = state.basketItems.findIndex( (p) => p._id === product._id)
-			console.log(index)
+			const index = state.basketItems.findIndex((p) => p._id === product._id)
+
 			if (index > -1) {
-				if(state.basketItems[index].amount===1){
+				if (state.basketItems[index].amount === 1) {
 					state.basketItems.splice(index, 1)
-				}
-				else
-				{
+				} else {
 					state.basketItems[index].amount -= 1
 				}
 			}
 		},
-		
 
 		completePayment(state) {
 			//För att komma till sidan efter konfirmerat payment
@@ -89,38 +93,31 @@ export default new Vuex.Store({
 		logout(state) {
 			//Don't use this. Use action instead.
 			state.loggedInUser = {}
+			state.allOrders = []
 		},
+		//#endregion
 
-		// admin Helpers
+		//#region admin Helpers
 		selectUser(state, user) {
 			state.selectedUser = user
 		},
 
-		cacheAllOrders(state, orders){
+		cacheAllOrders(state, orders) {
 			state.allOrders = orders
-		}
+		},
+		removeCachedOrder(state, order) {
+			let tmp = state.allOrders.findIndex((x) => x._id === order._id)
+			tmp >= 0 ? state.allOrders.splice(tmp, 1) : ''
+		},
+		//#endregion
 	},
 	actions: {
-		//#region User CRUDs
-		async login({ commit }, user) {
-			let result = await api.login(user)
-			let compiledUser = result.user
-			compiledUser.token = result.token
-			this.commit('login', compiledUser)
-		},
-		logout({ commit }) {
-			this.commit('logout')
-		},
-		
-
-		async createUser({dispatch}, user){
+		async createUser({ dispatch }, user) {
 			let result = await api.createUser(user)
-			if(result.message === "User registered!"){
-				console.log("ITS WORKING")
-				dispatch("login",user)
-			}
-			else if(result.message === "Email already exists"){
-				console.log("Do stuff for email that exist, popup maybe")
+			if (result.message === 'User registered!') {
+				dispatch('login', user)
+			} else if (result.message === 'Email already exists') {
+				console.log('Email already exists')
 			}
 		},
 
@@ -151,11 +148,8 @@ export default new Vuex.Store({
 		},
 		//#endregion
 
-
-		
 		//#region order CRUDs
 		async placeNewOrder({ commit, state }, payload) {
-			// console.log('THESE ARE THE RESULTS', payload.items)
 			let result = await api.createOrder(
 				payload.user,
 				payload.items,
@@ -163,70 +157,45 @@ export default new Vuex.Store({
 			)
 		},
 
-		async getAllOrders({state,commit}) {
+		async getAllOrders({ state, commit }) {
 			let result = await api.getAllOrders(state.loggedInUser)
-			commit('cacheAllOrders',result)
-			
-			console.log('THESE ARE THE RESULTS', state.allOrders)
-
-			return result;
+			commit('cacheAllOrders', result)
+			return result
 		},
 
-		//#endregion		
+		//#endregion
 	},
 
 	getters: {
-		basketCount(state, getters) {
-			return state.basketItems.reduce((x, next) => x + next.amount, 0)
-		},
-		basketTotalPrice(state, getters) {
-			let tmp = Object.entries(getters.basket)
-
-			const reducer = (accumulator, currentValue) =>
-				accumulator + currentValue.[1].amount*currentValue.[1].product.price
-
-			const newnum = tmp.reduce(reducer, 0)
-			// console.log(tmp)
-			return newnum
-		},
-		basketEmpty(state, getters) {
-			return getters.basketCount === 0
-		},
-		basketAveragePrice(state, getters) {
-			return getters.basketTotalPrice / getters.basketCount
-		},
-
-		loggedIn(state) {
-			return Object.keys(state.loggedInUser).length > 0
-		},
-		loggedInAsAdmin(state) {
-			return state.loggedInUser.role === 'admin'
-		},
-		allFiles() {
-			const req = require.context('../../../assets/', true, /\.(png)$/i)
-			let tmpFiles = []
-			req.keys().map((key) => {
-				tmpFiles.push(key.slice(2))
-			})
-			return tmpFiles
-		},
-
-		basket(state) {
-			let tmpbasket = {}
-			state.basketItems.map((item) => {
-				tmpbasket[item._id] = {
-					product: state.allProdDictionary[item._id],
-					amount: item.amount,
-				}
-			})
-
-			return tmpbasket
-		},
-		
+		//#region Basket Getters
+		// basketCount(state, getters) {
+		// 	return state.basketItems.reduce((x, next) => x + next.amount, 0)
+		// },
+		// basketTotalPrice(state, getters) {
+		// 	let tmp = Object.entries(getters.basket)
+		// 	const reducer = (accumulator, currentValue) =>
+		// 		accumulator + currentValue.[1].amount*currentValue.[1].product.price
+		// 	const newnum = tmp.reduce(reducer, 0)
+		// 	return newnum
+		// },
+		// basketEmpty(state, getters) {
+		// 	return getters.basketCount === 0
+		// },
+		// basketAveragePrice(state, getters) {
+		// 	return getters.basketTotalPrice / getters.basketCount
+		// },
+		// loggedIn(state) {
+		// 	return Object.keys(state.loggedInUser).length > 0
+		// },
+		//#endregion
 	},
 
 	modules: {
 		localStorage: LocalStorageModule,
+		Admin,
+		Basket,
+		Orders,
+		Product,
 	},
 	plugins: [createPersistedState()],
 })

@@ -4,13 +4,13 @@
 			<div class="cartProducts">
 				<transition-group name="list">
 					<div
-						v-for="(item, index) in basket"
-						:key="index"
+						v-for="item in basket"
+						:key="item.product._id"
 						class="productHolder"
 					>
 						<div class="cartProduct">
 							<img
-								:src="require(`../../../assets/${item.product.imgFile}`)"
+								:src="require(`@/assets/${item.product.imgFile}`)"
 								alt=""
 								class="cartProductImage"
 							/>
@@ -26,7 +26,7 @@
 
 							<div class="modifiers">
 								<i
-									class="fas fa-plus-square shadowed"
+									class="fas fa-plus-circle shadowed "
 									@click="addToCart(item.product)"
 								></i>
 								<i
@@ -36,7 +36,9 @@
 							</div>
 						</div>
 						<div>
-							<h1>Amount: {{ item.amount }}</h1>
+							<transition name="fade" mode="out-in">
+								<h1>Amount: {{ item.amount }}</h1>
+							</transition>
 						</div>
 						<hr />
 					</div>
@@ -105,5 +107,4 @@ export default {
 	}
 	padding-right: 1rem;
 }
-
 </style>

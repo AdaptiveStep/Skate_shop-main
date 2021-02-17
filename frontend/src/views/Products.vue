@@ -1,14 +1,16 @@
 <template>
 	<div class="product">
-		<!-- <h1>Some stuff form module {{ giveStuff }}</h1> -->
+		<!-- <h1> Activation module {{ oneStorage || activeDynamicReg }}</h1> -->
 		<Overlay :show="showProductModal" v-on:close="showProductModal = false">
 			<div class="modalProduct">
 				<div class="modalPic">
 					<img
 						class="modalImage"
-						src="../../../assets/skateboard-generic.png"
+						:src="require(`@/assets/${selectedProduct.imgFile}`)"
 					/>
 				</div>
+				<!-- src="@/assets/skateboard-generic.png" -->
+				<!-- :src="require(`@/assets/${selectedProduct.imgFile}`)" -->
 
 				<div class="modalInfo">
 					<div class="modalTitle">
@@ -25,25 +27,30 @@
 						<span>{{ selectedProduct.price }}</span>
 					</div>
 
-					<button @click="addToCart(selectedProduct)" class="blackPill">
+					<button
+						v-if="!loggedInAsAdmin"
+						@click="addToCart(selectedProduct)"
+						class="blackPill"
+					>
 						Take my Money
 					</button>
 				</div>
 			</div>
 		</Overlay>
 
-		<div class="productsContainer" v-if="true">
+		<div class="productsContainer">
 			<div
 				v-for="(item, index) in allProducts"
 				:key="index"
 				class="card shadowed"
 				@click="ShowProductDetails(item)"
+				tabindex="0"
 			>
 				<div class="cardHeader">
 					<span>{{ item.title }}</span>
 
 					<button class="roundButton bkg-secondary">
-						<img src="../../../assets/icon-bag-white.svg" />
+						<img src="@/assets/icon-bag-white.svg" />
 					</button>
 				</div>
 				<div class="cardSubTitle">
@@ -51,10 +58,7 @@
 				</div>
 
 				<div class="cardContent">
-					<img
-						class="cardImage"
-						:src="require(`../../../assets/${item.imgFile}`)"
-					/>
+					<img class="cardImage" :src="require(`@/assets/${item.imgFile}`)" />
 
 					<span class="blackPill move">
 						<div class="pillPrice">
@@ -86,7 +90,7 @@ export default {
 			this.showProductModal = true
 		},
 		urlImage(product) {
-			let tmp = '../../../assets/'
+			let tmp = '@/assets/'
 			let srctemp = tmp + product.imgFile
 			return srctemp
 		},
@@ -101,7 +105,14 @@ export default {
 	data() {
 		return {
 			showProductModal: false,
-			selectedProduct: {},
+			selectedProduct: {
+				title: '',
+				price: '',
+				shortDesc: '',
+				longDesc: '',
+				imgFile: 'skateboard-generic.png',
+				_id: '',
+			},
 			on: true,
 		}
 	},
@@ -111,7 +122,7 @@ export default {
 		},
 
 		...mapState(['allProducts']),
-		...mapGetters(['basket']),
+		...mapGetters(['basket', 'loggedInAsAdmin', 'oneStorage']),
 	},
 	components: {
 		Overlay,

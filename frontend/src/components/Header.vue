@@ -2,26 +2,30 @@
 	<div id="nav" class="header">
 		<div id="logo">
 			<router-link to="/">
-				<img src="../../../assets/sinus-logo.svg" />
+				<img src="@/assets/sinus-logo.svg" />
 			</router-link>
 		</div>
 
 		<!-- <div id="header-middle"></div> -->
 
 		<div class="header-right">
-			<router-link to="/register" v-if="!loggedIn">Register </router-link>
-			<router-link to="/products" v-if="!loggedInAsAdmin">Products</router-link>
+			<div class="links">
+				<router-link to="/register" v-if="!loggedIn">Register </router-link>
+				<router-link to="/products" v-if="!loggedInAsAdmin"
+					>Products</router-link
+				>
 
-			<router-link to="/adminproduct" v-if="loggedInAsAdmin && loggedIn">
-				<p>Admin Products</p></router-link
-			>
-			<router-link to="/orders" v-if="loggedIn">Orders</router-link>
+				<router-link to="/adminproduct" v-if="loggedInAsAdmin && loggedIn">
+					Admin Products</router-link
+				>
+				<router-link to="/orders" v-if="loggedIn">Orders</router-link>
+			</div>
 
 			<!-- Login modal -->
 			<LoginForm />
 
 			<!-- Cart modal -->
-			<div class="bagSpace">
+			<div v-if="!loggedInAsAdmin" class="bagSpace">
 				<div class="hasPopcounter">
 					<div class="arrowBox">
 						<div class="counterAndButton">
@@ -29,7 +33,7 @@
 								@click="showUserMod = true"
 								class="roundButton  bkg-orange"
 							>
-								<img src="../../../assets/icon-bag-black.svg" />
+								<img src="@/assets/icon-bag-black.svg" />
 							</button>
 
 							<span v-if="!basketEmpty" class="counter">{{ basketCount }}</span>
@@ -114,8 +118,10 @@ div#header > div {
 
 #logo {
 	color: #08a3d9;
-	width: 300px;
+
 	border-color: red;
+	width: 100%;
+	max-width: 300px;
 }
 
 #header-middle {
@@ -126,7 +132,9 @@ div#header > div {
 	display: flex;
 	gap: 1rem;
 	align-items: center;
+	justify-content: center;
 	min-height: 5rem;
+	flex-wrap: wrap;
 }
 
 // .popupOverlay {
@@ -163,6 +171,16 @@ div#header > div {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
+}
+
+.links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 1rem;
+	padding-top: 1rem;
 }
 
 .counterAndButton {
