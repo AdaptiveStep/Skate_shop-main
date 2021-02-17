@@ -122,7 +122,7 @@ export default {
 		},
 
 		...mapState(['allProducts']),
-		...mapGetters(['basket', 'loggedInAsAdmin', 'oneStorage']),
+		...mapGetters(['basket', 'loggedInAsAdmin']),
 	},
 	components: {
 		Overlay,

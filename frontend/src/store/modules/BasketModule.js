@@ -1,36 +1,4 @@
 export default {
-	namespaced: false,
-
-	mutations: {
-		addToCart(state, product, rootState) {
-			let exists = rootState.basketItems.some((p) => p._id === product._id)
-			if (exists) {
-				const withId = (p) => p._id === product._id
-				let pIndex = rootState.basketItems.findIndex(withId)
-				rootState.basketItems[pIndex].amount += 1
-			} else {
-				let tmpobj = {
-					_id: product._id,
-					amount: 1,
-				}
-				rootState.basketItems.push(tmpobj)
-			}
-		},
-		removeFromCart(state, product, rootState) {
-			const index = rootState.basketItems.findIndex(
-				(p) => p._id === product._id
-			)
-
-			if (index > -1) {
-				if (rootState.basketItems[index].amount === 1) {
-					rootState.basketItems.splice(index, 1)
-				} else {
-					rootState.basketItems[index].amount -= 1
-				}
-			}
-		},
-	},
-
 	getters: {
 		basket(state, getters, rootState) {
 			let tmpbasket = {}

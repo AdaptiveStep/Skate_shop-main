@@ -1,32 +1,16 @@
 import * as api from '@/api/index.js'
 
 export default {
-	namespaced: false,
-	state: () => ({}),
-	mutations: {
-		login(state, getters, rootState) {
-			//Don't use this. Use action instead.
-			return (user) => (rootState.loggedInUser = user)
-		},
-		logout(state, getters, rootState) {
-			//Don't use this. Use action instead.
-			rootState.loggedInUser = {}
-			rootState.allOrders = []
-		},
-		selectUser(state, getters, rootState) {
-			return (user) => (rootState.selectedUser = user)
-		},
-	},
 	actions: {
 		async login({ commit, dispatch }, user) {
 			let result = await api.login(user)
 			let compiledUser = result.user
 			compiledUser.token = result.token
-			commit('login', compiledUser, null, { root: true })
+			commit('login', compiledUser)
 			dispatch('getAllOrders', null, { root: true })
 		},
 		logout({ commit }) {
-			this.commit('logout', null, { root: true })
+			this.commit('logout')
 		},
 		async createUser({ dispatch }, user) {
 			let result = await api.createUser(user)
