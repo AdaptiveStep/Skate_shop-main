@@ -3,10 +3,7 @@
 		<h1>Admin Products</h1>
 
 		<div class="rows">
-			<div class="linedTitle">
-				<span>Add/Edit</span>
-				<hr />
-			</div>
+			<TitledContainer title="Add/Edit" />
 			<form @submit="NewProductSubmit(newProduct)" class="dataInputs">
 				<div class="dataInputImages">
 					<img
@@ -92,10 +89,7 @@
 							<span>{{ selectedProduct.price }}</span>
 						</div>
 						<div class="loginFormCompact">
-							<div class="linedTitle">
-								<span>Put new info</span>
-								<hr />
-							</div>
+							<TitledContainer title="Put new info" />
 							<div class="input-icons">
 								<input
 									v-model="selectedProduct.title"
@@ -206,6 +200,7 @@
 
 <script>
 import Overlay from '@/components/Overlay'
+import TitledContainer from '@/components/TitledContainer'
 import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
@@ -288,6 +283,7 @@ export default {
 	},
 	components: {
 		Overlay,
+		TitledContainer,
 	},
 	mounted() {
 		this.loadAllProducts()

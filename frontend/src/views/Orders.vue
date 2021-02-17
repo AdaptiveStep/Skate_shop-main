@@ -3,10 +3,7 @@
 		<div v-if="loggedIn" class="loggedIn">
 			<h1>Orders</h1>
 			<div class="rows">
-				<div class="linedTitle">
-					<span>In Progress</span>
-					<hr />
-				</div>
+				<TitledContainer title="In Progress" />
 				<div>
 					<transition-group name="list" class="orderList">
 						<div v-for="order in inProcessOrders" :key="order._id">
@@ -17,10 +14,7 @@
 			</div>
 
 			<div class="rows">
-				<div class="linedTitle">
-					<span>Done</span>
-					<hr />
-				</div>
+				<TitledContainer title="Done" />
 				<div class="orderList">
 					<div v-for="(order, index) in doneOrders" :key="index">
 						<OrderRow v-bind:order="order" />
@@ -34,6 +28,8 @@
 
 <script>
 // import Overlay from '@/components/Overlay'
+import TitledContainer from '@/components/TitledContainer'
+
 import OrderRow from '@/components/orders/OrderRow'
 import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
@@ -60,8 +56,9 @@ export default {
 		]),
 	},
 	components: {
-		// Overlay,
+		// Overlay
 		OrderRow,
+		TitledContainer,
 	},
 	mounted() {
 		this.loadAllProducts()
