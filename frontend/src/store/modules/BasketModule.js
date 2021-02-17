@@ -1,12 +1,12 @@
 export default {
 	namespaced: false,
-	state: () => ({}),
+	
 	mutations: {
 		ActiveBasket() {
 			console.log('Activated')
 		},
 	},
-	actions: {},
+	
 	getters: {
 		basket(state, getters, rootState) {
 			let tmpbasket = {}

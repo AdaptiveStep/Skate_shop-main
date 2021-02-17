@@ -2,11 +2,11 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import LocalStorageModule 	from '@/store/modules/localStorageHandlers.js'
-import Admin 				from '@/store/modules/AdminModule.js'
-import Basket 				from '@/store/modules/BasketModule.js'
-import Orders 				from '@/store/modules/OrdersModule.js'
-import Product 				from '@/store/modules/ProductModule.js'
+import LocalStorageModule from '@/store/modules/localStorageHandlers.js'
+import Admin from '@/store/modules/AdminModule.js'
+import Basket from '@/store/modules/BasketModule.js'
+import Orders from '@/store/modules/OrdersModule.js'
+import Product from '@/store/modules/ProductModule.js'
 
 import createPersistedState from 'vuex-persistedstate'
 
@@ -65,19 +65,16 @@ export default new Vuex.Store({
 		},
 
 		removeFromCart(state, product) {
-			const index = state.basketItems.findIndex( (p) => p._id === product._id)
-			
+			const index = state.basketItems.findIndex((p) => p._id === product._id)
+
 			if (index > -1) {
-				if(state.basketItems[index].amount===1){
+				if (state.basketItems[index].amount === 1) {
 					state.basketItems.splice(index, 1)
-				}
-				else
-				{
+				} else {
 					state.basketItems[index].amount -= 1
 				}
 			}
 		},
-		
 
 		completePayment(state) {
 			//För att komma till sidan efter konfirmerat payment
@@ -96,7 +93,7 @@ export default new Vuex.Store({
 		logout(state) {
 			//Don't use this. Use action instead.
 			state.loggedInUser = {}
-			state.allOrders=[]
+			state.allOrders = []
 		},
 		//#endregion
 
@@ -105,40 +102,22 @@ export default new Vuex.Store({
 			state.selectedUser = user
 		},
 
-		cacheAllOrders(state, orders){
+		cacheAllOrders(state, orders) {
 			state.allOrders = orders
 		},
-		removeCachedOrder(state, order){
-			let tmp = state.allOrders.findIndex(x=> x._id === order._id)
-			tmp>=0 ? state.allOrders.splice(tmp,1): "";
-			
-		}
+		removeCachedOrder(state, order) {
+			let tmp = state.allOrders.findIndex((x) => x._id === order._id)
+			tmp >= 0 ? state.allOrders.splice(tmp, 1) : ''
+		},
 		//#endregion
-
-
-			
 	},
 	actions: {
-		//#region User CRUDs
-		async login({ commit,dispatch }, user) {
-			let result = await api.login(user)
-			let compiledUser = result.user
-			compiledUser.token = result.token
-			commit('login', compiledUser)
-			dispatch('getAllOrders')
-		},
-		logout({ commit }) {
-			this.commit('logout')
-		},
-		
-
-		async createUser({dispatch}, user){
+		async createUser({ dispatch }, user) {
 			let result = await api.createUser(user)
-			if(result.message === "User registered!"){
-				dispatch("login",user)
-			}
-			else if(result.message === "Email already exists"){
-				console.log("Email already exists")
+			if (result.message === 'User registered!') {
+				dispatch('login', user)
+			} else if (result.message === 'Email already exists') {
+				console.log('Email already exists')
 			}
 		},
 
@@ -169,7 +148,6 @@ export default new Vuex.Store({
 		},
 		//#endregion
 
-
 		//#region order CRUDs
 		async placeNewOrder({ commit, state }, payload) {
 			let result = await api.createOrder(
@@ -179,27 +157,24 @@ export default new Vuex.Store({
 			)
 		},
 
-		async getAllOrders({state,commit}) {
+		async getAllOrders({ state, commit }) {
 			let result = await api.getAllOrders(state.loggedInUser)
-			commit('cacheAllOrders',result)
-			return result;
+			commit('cacheAllOrders', result)
+			return result
 		},
 
-		//#endregion		
+		//#endregion
 	},
 
 	getters: {
-
 		//#region Basket Getters
 		// basketCount(state, getters) {
 		// 	return state.basketItems.reduce((x, next) => x + next.amount, 0)
 		// },
 		// basketTotalPrice(state, getters) {
 		// 	let tmp = Object.entries(getters.basket)
-
 		// 	const reducer = (accumulator, currentValue) =>
 		// 		accumulator + currentValue.[1].amount*currentValue.[1].product.price
-
 		// 	const newnum = tmp.reduce(reducer, 0)
 		// 	return newnum
 		// },
@@ -209,79 +184,9 @@ export default new Vuex.Store({
 		// basketAveragePrice(state, getters) {
 		// 	return getters.basketTotalPrice / getters.basketCount
 		// },
-
-		loggedIn(state) {
-			return Object.keys(state.loggedInUser).length > 0
-		},
-		loggedInAsAdmin(state) {
-			return state.loggedInUser.role === 'admin'
-		},
-		allFiles() {
-			const req = require.context('@/assets/', true, /\.(png)$/i)
-			let tmpFiles = []
-			req.keys().map((key) => {
-				tmpFiles.push(key.slice(2))
-			})
-			return tmpFiles
-		},
-
-		// basket(state) {
-		// 	let tmpbasket = {}
-		// 	state.basketItems.map((item) => {
-		// 		tmpbasket[item._id] = {
-		// 			product: state.allProdDictionary[item._id],
-		// 			amount: item.amount,
-		// 		}
-		// 	})
-
-		// 	return tmpbasket
+		// loggedIn(state) {
+		// 	return Object.keys(state.loggedInUser).length > 0
 		// },
-		//#endregion
-		
-		//#region Order Getters
-		inProcessOrders(state,getters){
-			return state.allOrders.filter(x => x.status === "inProcess")
-			//return getters.filteredOrders(x => x.status === "inProcess")
-
-		},
-		doneOrders(state,getters){
-			return state.allOrders.filter(x => x.status === "done")
-			//return getters.filteredOrders(x => x.status === "done")
-		},
-
-		filteredOrders(state){
-			return filter => state.allOrders.filter(filter)
-		},
-
-		prodById(state){
-			return pid => {
-				let tmp = state.allProdDictionary[pid]
-				if(! (tmp===undefined))
-				{
-					return tmp
-
-				}else{
-					return {
-						title: 'Unknown Product',
-						price: '0',
-						shortDesc: 'Unknown' ,
-						longDesc: 'No description. This product cannot be found in the database',
-						imgFile: 'notfound.png',
-						_id: '',
-					}
-				}
-			}
-		},
-			
-		prodsByIdArray(n,getters){
-			return parray => parray.map(id => getters.prodById(id))
-		} 
-		
-		
-		
-		// {
-		// 	return parray.map(id => getters.prodById(id))
-		// }
 		//#endregion
 	},
 
