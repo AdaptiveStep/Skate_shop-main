@@ -4,9 +4,9 @@
 
 		<transition name="fade" mode="out-in">
 			<div
+				v-if="!loggedIn && !paymentComplete"
 				class="unloggedOrder"
 				key="newBuyer"
-				v-if="!loggedIn && !paymentComplete"
 			>
 				<Overlay :show="showMe" v-on:close="showMe = false">
 					<div class="modalProduct">
@@ -37,7 +37,7 @@
 				<div class="pageFlex">
 					<Basket v-on:clickBuy="showUserMod = false" />
 
-					<div class="loginForm">
+					<div v-if="true" class="loginForm">
 						<h1 class="yourDetails">Your Details</h1>
 						<div class="gapping">
 							<input class="Field" placeholder="Your name" type="text" />
@@ -71,31 +71,35 @@
 								<input class="Field" placeholder="CCV" type="text" />
 							</div>
 						</div>
-						<button class="submitBtn">Submit order</button>
+						<button disabled class="submitBtn">Submit order</button>
+					</div>
+
+					<div v-if="false">
+						Please login or
+						<router-link to="/register" v-if="!loggedIn">Register </router-link>
+						to proceed.
 					</div>
 				</div>
 			</div>
 
 			<div
+				v-else-if="loggedIn && !paymentComplete"
 				class="loggedInOrder"
 				key="oldBuyer"
-				v-else-if="loggedIn && !paymentComplete"
 			>
 				<div class="pageFlex">
-					<TitledContainer title="items">
+					<TitledContainer title="Items">
 						<Basket />
 					</TitledContainer>
 
 					<div class="multiFormWrapper">
 						<TitledContainer class="fixa" title="Delivery">
-							<div class="gapping">
-								<input
-									v-model="loggedInUser.name"
-									class="Field"
-									placeholder="Name"
-									type="text"
-								/>
-							</div>
+							<input
+								v-model="loggedInUser.name"
+								class="Field"
+								placeholder="Name"
+								type="text"
+							/>
 
 							<div class="gapping">
 								<input
@@ -126,7 +130,7 @@
 						</TitledContainer>
 
 						<TitledContainer class="fixa" title="Payment Details">
-							<div class="gapping">
+							<div class="">
 								<input class="Field" placeholder="Card owner" type="text" />
 							</div>
 
@@ -307,10 +311,6 @@ export default {
 	gap: 1rem;
 }
 
-//Remove when cart is done
-.userCart {
-}
-
 .submitBtn {
 	border-radius: 0.3rem;
 	background-color: $secondary-color;
@@ -348,6 +348,9 @@ export default {
 .multiFormWrapper {
 	display: flex;
 	gap: 1rem;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
 }
 
 // Tillfälligt
@@ -365,7 +368,6 @@ export default {
 }
 
 .forBut {
-	
 }
 
 .gapping {
