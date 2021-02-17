@@ -245,14 +245,18 @@ hr {
 	padding-right: 1rem;
 	padding-top: 1rem;
 	justify-content: space-between;
+	border-radius: 10px;
+	transition: background-color 0.5s ease;
 	&:hover {
-		margin: 1rem;
+		background-color: $light-grey;
 	}
-	&:active {
-		margin: 2rem;
+	&:focus {
+		background-color: $orange-color;
+	}
+	&::selection {
+		background-color: $orange-color;
 	}
 
-	transition: margin ease 0.2s;
 	flex-grow: 1;
 }
 

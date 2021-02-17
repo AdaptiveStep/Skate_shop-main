@@ -33,6 +33,9 @@
 						</div>
 
 						<div v-else>
+							<p><b>Logged in: </b> {{ loggedInUser.name }}</p>
+							<p>{{ loggedInUser.role }}</p>
+
 							<button class="blackPill loginBtn" @click="logoutButtonPressed">
 								Logout
 							</button>
@@ -46,7 +49,7 @@
 
 <script>
 import Overlay from '@/components/Overlay.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
 	name: 'Header',
@@ -82,6 +85,7 @@ export default {
 			'basketTotalPrice',
 			'basketEmpty',
 		]),
+		...mapState(['loggedInUser']),
 	},
 }
 </script>

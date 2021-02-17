@@ -27,19 +27,24 @@
 						<span>{{ selectedProduct.price }}</span>
 					</div>
 
-					<button @click="addToCart(selectedProduct)" class="blackPill">
+					<button
+						v-if="!loggedInAsAdmin"
+						@click="addToCart(selectedProduct)"
+						class="blackPill"
+					>
 						Take my Money
 					</button>
 				</div>
 			</div>
 		</Overlay>
 
-		<div class="productsContainer" v-if="true">
+		<div class="productsContainer">
 			<div
 				v-for="(item, index) in allProducts"
 				:key="index"
 				class="card shadowed"
 				@click="ShowProductDetails(item)"
+				tabindex="0"
 			>
 				<div class="cardHeader">
 					<span>{{ item.title }}</span>
@@ -117,7 +122,7 @@ export default {
 		},
 
 		...mapState(['allProducts']),
-		...mapGetters(['basket']),
+		...mapGetters(['basket', 'loggedInAsAdmin']),
 	},
 	components: {
 		Overlay,

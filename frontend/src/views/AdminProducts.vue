@@ -34,7 +34,7 @@
 							placeholder="Product Price"
 							required
 						/>
-						<select v-model="newProduct.category">
+						<select class="Field" v-model="newProduct.category">
 							<option
 								v-for="(item, key) in categories"
 								:key="key"
@@ -51,6 +51,7 @@
 							placeholder="Product short desc"
 							required
 						/>
+						<label for="male">{{ newProduct.imgFile }}</label>
 					</div>
 					<div class="dataInputDescription">
 						<textarea
@@ -112,7 +113,7 @@
 									:placeholder="selectedProduct.shortDesc"
 								/>
 							</div>
-							<select v-model="selectedProduct.category">
+							<select class="Field" v-model="selectedProduct.category">
 								<option
 									v-for="(item, key) in categories"
 									:key="key"
@@ -200,55 +201,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- <Overlay :show="showMe" v-on:close="showMe = false">
-			<div class="modalProduct">
-				<div class="modalPic">
-					<img
-						class="modalImage"
-						src="@/assets/skateboard-generic.png"
-					/>
-				</div>
-
-				<div class="modalInfo">
-					<div class="modalTitle">
-						<span>GRETA FURY</span>
-					</div>
-					<div class="modalSubtitle">
-						<span>Unisex</span>
-					</div>
-					<div class="modalTextInfo">
-						<p>Jag gillar apor som hoppar</p>
-					</div>
-
-					<div class="modalCash">
-						<span>999 sek</span>
-					</div>
-
-					<div class="loginFormCompact">
-						<div class="linedTitle">
-							<span>Put new info</span>
-							<hr />
-						</div>
-						<div class="input-icons">
-							<input class="Field" type="text" placeholder="Product name" />
-						</div>
-
-						<div class="input-icons">
-							<input class="Field" type="text" placeholder="Description" />
-						</div>
-
-						<div class="input-icons">
-							<input class="Field" type="text" placeholder="Price" />
-						</div>
-
-						<button class="blackPill">
-							Save Product
-						</button>
-					</div>
-				</div>
-			</div>
-		</Overlay> -->
 	</div>
 </template>
 
@@ -287,7 +239,7 @@ export default {
 		...mapMutations(['addToCart']),
 
 		...mapActions([
-			'giveStuff', // -> this.someMutation
+			'giveStuff',
 			'loadAllProducts',
 			'saveProduct',
 			'createProduct',
@@ -295,7 +247,6 @@ export default {
 		]),
 		setNewProductPath(path) {
 			this.newProduct.imgFile = path
-			console.log(path)
 		},
 	},
 	data() {
