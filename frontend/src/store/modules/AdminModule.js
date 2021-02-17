@@ -4,8 +4,17 @@ export default {
 	namespaced: false,
 	state: () => ({}),
 	mutations: {
-		ActivationAdmin() {
-			console.log('Activated')
+		login(state, getters, rootState) {
+			//Don't use this. Use action instead.
+			return (user) => (rootState.loggedInUser = user)
+		},
+		logout(state, getters, rootState) {
+			//Don't use this. Use action instead.
+			rootState.loggedInUser = {}
+			rootState.allOrders = []
+		},
+		selectUser(state, getters, rootState) {
+			return (user) => (rootState.selectedUser = user)
 		},
 	},
 	actions: {
@@ -18,6 +27,14 @@ export default {
 		},
 		logout({ commit }) {
 			this.commit('logout', null, { root: true })
+		},
+		async createUser({ dispatch }, user) {
+			let result = await api.createUser(user)
+			if (result.message === 'User registered!') {
+				dispatch('login', user)
+			} else if (result.message === 'Email already exists') {
+				console.log('Email already exists')
+			}
 		},
 	},
 	getters: {

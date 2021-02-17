@@ -65,7 +65,9 @@ export default {
 	},
 	mounted() {
 		this.loadAllProducts()
-		this.getAllOrders()
+
+		//getting All orders Requires logged in user.
+		this.loggedIn && this.getAllOrders()
 	},
 }
 </script>

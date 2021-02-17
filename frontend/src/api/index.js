@@ -127,11 +127,27 @@ export const getAllOrders = function(user) {
 }
 
 export const createUser = function(user) {
+	let tmpadress = user.adress
+		? user.adress
+		: { street: 'TestStreet', zip: '123 34', city: 'TestCity' }
 	let result = fetch('http://localhost:5000/api/register', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 
-		body: JSON.stringify(user),
+		body: JSON.stringify({
+			email: user.email,
+			password: user.password,
+			repeatPassword: user.password,
+
+			name: user.name,
+			adress: tmpadress,
+			payment: {
+				cardOwner: 'unamed',
+				cardNumber: '0000 0000 0000 0000',
+				validUntil: '10 / 23',
+				cvv: '123',
+			},
+		}),
 	}).then((response) => response.json())
 
 	return result
