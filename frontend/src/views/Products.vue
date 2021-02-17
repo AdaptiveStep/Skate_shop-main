@@ -1,6 +1,6 @@
 <template>
 	<div class="product">
-		<h1>Some stuff form module {{ oneStorage }}</h1>
+		<!-- <h1> Activation module {{ oneStorage || activeDynamicReg }}</h1> -->
 		<Overlay :show="showProductModal" v-on:close="showProductModal = false">
 			<div class="modalProduct">
 				<div class="modalPic">
