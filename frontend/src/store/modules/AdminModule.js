@@ -1,6 +1,7 @@
 //Local storage can only store strings.
 
 export default {
+	namespaced: false,
 	state: () => ({}),
 	mutations: {
 		ActivationMutation() {

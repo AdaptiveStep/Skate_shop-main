@@ -2,5 +2,9 @@ export default {
 	state: () => ({}),
 	mutations: {},
 	actions: {},
-	getters: {},
+	getters: {
+		petty(state, rootstate) {
+			return 'ItemsID'
+		},
+	},
 }

@@ -1,6 +1,13 @@
+//Author Hariz Hasecic 2015
+
 import Vue from 'vue'
 import Vuex from 'vuex'
-import LocalStorageModule from '@/store/modules/localStorageHandlers.js'
+import LocalStorageModule 	from '@/store/modules/localStorageHandlers.js'
+import Admin 				from '@/store/modules/AdminModule.js'
+import Basket 				from '@/store/modules/BasketModule.js'
+import Orders 				from '@/store/modules/OrdersModule.js'
+import Product 				from '@/store/modules/ProductModule.js'
+
 import createPersistedState from 'vuex-persistedstate'
 
 import * as api from '@/api/index.js'
@@ -55,12 +62,11 @@ export default new Vuex.Store({
 				}
 				state.basketItems.push(tmpobj)
 			}
-			// console.log(lol)
 		},
 
 		removeFromCart(state, product) {
 			const index = state.basketItems.findIndex( (p) => p._id === product._id)
-			console.log(index)
+			
 			if (index > -1) {
 				if(state.basketItems[index].amount===1){
 					state.basketItems.splice(index, 1)
@@ -105,7 +111,7 @@ export default new Vuex.Store({
 		removeCachedOrder(state, order){
 			let tmp = state.allOrders.findIndex(x=> x._id === order._id)
 			tmp>=0 ? state.allOrders.splice(tmp,1): "";
-			console.log("tmp",tmp)
+			
 		}
 		//#endregion
 
@@ -166,7 +172,6 @@ export default new Vuex.Store({
 
 		//#region order CRUDs
 		async placeNewOrder({ commit, state }, payload) {
-			// console.log('THESE ARE THE RESULTS', payload.items)
 			let result = await api.createOrder(
 				payload.user,
 				payload.items,
@@ -177,9 +182,6 @@ export default new Vuex.Store({
 		async getAllOrders({state,commit}) {
 			let result = await api.getAllOrders(state.loggedInUser)
 			commit('cacheAllOrders',result)
-			
-			// console.log('THESE ARE THE RESULTS', state.allOrders)
-
 			return result;
 		},
 
@@ -189,25 +191,24 @@ export default new Vuex.Store({
 	getters: {
 
 		//#region Basket Getters
-		basketCount(state, getters) {
-			return state.basketItems.reduce((x, next) => x + next.amount, 0)
-		},
-		basketTotalPrice(state, getters) {
-			let tmp = Object.entries(getters.basket)
+		// basketCount(state, getters) {
+		// 	return state.basketItems.reduce((x, next) => x + next.amount, 0)
+		// },
+		// basketTotalPrice(state, getters) {
+		// 	let tmp = Object.entries(getters.basket)
 
-			const reducer = (accumulator, currentValue) =>
-				accumulator + currentValue.[1].amount*currentValue.[1].product.price
+		// 	const reducer = (accumulator, currentValue) =>
+		// 		accumulator + currentValue.[1].amount*currentValue.[1].product.price
 
-			const newnum = tmp.reduce(reducer, 0)
-			// console.log(tmp)
-			return newnum
-		},
-		basketEmpty(state, getters) {
-			return getters.basketCount === 0
-		},
-		basketAveragePrice(state, getters) {
-			return getters.basketTotalPrice / getters.basketCount
-		},
+		// 	const newnum = tmp.reduce(reducer, 0)
+		// 	return newnum
+		// },
+		// basketEmpty(state, getters) {
+		// 	return getters.basketCount === 0
+		// },
+		// basketAveragePrice(state, getters) {
+		// 	return getters.basketTotalPrice / getters.basketCount
+		// },
 
 		loggedIn(state) {
 			return Object.keys(state.loggedInUser).length > 0
@@ -224,17 +225,17 @@ export default new Vuex.Store({
 			return tmpFiles
 		},
 
-		basket(state) {
-			let tmpbasket = {}
-			state.basketItems.map((item) => {
-				tmpbasket[item._id] = {
-					product: state.allProdDictionary[item._id],
-					amount: item.amount,
-				}
-			})
+		// basket(state) {
+		// 	let tmpbasket = {}
+		// 	state.basketItems.map((item) => {
+		// 		tmpbasket[item._id] = {
+		// 			product: state.allProdDictionary[item._id],
+		// 			amount: item.amount,
+		// 		}
+		// 	})
 
-			return tmpbasket
-		},
+		// 	return tmpbasket
+		// },
 		//#endregion
 		
 		//#region Order Getters
@@ -286,6 +287,10 @@ export default new Vuex.Store({
 
 	modules: {
 		localStorage: LocalStorageModule,
+		Admin,
+		Basket,
+		Orders,
+		Product,
 	},
 	plugins: [createPersistedState()],
 })

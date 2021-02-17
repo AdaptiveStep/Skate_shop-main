@@ -1,6 +1,6 @@
 <template>
 	<div class="product">
-		<!-- <h1>Some stuff form module {{ giveStuff }}</h1> -->
+		<h1>Some stuff form module {{ oneStorage }}</h1>
 		<Overlay :show="showProductModal" v-on:close="showProductModal = false">
 			<div class="modalProduct">
 				<div class="modalPic">
@@ -122,12 +122,12 @@ export default {
 		},
 
 		...mapState(['allProducts']),
-		...mapGetters(['basket', 'loggedInAsAdmin']),
+		...mapGetters(['basket', 'loggedInAsAdmin', 'oneStorage']),
 	},
 	components: {
 		Overlay,
 	},
-	created() {
+	mounted() {
 		this.loadAllProducts()
 	},
 }

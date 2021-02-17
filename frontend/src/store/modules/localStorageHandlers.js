@@ -1,6 +1,7 @@
 //Local storage can only store strings.
 
 export default {
+	namespaced: false,
 	state: () => ({}),
 	mutations: {
 		ActivationMutation() {
@@ -25,7 +26,7 @@ export default {
 	},
 	actions: {},
 	getters: {
-		syncStorage() {
+		oneStorage() {
 			return 'storageID'
 		},
 	},
