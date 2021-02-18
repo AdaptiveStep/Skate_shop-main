@@ -59,8 +59,7 @@ export const createProduct = function(product, user) {
 
 
 export const updateProductById = function(product, user) {
-	console.log('USER now', user)
-	console.log('Product now', product)
+
 
 	let endpoint = 'http://localhost:5000/api/products/' + product._id
 	let result = fetch(endpoint, {

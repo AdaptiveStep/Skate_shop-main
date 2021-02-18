@@ -83,9 +83,7 @@ export default {
 			this.selectedProduct = product
 			this.showProductModal = true
 		},
-		dothis() {
-			console.log('PRESSED')
-		},
+
 		finishOrder(order) {
 			this.$emit('finishOrder', order)
 			this.removeCachedOrder(order)

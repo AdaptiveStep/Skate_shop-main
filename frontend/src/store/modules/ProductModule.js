@@ -43,18 +43,18 @@ export default {
 			commit('cacheAllProducts', tmp)
 		},
 
-		async createProduct({ state, dispatch }, product) {
-			let result = await api.createProduct(product, state.loggedInUser)
+		async createProduct({ state, dispatch, rootState }, product) {
+			let result = await api.createProduct(product, rootState.loggedInUser)
 			dispatch('loadAllProducts')
 		},
 
-		async saveProduct({ state, dispatch }, product) {
-			let result = await api.updateProductById(product, state.loggedInUser)
+		async saveProduct({ state, dispatch, rootState }, product) {
+			let result = await api.updateProductById(product, rootState.loggedInUser)
 			dispatch('loadAllProducts')
 		},
 
-		async deleteProductById({ state, dispatch }, product) {
-			let result = await api.deleteProductById(product, state.loggedInUser)
+		async deleteProductById({ state, dispatch, rootState }, product) {
+			let result = await api.deleteProductById(product, rootState.loggedInUser)
 			dispatch('loadAllProducts')
 		},
 		//#endregion

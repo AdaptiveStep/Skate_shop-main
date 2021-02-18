@@ -1,5 +1,5 @@
-<template>
-	<div class="makeOrder">
+<template >
+	<div  v-if="loggedInAsAdmin" class="makeOrder">
 		<h1>Admin Products</h1>
 
 		<div class="rows">
@@ -59,11 +59,15 @@
 							placeholder="Product Description"
 							rows="9"
 							cols="50"
+							required
 						/>
+						<div class="adminSubmit">
+							<input class="blackPill" type="submit" value="Create New Product" />
+						</div>
 					</div>
+
 				</div>
 				<!-- <button @click="">Submit</button> -->
-				<input class="blackPill" type="submit" value="Create New Product" />
 			</form>
 
 			<Overlay :show="showProductModal" v-on:close="showProductModal = false">
@@ -197,6 +201,7 @@
 			</div>
 		</div>
 	</div>
+	<div v-else>Access Denied</div>
 </template>
 
 <script>
@@ -222,11 +227,11 @@ export default {
 		NewProductSubmit(product) {
 			this.createProduct(product)
 			this.newProduct = {
-				title: 'Unnamed Product',
-				price: 100,
-				shortDesc: 'Unisex',
-				category: 'clothes',
-				longDesc: 'No description given',
+				title: '',
+				price: 0,
+				shortDesc: '',
+				category: '',
+				longDesc: '',
 				imgFile: 'hoodie-ash.png',
 				serial: '00000000000',
 			}
@@ -258,11 +263,11 @@ export default {
 			},
 			on: true,
 			newProduct: {
-				title: 'Unnamed Product',
-				price: 100,
-				shortDesc: 'Unisex',
+				title: '',
+				price: '',
+				shortDesc: '',
 				category: 'clothes',
-				longDesc: 'No description given',
+				longDesc: '',
 				imgFile: 'hoodie-ash.png',
 				serial: '00000000000',
 			},
@@ -280,7 +285,7 @@ export default {
 		},
 
 		...mapState(['allProducts']),
-		...mapGetters(['allFiles']),
+		...mapGetters(['allFiles', 'loggedInAsAdmin']),
 	},
 	components: {
 		Overlay,
@@ -320,6 +325,16 @@ textarea {
 	box-sizing: border-box;
 	margin: 19rem;
 	display: block;
+}
+
+.dataInputDescription {
+	display: flex;
+	flex-direction: column;
+}
+
+.adminSubmit {
+	display: flex;
+	justify-content: flex-end;
 }
 
 .productImage {

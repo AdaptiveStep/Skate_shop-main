@@ -146,7 +146,7 @@
 							</div>
 							<div class="forBut">
 								<button v-if="!basketEmpty" @click="Confirm" class="blackPill">
-									Take my Money
+									<img class="bagSvg" src="@/assets/icon-bag-white.svg" />Take my money!
 								</button>
 							</div>
 						</TitledContainer>
@@ -203,9 +203,7 @@ import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
 	methods: {
-		Hej() {
-			console.log('hej')
-		},
+
 		tryme() {
 			this.showMe = !this.showMe
 		},
@@ -225,9 +223,7 @@ export default {
 			this.placeNewOrder(payload) //Placerar i databas
 			this.completePayment() //Sätter payment som klar, och resettar basket
 		},
-		hej() {
-			console.log('hej')
-		},
+
 		placeNewUnknownOrder() {
 			let items = []
 			for (let it of this.basketItems) {
@@ -241,7 +237,6 @@ export default {
 			let tmptotalprice = this.basketTotalPrice
 			let payload = { items: items, price: tmptotalprice }
 
-			console.log(payload)
 
 			this.placeNewOrder(payload) //Placerar i databas
 			this.completePayment() //Sätter payment som klar, och resettar basket
@@ -340,6 +335,10 @@ export default {
 	width: 19rem;
 }
 
+.forBut {
+	display: flex;
+	justify-content: flex-end;
+}
 
 .gapping {
 	padding-top: 1rem;

@@ -97,9 +97,7 @@ export default {
 		toggleModal() {
 			this.showModal = !this.showModal
 		},
-		hejsan() {
-			console.log('hejhej')
-		},
+
 		async createUserSimple() {
 			let newUser = {
 				name: this.user.name,
