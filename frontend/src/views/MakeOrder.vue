@@ -258,52 +258,6 @@ export default {
 <style scoped lang="scss">
 @import '@/styles/template.scss';
 
-.modalProduct {
-	display: flex;
-	position: fixed;
-
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.modalPic {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	max-width: 20rem;
-	min-width: 10rem;
-	background-color: $primary-color;
-}
-
-.modalInfo {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 20rem;
-	background-color: $primary-color;
-	padding: 1rem;
-}
-.modalImage {
-	width: 100%;
-}
-.modalTitle {
-	font-size: 1.3rem;
-	text-align: left;
-}
-.modalSubtitle {
-	font-size: 0.8rem;
-	text-align: left;
-}
-.modalTextInfo {
-	font-size: 0.7rem;
-	text-align: left;
-}
-.modalCash {
-	font-size: 1.3rem;
-	text-align: left;
-}
-
 .pageFlex {
 	display: flex;
 	justify-content: space-evenly;
@@ -352,9 +306,7 @@ export default {
 	flex-direction: row;
 	justify-content: center;
 }
-
-// Tillfälligt
-
+//--------------
 .yourDetails {
 	padding-right: 11rem;
 }

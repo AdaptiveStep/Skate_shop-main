@@ -137,14 +137,6 @@ div#header > div {
 	flex-wrap: wrap;
 }
 
-// .popupOverlay {
-// 	transform: translate(-50%);
-// }
-
-// router-link {
-// 	background-color: red;
-// }
-
 .hasPopcounter .counter {
 	position: absolute;
 	margin-left: -0.8rem;

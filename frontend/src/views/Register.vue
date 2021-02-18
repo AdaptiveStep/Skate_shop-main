@@ -85,6 +85,7 @@ export default {
 				repeatPassword: '',
 				role: 'customer',
 			},
+			errorMessage: false,
 		}
 	},
 	methods: {
@@ -102,7 +103,8 @@ export default {
 				repeatPassword: this.user.password,
 				role: 'customer',
 			}
-			this.createUser(newUser)
+			//WORK HERE
+			let result = this.createUser(newUser)
 		},
 		...mapActions(['createUser']),
 	},
