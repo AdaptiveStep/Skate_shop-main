@@ -14,10 +14,11 @@ export default {
 		},
 		async createUser({ dispatch }, user) {
 			let result = await api.createUser(user)
-			if (result.message === 'User registered!') {
+
+			if (result.message) {
 				dispatch('login', user)
-			} else if (result.message === 'Email already exists') {
-				console.log('Email already exists')
+			} else {
+				return "ErrorEmail"
 			}
 		},
 	},

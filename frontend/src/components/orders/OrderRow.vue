@@ -155,6 +155,7 @@ export default {
 
 	// flex-shrink: 1;
 }
+
 .productImage {
 	border-radius: 10%;
 	width: 3rem;

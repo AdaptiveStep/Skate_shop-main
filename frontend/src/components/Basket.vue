@@ -54,7 +54,7 @@
 
 			<router-link to="/makeorder" v-if="withButton"
 				><button @click="$emit('clickBuy')" class="blackPill resizedCartPill">
-					Take my money
+						<img class="bagSvg" src="@/assets/icon-bag-white.svg" />Take my money!
 				</button></router-link
 			>
 		</div>

@@ -32,7 +32,7 @@
 						@click="addToCart(selectedProduct)"
 						class="blackPill"
 					>
-						Take my Money
+						<img class="bagSvg" src="@/assets/icon-bag-white.svg" />Take my money!
 					</button>
 				</div>
 			</div>
@@ -144,4 +144,5 @@ export default {
 	height: 5rem;
 	min-width: 10rem;
 }
+
 </style>

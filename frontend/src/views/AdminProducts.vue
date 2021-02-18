@@ -9,14 +9,13 @@
 					<img
 						v-for="(item, index) in allFiles"
 						:key="index"
-						tabindex="0"
-						class="selectNewProductImage"
+						class="productImage"
 						:src="require(`@/assets/${item}`)"
 						@click="setNewProductPath(item)"
 					/>
 				</div>
 				<div class="allFields">
-					<div class="datainputLines">
+					<div class="dataInputFields">
 						<input
 							v-model="newProduct.title"
 							class="Field"
@@ -48,7 +47,9 @@
 							placeholder="Product short desc"
 							required
 						/>
-						<label for="male">{{ newProduct.imgFile }}</label>
+						<div class="dataInputImages">
+							<img class="selectNewProductImage" :src="require(`@/assets/${newProduct.imgFile}`)">
+						</div>
 					</div>
 					<div class="dataInputDescription">
 						<textarea
@@ -119,7 +120,7 @@
 							<div class="input-icons">
 								<textarea
 									v-model="selectedProduct.longDesc"
-									class="Field"
+									class="Field descriptionField"
 									type="text"
 									:placeholder="selectedProduct.longDesc"
 									rows="9"
@@ -304,6 +305,35 @@ export default {
 	flex-wrap: wrap;
 	gap: 1rem;
 	justify-content: space-evenly;
+	
+	.dataInputFields{
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+
+}
+
+textarea {
+	resize: none;
+	box-sizing: border-box;
+	margin: 19rem;
+	display: block;
+}
+
+.productImage {
+	border-radius: 10%;
+	width: 3rem;
+	height: 3rem;
+	background-color: $shadow-color;
+
+	&:hover {
+		background-color: $primary-color;
+	}
+	&:focus {
+		background-color: $orange-color;
+	}
 }
 
 .dataInputs {
@@ -316,6 +346,7 @@ export default {
 	.dataInputImages {
 		display: flex;
 		flex-direction: row;
+		justify-content: center;
 		gap: 1rem;
 		flex-wrap: wrap;
 		max-width: 15rem;

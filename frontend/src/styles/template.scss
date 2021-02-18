@@ -56,8 +56,15 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	color: $primary-color;
 
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-size: 1.1rem;
 }
+
+.bagSvg {
+	padding:0.5rem;
+}
+
 .pillSEK {
 	position: relative;
 	margin-left: 0.2rem;
@@ -114,8 +121,9 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	min-height: 2rem;
 	background-color: $light-grey;
 	color: $secondary-color;
-	text-indent: 1rem;
-	padding: 0;
+	// text-indent: 1rem;
+	padding: 1rem;
+	box-sizing: border-box;
 	margin: 0;
 	border-radius: 4px;
 	cursor: pointer;
@@ -367,6 +375,9 @@ hr {
 	z-index: 3;
 	padding-top: 0.5rem;
 }
+
+
+
 
 /////////////////--------Buttons
 .modifiers {
