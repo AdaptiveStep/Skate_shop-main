@@ -1,30 +1,4 @@
-$primary-color: #eeeeee;
-$secondary-color: #404040;
-$orange-color: #f56969;
-$light-grey: #e5e5e5;
-$shadow-color: #858585;
-
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/solid'; // fas
-@import '~@fortawesome/fontawesome-free/scss/regular'; // far
-@import '~@fortawesome/fontawesome-free/scss/brands'; // fab
-
-.bkg-orange {
-	background-color: $orange-color;
-}
-
-.bkg-primary {
-	background-color: $primary-color;
-}
-
-.bkg-secondary {
-	background-color: $secondary-color;
-}
-
-.bkg-lightgrey {
-	background-color: $light-grey;
-}
+@import 'imports.scss';
 
 .roundButton {
 	border: none;
@@ -50,15 +24,17 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 .blackPill {
 	border-radius: 10rem;
 	background-color: black;
-	// padding: 0.5rem;
 	padding: 0.3rem 0.8rem;
 	margin: 1rem;
 	color: $primary-color;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 1.1rem;
+	&:hover {
+		background-color: $secondary-color;
+	}
+	outline: none;
 }
 
 .bagSvg {
@@ -90,11 +66,6 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 .twoWrappers {
 	display: flex;
-
-	//Aktiveras med mediaquery
-	// flex-flow: wrap;
-
-	// justify-content: space-evenly;
 	align-items: stretch;
 	gap: 1rem;
 	overflow: hidden;
@@ -411,27 +382,3 @@ hr {
 		}
 	}
 }
-
-//_-----------------Only Vue transitions
-
-.fade-enter-active,
-.fade-leave-active {
-	transition: opacity 0.1s ease;
-}
-.fade-enter, .fade-leave-to
-  /* .component-fade-leave-active below version 2.1.8 */ {
-	opacity: 0;
-}
-//----------------
-
-.list-enter-active,
-.list-leave-active {
-	transition: all 1s;
-}
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
-	opacity: 0;
-	transform: translateY(30px);
-	transition: all 1s ease;
-}
-
-///---------------------------------------

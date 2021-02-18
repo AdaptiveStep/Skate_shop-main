@@ -1,0 +1,20 @@
+$primary-color: #eeeeee;
+$secondary-color: #404040;
+$orange-color: #f56969;
+$light-grey: #e5e5e5;
+$shadow-color: #858585;
+.bkg-orange {
+	background-color: $orange-color;
+}
+
+.bkg-primary {
+	background-color: $primary-color;
+}
+
+.bkg-secondary {
+	background-color: $secondary-color;
+}
+
+.bkg-lightgrey {
+	background-color: $light-grey;
+}
