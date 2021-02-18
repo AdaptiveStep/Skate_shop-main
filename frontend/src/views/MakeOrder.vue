@@ -367,8 +367,6 @@ export default {
 	width: 19rem;
 }
 
-.forBut {
-}
 
 .gapping {
 	padding-top: 1rem;
