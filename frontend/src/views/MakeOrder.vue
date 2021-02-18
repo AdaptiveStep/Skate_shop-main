@@ -37,7 +37,7 @@
 				<div class="pageFlex">
 					<Basket v-on:clickBuy="showUserMod = false" />
 
-					<form @submit.prevent="Hej()" v-if="true" class="loginForm">
+					<form v-if="!basketEmpty" @submit.prevent="placeNewUnknownOrder" class="loginForm">
 						<h1 class="yourDetails">Your Details</h1>
 						<div class="gapping">
 							<input required class="Field" placeholder="Your name" type="text" />
@@ -71,7 +71,7 @@
 								<input class="Field" placeholder="CCV" type="text" />
 							</div>
 						</div>
-						<input value="Submit order" type="submit" class="submitBtn">
+						<input  value="Submit order" type="submit" class="submitBtn">
 					</form>
 
 					<div v-if="false">
@@ -126,7 +126,6 @@
 								</div>
 							</div>
 
-							<button @click="hej" class="blackPill">Update</button>
 						</TitledContainer>
 
 						<TitledContainer class="fixa" title="Payment Details">
@@ -146,7 +145,7 @@
 								</div>
 							</div>
 							<div class="forBut">
-								<button @click="Confirm" class="blackPill">
+								<button v-if="!basketEmpty" @click="Confirm" class="blackPill">
 									Take my Money
 								</button>
 							</div>
@@ -228,6 +227,25 @@ export default {
 		},
 		hej() {
 			console.log('hej')
+		},
+		placeNewUnknownOrder() {
+			let items = []
+			for (let it of this.basketItems) {
+				for (let index = 0; index < it.amount; index++) {
+					items.push(it._id)
+				}
+			}
+
+
+
+			let tmptotalprice = this.basketTotalPrice
+			let payload = { items: items, price: tmptotalprice }
+
+			console.log(payload)
+
+			this.placeNewOrder(payload) //Placerar i databas
+			this.completePayment() //Sätter payment som klar, och resettar basket
+
 		},
 
 		...mapMutations(['startNewOrder', 'completePayment']),

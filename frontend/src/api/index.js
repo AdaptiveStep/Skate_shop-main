@@ -56,6 +56,8 @@ export const createProduct = function(product, user) {
 	return result
 }
 
+
+
 export const updateProductById = function(product, user) {
 	console.log('USER now', user)
 	console.log('Product now', product)
@@ -103,6 +105,22 @@ export const createOrder = function(user, itemIdArray, price) {
 			'Content-Type': 'application/json',
 
 			Authorization: 'Bearer ' + user.token,
+		},
+
+		body: JSON.stringify({
+			items: itemIdArray,
+			orderValue: price,
+			status: 'inProcess',
+		}),
+	}).then((response) => response.json())
+	return result
+}
+
+export const createUnknownOrder = function(itemIdArray, price) {
+	let result = fetch('http://localhost:5000/api/orders', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
 		},
 
 		body: JSON.stringify({

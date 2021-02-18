@@ -2,11 +2,14 @@ import * as api from '@/api/index.js'
 
 export default {
 	actions: {
-		async placeNewOrder({ commit, state }, payload = '') {
+		async placeNewOrder({ commit, state }, payload) {
 			let result = ''
 
-			if (payload) {
-				result = await api.createOrder()
+			if (!payload.user) {
+				result = await api.createUnknownOrder(
+					payload.items,
+					payload.price,
+				)
 			}
 			else{
 				result = await api.createOrder(
@@ -15,6 +18,9 @@ export default {
 					payload.price,
 				)
 			}
+
+			commit('completePayment')
+
 		},
 
 		async getAllOrders({ state, commit, rootState }) {
