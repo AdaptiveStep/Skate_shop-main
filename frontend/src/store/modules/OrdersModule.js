@@ -2,12 +2,19 @@ import * as api from '@/api/index.js'
 
 export default {
 	actions: {
-		async placeNewOrder({ commit, state }, payload) {
-			let result = await api.createOrder(
-				payload.user,
-				payload.items,
-				payload.price
-			)
+		async placeNewOrder({ commit, state }, payload = '') {
+			let result = ''
+
+			if (payload) {
+				result = await api.createOrder()
+			}
+			else{
+				result = await api.createOrder(
+					payload.user,
+					payload.items,
+					payload.price,
+				)
+			}
 		},
 
 		async getAllOrders({ state, commit, rootState }) {

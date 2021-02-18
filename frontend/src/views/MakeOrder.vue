@@ -37,21 +37,21 @@
 				<div class="pageFlex">
 					<Basket v-on:clickBuy="showUserMod = false" />
 
-					<div v-if="true" class="loginForm">
+					<form @submit.prevent="Hej()" v-if="true" class="loginForm">
 						<h1 class="yourDetails">Your Details</h1>
 						<div class="gapping">
-							<input class="Field" placeholder="Your name" type="text" />
+							<input required class="Field" placeholder="Your name" type="text" />
 						</div>
 
 						<div class="gapping">
-							<input class="Field" placeholder="Street" type="text" />
+							<input required class="Field" placeholder="Street" type="text" />
 						</div>
 						<div class="inline gapping">
 							<div>
-								<input class="Field" placeholder="ZIP code" />
+								<input required class="Field" placeholder="ZIP code" />
 							</div>
 							<div>
-								<input class="Field" placeholder="City" />
+								<input required class="Field" placeholder="City" />
 							</div>
 						</div>
 						<hr />
@@ -71,8 +71,8 @@
 								<input class="Field" placeholder="CCV" type="text" />
 							</div>
 						</div>
-						<button disabled class="submitBtn">Submit order</button>
-					</div>
+						<input value="Submit order" type="submit" class="submitBtn">
+					</form>
 
 					<div v-if="false">
 						Please login or
@@ -204,6 +204,9 @@ import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
 	methods: {
+		Hej() {
+			console.log('hej')
+		},
 		tryme() {
 			this.showMe = !this.showMe
 		},
