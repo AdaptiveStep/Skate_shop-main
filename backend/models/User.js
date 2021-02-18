@@ -17,7 +17,7 @@ async function validate(body) {
 }
 
 function format(body) {
-	let { email, name, adress, password, payment } = body
+	let { email, name, adress, password } = body
 
 	return {
 		email,
@@ -26,7 +26,6 @@ function format(body) {
 		role: 'customer',
 		password: bcrypt.hashSync(password, 10),
 		orderHistory: [],
-		payment,
 	}
 }
 

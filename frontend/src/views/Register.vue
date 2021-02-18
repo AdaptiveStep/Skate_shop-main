@@ -27,41 +27,45 @@
 				</span>
 			</div>
 
-			<div v-if="!loggedIn" class="inputLength">
+			<form @submit.prevent="createUserSimple()" v-if="!loggedIn" class="inputLength">
 				<h1>Register</h1>
 				<div class="inputContainer">
 					<i class="fa fa-user icon"> </i>
-					<input
-						v-model="user.name"
-						class="Field"
-						type="text"
-						placeholder="Name"
-					/>
+						<input
+							v-model="user.name"
+							class="Field"
+							type="text"
+							placeholder="Name"
+							required
+						/>
 				</div>
 				<div class="inputContainer">
 					<i class="fa fa-envelope icon"> </i>
-					<input
-						v-model="user.email"
-						class="Field"
-						type="text"
-						placeholder="Email"
-					/>
+						<input
+							v-model="user.email"
+							class="Field"
+							type="email"
+							placeholder="Email"
+							required
+						/>
 				</div>
 				<div class="inputContainer">
 					<i class="fa fa-key icon"> </i>
-					<input
-						v-model="user.password"
-						class="Field"
-						type="password"
-						placeholder="Password"
-					/>
+						<input
+							v-model="user.password"
+							class="Field"
+							type="password"
+							placeholder="Password"
+							required
+						/>
+
+
 				</div>
 				<div class="inputContainer">
-					<button @click="createUserSimple()" class="blackPill">
-						Register
-					</button>
+					<input value="Register" type="submit" class="blackPill">
 				</div>
-			</div>
+				<div v-if="showError">Email finns redan</div>
+			</form>
 			<div v-else>
 				<h1>Tack för att du är medlem hos oss!</h1>
 			</div>
@@ -85,7 +89,8 @@ export default {
 				repeatPassword: '',
 				role: 'customer',
 			},
-			errorMessage: false,
+
+			showError: false,
 		}
 	},
 	methods: {
@@ -95,7 +100,7 @@ export default {
 		hejsan() {
 			console.log('hejhej')
 		},
-		createUserSimple() {
+		async createUserSimple() {
 			let newUser = {
 				name: this.user.name,
 				email: this.user.email,
@@ -103,8 +108,16 @@ export default {
 				repeatPassword: this.user.password,
 				role: 'customer',
 			}
-			//WORK HERE
-			let result = this.createUser(newUser)
+			let result = await this.createUser(newUser)
+
+			if (result === 'ErrorEmail') {
+				this.showError = true
+			}
+			else {
+				this.showError = false
+			}
+
+	
 		},
 		...mapActions(['createUser']),
 	},
@@ -128,11 +141,12 @@ export default {
 	width: 100%;
 	padding-top: 1rem;
 	display: flex;
+	align-items: center;
 	justify-content: flex-end;
 }
 
 .icon {
-	padding: 10px;
+	padding: 1rem;
 }
 
 .cut {
