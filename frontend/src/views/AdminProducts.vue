@@ -37,18 +37,9 @@ export default {
 			}
 		},
 
-		...mapMutations(['addToCart']),
-
 		...mapActions([
-			'giveStuff',
 			'loadAllProducts',
-			'saveProduct',
-			'createProduct',
-			'deleteProductById',
 		]),
-		setNewProductPath(path) {
-			this.newProduct.imgFile = path
-		},
 	},
 	data() {
 		return {
