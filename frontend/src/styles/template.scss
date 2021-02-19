@@ -31,6 +31,7 @@
 	justify-content: center;
 	align-items: center;
 	font-size: 1.1rem;
+	transition: background-color 0.1s ease;
 	&:hover {
 		background-color: $secondary-color;
 	}
@@ -38,10 +39,11 @@
 }
 
 .bagSvg {
-	padding:0.5rem;
+	padding: 0.5rem;
 }
 
 .pillSEK {
+	align-self: flex-start;
 	position: relative;
 	margin-left: 0.2rem;
 	font-size: 0.65rem;
@@ -62,16 +64,6 @@
 	transform: translate(-50%, -50%);
 	font-size: 3rem;
 	color: $primary-color;
-}
-
-.twoWrappers {
-	display: flex;
-	align-items: stretch;
-	gap: 1rem;
-	overflow: hidden;
-	margin-top: 1rem;
-
-	text-align: left;
 }
 
 .column {
@@ -114,7 +106,6 @@
 .userCart {
 	display: flex;
 	flex-direction: column;
-	// background-color: blueviolet;
 
 	h1,
 	h2,
@@ -126,12 +117,18 @@
 
 	h1 {
 		font-size: 1.5rem;
+		font-weight: bold;
+		color: black;
 	}
 	h2 {
 		font-size: 1rem;
+		font-weight: bold;
+		color: $secondary-color;
 	}
 	h3 {
 		font-size: 0.5rem;
+		font-weight: bold;
+		color: $shadow-color;
 	}
 }
 
@@ -141,7 +138,6 @@
 	max-height: 40rem;
 	overflow: auto;
 	justify-content: space-between;
-	// width: 100%;
 }
 
 .cartProduct {
@@ -152,14 +148,17 @@
 	// gap: 0.5rem;
 	background-color: $light-grey;
 	border-radius: 10px;
+	overflow: hidden;
 }
 
 .cartProductImage {
 	width: 3rem;
-	height: 3rem;
+	height: 100%;
+	max-height: 5rem;
 	background: $primary-color;
-	margin: 0.5rem;
+	align-self: center;
 	border-radius: 10px;
+	margin-left: 1rem;
 }
 
 .cartProductDetails {
@@ -225,36 +224,67 @@ hr {
 	padding-top: 1rem;
 	justify-content: space-between;
 	border-radius: 10px;
-	transition: background-color 0.5s ease;
+	transition: all 0.3s ease;
+	outline: none;
 	&:hover {
-		background-color: $light-grey;
+		box-shadow: 0 0 2rem $shadow-color;
 	}
 	&:focus {
-		background-color: $orange-color;
+		background-color: $light-grey;
+		box-shadow: 0 0 2rem white;
 	}
 	&::selection {
-		background-color: $orange-color;
+		background-color: $light-grey;
+		box-shadow: 0 0 2rem white;
 	}
 
 	flex-grow: 1;
+	user-drag: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 
 .cardHeader {
 	display: flex;
 	justify-content: space-between;
-	/* background-color: green; */
+	flex-direction: row;
+	align-items: flex-start;
 
 	font-size: 2rem;
-	align-items: center;
+	text-transform: uppercase;
+
+	max-height: 10rem;
+	overflow: hidden;
+	font-weight: bold;
+	color: black;
+}
+.cardHeader span {
+	overflow: hidden;
+	// white-space: nowrap;
+	// text-overflow: ellipsis;
+	text-align: left;
 }
 .cardSubTitle {
 	display: flex;
 	/* margin: 1rem; */
 	/* background-color: pink; */
+	font-weight: bold;
+	color: $shadow-color;
 }
 
 .cardImage {
 	width: 100%;
+}
+img {
+	user-drag: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 
 .cardContent {
@@ -280,6 +310,11 @@ hr {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+
+	max-height: 45rem;
+	background-color: $primary-color;
+	overflow: auto;
+	flex-direction: row;
 }
 
 .modalPic {
@@ -288,6 +323,9 @@ hr {
 	justify-content: flex-end;
 	max-width: 20rem;
 	min-width: 10rem;
+	padding-top: 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	background-color: $primary-color;
 }
 
@@ -295,7 +333,7 @@ hr {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 20rem;
+	max-width: 20rem;
 	background-color: $primary-color;
 	padding: 1rem;
 }
@@ -305,18 +343,26 @@ hr {
 .modalTitle {
 	font-size: 1.3rem;
 	text-align: left;
+	font-weight: bold;
+	color: black;
+	text-transform: uppercase;
 }
 .modalSubtitle {
 	font-size: 0.8rem;
 	text-align: left;
+	font-weight: bold;
+	color: $shadow-color;
 }
 .modalTextInfo {
 	font-size: 0.7rem;
 	text-align: left;
+	color: $shadow-color;
 }
 .modalCash {
 	font-size: 1.3rem;
 	text-align: left;
+	font-weight: bold;
+	color: black;
 }
 
 //-----------------Popup
@@ -326,6 +372,7 @@ hr {
 	box-shadow: 0 0 0.5rem $shadow-color;
 	// margin: 0;
 	padding: 1rem;
+	min-width: 13rem;
 }
 
 .bagSpace {
@@ -343,12 +390,9 @@ hr {
 	border-right: 10px solid transparent;
 	border-bottom: 20px solid $primary-color;
 	transform: translate(50%, 0);
-	z-index: 3;
+	z-index: 4;
 	padding-top: 0.5rem;
 }
-
-
-
 
 /////////////////--------Buttons
 .modifiers {
@@ -359,6 +403,8 @@ hr {
 	align-items: center;
 	color: $secondary-color;
 	gap: 0.1rem;
+	margin: 0.5rem;
+
 	// padding: 1rem; förstör basket
 	.fas {
 		// width: 1.5rem;
@@ -366,7 +412,8 @@ hr {
 		// background-color: $secondary-color;
 		border-radius: 50%;
 		text-align: center;
-		padding: 0.1rem;
+		// padding: 1rem;
+
 		font-size: 2rem;
 		display: flex;
 		justify-content: center;
@@ -380,5 +427,11 @@ hr {
 			transition: background-color 0.01s ease-out;
 			background-color: $orange-color;
 		}
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.modalProduct {
+		flex-direction: column;
 	}
 }

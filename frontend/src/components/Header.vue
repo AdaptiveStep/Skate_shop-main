@@ -21,39 +21,46 @@
 				<router-link to="/orders" v-if="loggedIn">Orders</router-link>
 			</div>
 
-			<!-- Login modal -->
-			<LoginForm />
+			<div class="ballMenus">
+				<!-- Login modal -->
+				<LoginForm />
 
-			<!-- Cart modal -->
-			<div v-if="!loggedInAsAdmin" class="bagSpace">
-				<div class="hasPopcounter">
-					<div class="arrowBox">
-						<div class="counterAndButton">
-							<button
-								@click="showUserMod = true"
-								class="roundButton  bkg-orange"
-							>
-								<img src="@/assets/icon-bag-black.svg" />
-							</button>
+				<!-- Cart modal -->
+				<div v-if="!loggedInAsAdmin" class="bagSpace">
+					<div class="hasPopcounter">
+						<div class="arrowBox">
+							<div class="counterAndButton">
+								<button
+									@click="showUserMod = true"
+									class="roundButton  bkg-orange"
+								>
+									<img src="@/assets/icon-bag-black.svg" />
+								</button>
 
-							<span v-if="!basketEmpty" class="counter">{{ basketCount }}</span>
+								<span v-if="!basketEmpty" class="counter">{{
+									basketCount
+								}}</span>
+							</div>
+
+							<div v-if="showUserMod" class="triangle-up "></div>
 						</div>
-
-						<div v-if="showUserMod" class="triangle-up "></div>
 					</div>
-				</div>
 
-				<Overlay
-					:popup="true"
-					:show="showUserMod"
-					v-on:close="showUserMod = false"
-				>
-					<template>
-						<div class="popoverBag">
-							<Basket :withButton="true" v-on:clickBuy="showUserMod = false" />
-						</div>
-					</template>
-				</Overlay>
+					<Overlay
+						:popup="true"
+						:show="showUserMod"
+						v-on:close="showUserMod = false"
+					>
+						<template>
+							<div class="popoverBag">
+								<Basket
+									:withButton="true"
+									v-on:clickBuy="showUserMod = false"
+								/>
+							</div>
+						</template>
+					</Overlay>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -110,7 +117,7 @@ export default {
 
 div#header > div {
 	text-align: center;
-	border: 4px dashed; 
+	border: 4px dashed;
 	overflow: hidden;
 }
 
@@ -143,7 +150,7 @@ div#header > div {
 	background-color: white;
 	padding: 0.2rem;
 	box-shadow: 0 0 0.4rem $shadow-color;
-	z-index: 2;
+	z-index: 0;
 }
 
 .resizedCartPill {
@@ -171,6 +178,14 @@ div#header > div {
 	align-items: center;
 	padding-bottom: 1rem;
 	padding-top: 1rem;
+}
+
+.ballMenus {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
 }
 
 @media screen and (max-width: 40rem) {

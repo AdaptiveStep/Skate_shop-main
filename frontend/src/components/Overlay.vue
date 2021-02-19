@@ -22,12 +22,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import '@/styles/template.scss';
 
 .overlay {
 	pointer-events: none;
-	z-index: 1;
+	z-index: 4;
 }
 .overlay.show {
 	pointer-events: all;

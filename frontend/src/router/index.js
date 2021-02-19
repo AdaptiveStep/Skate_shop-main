@@ -37,12 +37,8 @@ const routes = [
 	{
 		path: '/orders',
 		component: Orders,
-		beforeEnter: (to, from, next) => {
-			if (store.getters.loggedIn) {
-				next()
-			} else {
-				next('/')
-			}
+		meta: {
+			requiresAuth: true,
 		},
 	},
 
@@ -56,6 +52,20 @@ const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
 	routes,
+})
+
+router.beforeEach((to, from, next) => {
+	if (to.matched.some((record) => record.meta.requiresAuth)) {
+		if (store.getters.loggedIn) {
+			next()
+			return
+		}
+		next('/register')
+	} else {
+		next()
+	}
+
+	
 })
 
 export default router

@@ -54,7 +54,7 @@
 
 			<router-link to="/makeorder" v-if="withButton"
 				><button @click="$emit('clickBuy')" class="blackPill resizedCartPill">
-						<img class="bagSvg" src="@/assets/icon-bag-white.svg" />Take my money!
+					<img class="bagSvg" src="@/assets/icon-bag-white.svg" />Take my money!
 				</button></router-link
 			>
 		</div>
@@ -104,7 +104,8 @@ export default {
 	flex-direction: column;
 	hr {
 		border: 1px solid rgba(0, 0, 0, 0.06);
+		width: 99%;
 	}
-	padding-right: 1rem;
+	// padding-right: 1rem;
 }
 </style>
