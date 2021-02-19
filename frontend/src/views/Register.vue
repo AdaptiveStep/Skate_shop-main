@@ -69,7 +69,9 @@
 				<div class="inputContainer">
 					<input value="Register" type="submit" class="blackPill" />
 				</div>
-				<div v-if="showError">Email finns redan</div>
+				<div v-if="showError">
+					This email already exists. Please pick another one.
+				</div>
 			</form>
 			<div v-else>
 				<h1>Thank you for registering! Have a nice shopping!</h1>

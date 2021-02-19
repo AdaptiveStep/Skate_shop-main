@@ -250,12 +250,14 @@ hr {
 .cardHeader {
 	display: flex;
 	justify-content: space-between;
-	/* background-color: green; */
+	flex-direction: row;
+	align-items: flex-start;
 
 	font-size: 2rem;
-	align-items: center;
 	text-transform: uppercase;
 
+	max-height: 10rem;
+	overflow: hidden;
 	font-weight: bold;
 	color: black;
 }

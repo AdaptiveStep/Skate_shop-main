@@ -110,6 +110,13 @@ export default {
 				serial: '00000000000',
 			}
 		},
+
+		...mapActions([
+			'loadAllProducts',
+			'createProduct',
+			'saveProduct',
+			'deleteProductById',
+		]),
 	},
 	computed: {
 		...mapGetters(['allFiles']),
