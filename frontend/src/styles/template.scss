@@ -106,7 +106,6 @@
 .userCart {
 	display: flex;
 	flex-direction: column;
-	// background-color: blueviolet;
 
 	h1,
 	h2,
@@ -118,12 +117,18 @@
 
 	h1 {
 		font-size: 1.5rem;
+		font-weight: bold;
+		color: black;
 	}
 	h2 {
 		font-size: 1rem;
+		font-weight: bold;
+		color: $secondary-color;
 	}
 	h3 {
 		font-size: 0.5rem;
+		font-weight: bold;
+		color: $shadow-color;
 	}
 }
 
@@ -133,7 +138,6 @@
 	max-height: 40rem;
 	overflow: auto;
 	justify-content: space-between;
-	// width: 100%;
 }
 
 .cartProduct {
@@ -144,14 +148,17 @@
 	// gap: 0.5rem;
 	background-color: $light-grey;
 	border-radius: 10px;
+	overflow: hidden;
 }
 
 .cartProductImage {
 	width: 3rem;
-	height: 3rem;
+	height: 100%;
+	max-height: 5rem;
 	background: $primary-color;
-	margin: 0.5rem;
+	align-self: center;
 	border-radius: 10px;
+	margin-left: 1rem;
 }
 
 .cartProductDetails {
@@ -217,15 +224,18 @@ hr {
 	padding-top: 1rem;
 	justify-content: space-between;
 	border-radius: 10px;
-	transition: background-color 0.5s ease;
+	transition: all 0.3s ease;
+	outline: none;
 	&:hover {
-		background-color: $light-grey;
+		box-shadow: 0 0 2rem $shadow-color;
 	}
 	&:focus {
-		background-color: $orange-color;
+		background-color: $light-grey;
+		box-shadow: 0 0 2rem white;
 	}
 	&::selection {
-		background-color: $orange-color;
+		background-color: $light-grey;
+		box-shadow: 0 0 2rem white;
 	}
 
 	flex-grow: 1;
@@ -244,16 +254,23 @@ hr {
 
 	font-size: 2rem;
 	align-items: center;
+	text-transform: uppercase;
+
+	font-weight: bold;
+	color: black;
 }
 .cardHeader span {
 	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	// white-space: nowrap;
+	// text-overflow: ellipsis;
+	text-align: left;
 }
 .cardSubTitle {
 	display: flex;
 	/* margin: 1rem; */
 	/* background-color: pink; */
+	font-weight: bold;
+	color: $shadow-color;
 }
 
 .cardImage {
@@ -324,18 +341,26 @@ img {
 .modalTitle {
 	font-size: 1.3rem;
 	text-align: left;
+	font-weight: bold;
+	color: black;
+	text-transform: uppercase;
 }
 .modalSubtitle {
 	font-size: 0.8rem;
 	text-align: left;
+	font-weight: bold;
+	color: $shadow-color;
 }
 .modalTextInfo {
 	font-size: 0.7rem;
 	text-align: left;
+	color: $shadow-color;
 }
 .modalCash {
 	font-size: 1.3rem;
 	text-align: left;
+	font-weight: bold;
+	color: black;
 }
 
 //-----------------Popup
@@ -345,6 +370,7 @@ img {
 	box-shadow: 0 0 0.5rem $shadow-color;
 	// margin: 0;
 	padding: 1rem;
+	min-width: 13rem;
 }
 
 .bagSpace {
@@ -364,7 +390,6 @@ img {
 	transform: translate(50%, 0);
 	z-index: 4;
 	padding-top: 0.5rem;
-	
 }
 
 /////////////////--------Buttons
@@ -376,6 +401,8 @@ img {
 	align-items: center;
 	color: $secondary-color;
 	gap: 0.1rem;
+	margin: 0.5rem;
+
 	// padding: 1rem; förstör basket
 	.fas {
 		// width: 1.5rem;
@@ -383,7 +410,8 @@ img {
 		// background-color: $secondary-color;
 		border-radius: 50%;
 		text-align: center;
-		padding: 0.1rem;
+		// padding: 1rem;
+
 		font-size: 2rem;
 		display: flex;
 		justify-content: center;

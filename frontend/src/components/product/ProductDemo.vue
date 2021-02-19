@@ -8,18 +8,20 @@
 		</div>
 
 		<div class="modalInfo">
-			<div class="modalTitle">
-				<span>{{ selectedProduct.title }}</span>
-			</div>
-			<div class="modalSubtitle">
-				<span>{{ selectedProduct.shortDesc }}</span>
+			<div class="topText">
+				<div class="modalTitle">
+					<span>{{ selectedProduct.title }}</span>
+				</div>
+				<div class="modalSubtitle">
+					<span>{{ selectedProduct.shortDesc }}</span>
+				</div>
 			</div>
 			<div class="modalTextInfo">
 				<p>{{ selectedProduct.longDesc }}</p>
 			</div>
 
 			<div class="modalCash">
-				<span>{{ selectedProduct.price }}</span>
+				<span>{{ selectedProduct.price }} sek</span>
 			</div>
 			<button
 				v-if="!loggedInAsAdmin"
@@ -154,5 +156,10 @@ export default {
 
 .Field {
 	margin-bottom: 1rem;
+}
+
+.topText {
+	display: flex;
+	flex-direction: column;
 }
 </style>

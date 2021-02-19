@@ -8,29 +8,31 @@
 			<div
 				v-for="(item, index) in allProducts"
 				:key="index"
-				class="card shadowed"
+				class="card"
 				@click="ShowProductDetails(item)"
 				tabindex="0"
 			>
-				<div class="cardHeader">
-					<span>{{ item.title }}</span>
+				<div class="cardTopText">
+					<div class="cardHeader">
+						<span>{{ item.title }}</span>
 
-					<transition name="fade" mode="out-in">
-						<button
-							v-if="!loggedInAsAdmin"
-							class="roundButton bkg-secondary"
-							key="admin"
-						>
-							<img src="@/assets/icon-bag-white.svg" key="admin" />
-						</button>
+						<transition name="fade" mode="out-in">
+							<button
+								v-if="!loggedInAsAdmin"
+								class="roundButton bkg-secondary"
+								key="admin"
+							>
+								<img src="@/assets/icon-bag-white.svg" key="admin" />
+							</button>
 
-						<button v-else class="roundButton bkg-orange" key="customer">
-							<img src="@/assets/icon-edit-white.svg" key="customer" />
-						</button>
-					</transition>
-				</div>
-				<div class="cardSubTitle">
-					<span>{{ item.category }}</span>
+							<button v-else class="roundButton bkg-orange" key="customer">
+								<img src="@/assets/icon-edit-white.svg" key="customer" />
+							</button>
+						</transition>
+					</div>
+					<div class="cardSubTitle">
+						<span>{{ item.category }}</span>
+					</div>
 				</div>
 
 				<div class="cardContent">
@@ -93,4 +95,8 @@ export default {
 
 <style scoped lang="scss">
 @import '@/styles/template.scss';
+.cardTopText {
+	display: flex;
+	flex-direction: column;
+}
 </style>

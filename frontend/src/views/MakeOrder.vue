@@ -216,8 +216,8 @@ export default {
 			let tmptotalprice = this.basketTotalPrice
 			let payload = { user: tmpuser, items: items, price: tmptotalprice }
 
-			this.placeNewOrder(payload) //Placerar i databas
-			this.completePayment() //Sätter payment som klar, och resettar basket
+			this.placeNewOrder(payload) //puts in database
+			this.completePayment() 		//sets payment as finished and resets the basket
 		},
 
 		placeNewUnknownOrder() {
@@ -231,8 +231,8 @@ export default {
 			let tmptotalprice = this.basketTotalPrice
 			let payload = { items: items, price: tmptotalprice }
 
-			this.placeNewOrder(payload) //Placerar i databas
-			this.completePayment() //Sätter payment som klar, och resettar basket
+			this.placeNewOrder(payload) //puts in database
+			this.completePayment() 		//sets payment as finished and resets the basket
 		},
 
 		...mapMutations(['startNewOrder', 'completePayment']),
