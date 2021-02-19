@@ -1,8 +1,8 @@
 <template>
 	<div v-if="loggedInAsAdmin" class="makeOrder">
 		<h1>Admin Products</h1>
-		<ProductListing />
-		<!-- <div class="rows">
+		
+		<div class="rows">
 			<TitledContainer title="Add/Edit" />
 			<form @submit="NewProductSubmit(newProduct)" class="dataInputs">
 				<div class="dataInputImages">
@@ -73,11 +73,9 @@
 						</div>
 					</div>
 				</div>
-				
 			</form>
 
-			
-			<Overlay :show="showProductModal" v-on:close="showProductModal = false">
+			<!-- <Overlay :show="showProductModal" v-on:close="showProductModal = false">
 				<div class="modalProduct">
 					<div class="modalPic">
 						<img
@@ -171,9 +169,9 @@
 						</div>
 					</div>
 				</div>
-			</Overlay>
+			</Overlay> -->
 
-			<div class="productsContainer" v-if="true">
+			<!-- <div class="productsContainer" v-if="true">
 				<div
 					v-for="(item, index) in allProducts"
 					:key="index"
@@ -205,22 +203,21 @@
 						</span>
 					</div>
 				</div>
-			</div>
-		</div> -->
+			</div> -->
+		</div>
+
+		<ProductListing />
 	</div>
 	<div v-else>Access Denied</div>
 </template>
 
 <script>
-import ProductListing from '@/components/ProductListing'
+import ProductListing from '@/components/product/ProductListing'
+import TitledContainer from '@/components/TitledContainer'
 import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
 	methods: {
-		tryme() {
-			this.$store.commit('coolMutation')
-		},
-
 		ShowProductDetails(item) {
 			this.selectedProduct = item
 			this.showProductModal = true
@@ -277,12 +274,12 @@ export default {
 				imgFile: 'hoodie-ash.png',
 				serial: '00000000000',
 			},
-			// selectedCategory: 'clothes',
-			// categories: [
-			// 	{ text: 'Clothes', value: 'clothes' },
-			// 	{ text: 'Board', value: 'board' },
-			// 	{ text: 'Wheels', value: 'wheels' },
-			// ],
+			selectedCategory: 'clothes',
+			categories: [
+				{ text: 'Clothes', value: 'clothes' },
+				{ text: 'Board', value: 'board' },
+				{ text: 'Wheels', value: 'wheels' },
+			],
 		}
 	},
 	computed: {
@@ -294,7 +291,8 @@ export default {
 		...mapGetters(['allFiles', 'loggedInAsAdmin']),
 	},
 	components: {
-		ProductListing
+		ProductListing,
+		TitledContainer,
 	},
 	mounted() {
 		this.loadAllProducts()

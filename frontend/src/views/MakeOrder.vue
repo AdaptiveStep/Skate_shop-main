@@ -206,9 +206,6 @@ import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
 	methods: {
-		tryme() {
-			this.showMe = !this.showMe
-		},
 		Confirm() {
 			let tmpuser = this.loggedInUser
 

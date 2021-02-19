@@ -4,7 +4,7 @@
 
 		<!-- <Overlay :show="showProductModal" v-on:close="showProductModal = false">
 			<ProductDemo :selectedProduct="selectedProduct" /> -->
-			<!-- <div class="modalProduct">
+		<!-- <div class="modalProduct">
 				<div class="modalPic">
 					<img
 						class="modalImage"
@@ -72,7 +72,6 @@
 				</div>
 			</div>
 		</div> -->
-
 	</div>
 </template>
 
@@ -83,10 +82,6 @@ import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
 	methods: {
-		// tryme() {
-		// 	this.$store.commit('coolMutation')
-		// },
-
 		ShowProductDetails(item) {
 			this.selectedProduct = item
 			this.showProductModal = true
