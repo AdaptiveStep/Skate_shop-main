@@ -151,4 +151,8 @@ export default {
 .descriptionField {
 	resize: vertical;
 }
+
+.Field {
+	margin-bottom: 1rem;
+}
 </style>

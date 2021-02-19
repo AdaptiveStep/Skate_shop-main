@@ -31,6 +31,7 @@
 	justify-content: center;
 	align-items: center;
 	font-size: 1.1rem;
+	transition: background-color 0.1s ease;
 	&:hover {
 		background-color: $secondary-color;
 	}
@@ -42,6 +43,7 @@
 }
 
 .pillSEK {
+	align-self: flex-start;
 	position: relative;
 	margin-left: 0.2rem;
 	font-size: 0.65rem;
@@ -227,6 +229,12 @@ hr {
 	}
 
 	flex-grow: 1;
+	user-drag: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 
 .cardHeader {
@@ -250,6 +258,14 @@ hr {
 
 .cardImage {
 	width: 100%;
+}
+img {
+	user-drag: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 
 .cardContent {
@@ -275,6 +291,11 @@ hr {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+
+	max-height: 45rem;
+	background-color: $primary-color;
+	overflow: auto;
+	flex-direction: row;
 }
 
 .modalPic {
@@ -283,6 +304,9 @@ hr {
 	justify-content: flex-end;
 	max-width: 20rem;
 	min-width: 10rem;
+	padding-top: 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	background-color: $primary-color;
 }
 
@@ -290,7 +314,7 @@ hr {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 20rem;
+	max-width: 20rem;
 	background-color: $primary-color;
 	padding: 1rem;
 }
@@ -338,8 +362,9 @@ hr {
 	border-right: 10px solid transparent;
 	border-bottom: 20px solid $primary-color;
 	transform: translate(50%, 0);
-	z-index: 3;
+	z-index: 4;
 	padding-top: 0.5rem;
+	
 }
 
 /////////////////--------Buttons
@@ -372,5 +397,11 @@ hr {
 			transition: background-color 0.01s ease-out;
 			background-color: $orange-color;
 		}
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.modalProduct {
+		flex-direction: column;
 	}
 }

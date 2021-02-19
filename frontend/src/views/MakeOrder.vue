@@ -1,6 +1,5 @@
 <template>
 	<div class="makeOrder">
-		<!-- <HeaderImage image="@blablbl/..../img.jpg" msg="hejjlo"> -->
 
 		<transition name="fade" mode="out-in">
 			<div
@@ -164,8 +163,6 @@
 			</div>
 
 			<div class="inProcessOrder" key="completeBuy" v-else-if="paymentComplete">
-				<h1>This is an ORDER DONE page</h1>
-
 				<div class="hero">
 					<img class="heroImage" src="@/assets/skate-hero-1.jpg" />
 					<div class="heroText">

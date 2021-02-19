@@ -15,9 +15,19 @@
 				<div class="cardHeader">
 					<span>{{ item.title }}</span>
 
-					<button class="roundButton bkg-secondary">
-						<img src="@/assets/icon-bag-white.svg" />
-					</button>
+					<transition name="fade" mode="out-in">
+						<button
+							v-if="!loggedInAsAdmin"
+							class="roundButton bkg-secondary"
+							key="admin"
+						>
+							<img src="@/assets/icon-bag-white.svg" key="admin" />
+						</button>
+
+						<button v-else class="roundButton bkg-orange" key="customer">
+							<img src="@/assets/icon-edit-white.svg" key="customer" />
+						</button>
+					</transition>
 				</div>
 				<div class="cardSubTitle">
 					<span>{{ item.category }}</span>

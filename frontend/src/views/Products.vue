@@ -1,5 +1,7 @@
 <template>
 	<div class="product">
+		<h1>Products</h1>
+
 		<ProductListing />
 
 		<!-- <Overlay :show="showProductModal" v-on:close="showProductModal = false">
