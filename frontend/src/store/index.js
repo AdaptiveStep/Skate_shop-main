@@ -4,6 +4,7 @@ import Admin from '@/store/modules/AdminModule.js'
 import Basket from '@/store/modules/BasketModule.js'
 import Orders from '@/store/modules/OrdersModule.js'
 import Product from '@/store/modules/ProductModule.js'
+import router from '@/router'
 import createPersistedState from 'vuex-persistedstate'
 
 // import * as api from '@/api/index.js'
@@ -71,6 +72,7 @@ export default new Vuex.Store({
 
 		startNewOrder(state) {
 			state.paymentComplete = false
+			router.push('/products')
 		},
 		cacheAllOrders(state, orders) {
 			state.allOrders = orders

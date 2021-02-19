@@ -1,7 +1,10 @@
 <template>
 	<div class="product">
-		<Overlay :show="showProductModal" v-on:close="showProductModal = false">
-			<div class="modalProduct">
+		<ProductListing />
+
+		<!-- <Overlay :show="showProductModal" v-on:close="showProductModal = false">
+			<ProductDemo :selectedProduct="selectedProduct" /> -->
+			<!-- <div class="modalProduct">
 				<div class="modalPic">
 					<img
 						class="modalImage"
@@ -32,10 +35,10 @@
 							<img class="bagSvg" src="@/assets/icon-bag-white.svg" />Take my money!
 						</button>
 				</div>
-			</div>
-		</Overlay>
+			</div> -->
+		<!-- </Overlay>  -->
 
-		<div class="productsContainer">
+		<!-- <div class="productsContainer">
 			<div
 				v-for="(item, index) in allProducts"
 				:key="index"
@@ -68,19 +71,21 @@
 					</span>
 				</div>
 			</div>
-		</div>
+		</div> -->
+
 	</div>
 </template>
 
 <script>
-import Overlay from '@/components/Overlay'
+// import Overlay from '@/components/Overlay'
+import ProductListing from '@/components/product/ProductListing'
 import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
 	methods: {
-		tryme() {
-			this.$store.commit('coolMutation')
-		},
+		// tryme() {
+		// 	this.$store.commit('coolMutation')
+		// },
 
 		ShowProductDetails(item) {
 			this.selectedProduct = item
@@ -94,10 +99,7 @@ export default {
 
 		...mapMutations(['addToCart']),
 
-		...mapActions([
-			'giveStuff', 
-			'loadAllProducts',
-		]),
+		...mapActions(['giveStuff', 'loadAllProducts']),
 	},
 	data() {
 		return {
@@ -122,7 +124,8 @@ export default {
 		...mapGetters(['basket', 'loggedInAsAdmin']),
 	},
 	components: {
-		Overlay,
+		// Overlay,
+		ProductListing,
 	},
 	mounted() {
 		this.loadAllProducts()
@@ -141,5 +144,4 @@ export default {
 	height: 5rem;
 	min-width: 10rem;
 }
-
 </style>

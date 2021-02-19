@@ -1,8 +1,8 @@
 <template>
 	<div v-if="loggedInAsAdmin" class="makeOrder">
 		<h1>Admin Products</h1>
-
-		<div class="rows">
+		<ProductListing />
+		<!-- <div class="rows">
 			<TitledContainer title="Add/Edit" />
 			<form @submit="NewProductSubmit(newProduct)" class="dataInputs">
 				<div class="dataInputImages">
@@ -73,10 +73,10 @@
 						</div>
 					</div>
 				</div>
-				<!-- <button @click="">Submit</button> -->
+				
 			</form>
 
-			<!-- PRODUCTDEMO COMPONENT HERE - REFACTOR -->
+			
 			<Overlay :show="showProductModal" v-on:close="showProductModal = false">
 				<div class="modalProduct">
 					<div class="modalPic">
@@ -173,7 +173,6 @@
 				</div>
 			</Overlay>
 
-			<!-- PRODUCTLISTING component HERE - REFACTOR  -->
 			<div class="productsContainer" v-if="true">
 				<div
 					v-for="(item, index) in allProducts"
@@ -207,14 +206,13 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 	<div v-else>Access Denied</div>
 </template>
 
 <script>
-import Overlay from '@/components/Overlay'
-import TitledContainer from '@/components/TitledContainer'
+import ProductListing from '@/components/ProductListing'
 import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
@@ -279,12 +277,12 @@ export default {
 				imgFile: 'hoodie-ash.png',
 				serial: '00000000000',
 			},
-			selectedCategory: 'clothes',
-			categories: [
-				{ text: 'Clothes', value: 'clothes' },
-				{ text: 'Board', value: 'board' },
-				{ text: 'Wheels', value: 'wheels' },
-			],
+			// selectedCategory: 'clothes',
+			// categories: [
+			// 	{ text: 'Clothes', value: 'clothes' },
+			// 	{ text: 'Board', value: 'board' },
+			// 	{ text: 'Wheels', value: 'wheels' },
+			// ],
 		}
 	},
 	computed: {
@@ -296,8 +294,7 @@ export default {
 		...mapGetters(['allFiles', 'loggedInAsAdmin']),
 	},
 	components: {
-		Overlay,
-		TitledContainer,
+		ProductListing
 	},
 	mounted() {
 		this.loadAllProducts()
