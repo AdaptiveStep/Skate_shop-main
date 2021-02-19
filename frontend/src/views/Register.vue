@@ -27,47 +27,49 @@
 				</span>
 			</div>
 
-			<form @submit.prevent="createUserSimple()" v-if="!loggedIn" class="inputLength">
+			<form
+				@submit.prevent="createUserSimple()"
+				v-if="!loggedIn"
+				class="inputLength"
+			>
 				<h1>Register</h1>
 				<div class="inputContainer">
 					<i class="fa fa-user icon"> </i>
-						<input
-							v-model="user.name"
-							class="Field"
-							type="text"
-							placeholder="Name"
-							required
-						/>
+					<input
+						v-model="user.name"
+						class="Field"
+						type="text"
+						placeholder="Name"
+						required
+					/>
 				</div>
 				<div class="inputContainer">
 					<i class="fa fa-envelope icon"> </i>
-						<input
-							v-model="user.email"
-							class="Field"
-							type="email"
-							placeholder="Email"
-							required
-						/>
+					<input
+						v-model="user.email"
+						class="Field"
+						type="email"
+						placeholder="Email"
+						required
+					/>
 				</div>
 				<div class="inputContainer">
 					<i class="fa fa-key icon"> </i>
-						<input
-							v-model="user.password"
-							class="Field"
-							type="password"
-							placeholder="Password"
-							required
-						/>
-
-
+					<input
+						v-model="user.password"
+						class="Field"
+						type="password"
+						placeholder="Password"
+						required
+					/>
 				</div>
 				<div class="inputContainer">
-					<input value="Register" type="submit" class="blackPill">
+					<input value="Register" type="submit" class="blackPill" />
 				</div>
 				<div v-if="showError">Email finns redan</div>
 			</form>
 			<div v-else>
-				<h1>Tack för att du är medlem hos oss!</h1>
+				<h1>Thank you for registering! Have a nice shopping!</h1>
 			</div>
 		</div>
 
@@ -110,12 +112,9 @@ export default {
 
 			if (result === 'ErrorEmail') {
 				this.showError = true
-			}
-			else {
+			} else {
 				this.showError = false
 			}
-
-	
 		},
 		...mapActions(['createUser']),
 	},

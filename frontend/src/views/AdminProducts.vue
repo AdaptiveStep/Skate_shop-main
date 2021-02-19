@@ -1,5 +1,5 @@
-<template >
-	<div  v-if="loggedInAsAdmin" class="makeOrder">
+<template>
+	<div v-if="loggedInAsAdmin" class="makeOrder">
 		<h1>Admin Products</h1>
 
 		<div class="rows">
@@ -48,7 +48,10 @@
 							required
 						/>
 						<div class="dataInputImages">
-							<img class="selectNewProductImage" :src="require(`@/assets/${newProduct.imgFile}`)">
+							<img
+								class="selectNewProductImage"
+								:src="require(`@/assets/${newProduct.imgFile}`)"
+							/>
 						</div>
 					</div>
 					<div class="dataInputDescription">
@@ -62,10 +65,13 @@
 							required
 						/>
 						<div class="adminSubmit">
-							<input class="blackPill" type="submit" value="Create New Product" />
+							<input
+								class="blackPill"
+								type="submit"
+								value="Create New Product"
+							/>
 						</div>
 					</div>
-
 				</div>
 				<!-- <button @click="">Submit</button> -->
 			</form>
@@ -310,14 +316,12 @@ export default {
 	flex-wrap: wrap;
 	gap: 1rem;
 	justify-content: space-evenly;
-	
-	.dataInputFields{
+
+	.dataInputFields {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
 	}
-
-
 }
 
 textarea {
@@ -342,7 +346,7 @@ textarea {
 	width: 3rem;
 	height: 3rem;
 	background-color: $shadow-color;
-
+	transition: background-color 0.5s ease;
 	&:hover {
 		background-color: $primary-color;
 	}

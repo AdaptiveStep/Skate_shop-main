@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Register from '../views/Register.vue'
-import Products from '../views/Products.vue'
-import MakeOrder from '../views/MakeOrder.vue'
-import AdminProducts from '../views/AdminProducts.vue'
-import Orders from '../views/Orders.vue'
-
+import Register from '@/views/Register.vue'
+import Products from '@/views/Products.vue'
+import MakeOrder from '@/views/MakeOrder.vue'
+import AdminProducts from '@/views/AdminProducts.vue'
+import Orders from '@/views/Orders.vue'
+import store from '@/store'
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,10 +26,24 @@ const routes = [
 	{
 		path: '/adminproduct',
 		component: AdminProducts,
+		beforeEnter: (to, from, next) => {
+			if (store.getters.loggedInAsAdmin) {
+				next()
+			} else {
+				next('/')
+			}
+		},
 	},
 	{
 		path: '/orders',
 		component: Orders,
+		beforeEnter: (to, from, next) => {
+			if (store.getters.loggedIn) {
+				next()
+			} else {
+				next('/')
+			}
+		},
 	},
 
 	{

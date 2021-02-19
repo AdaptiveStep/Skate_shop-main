@@ -1,6 +1,5 @@
 <template>
 	<div class="product">
-		<!-- <h1> Activation module {{ oneStorage || activeDynamicReg }}</h1> -->
 		<Overlay :show="showProductModal" v-on:close="showProductModal = false">
 			<div class="modalProduct">
 				<div class="modalPic">
@@ -9,8 +8,6 @@
 						:src="require(`@/assets/${selectedProduct.imgFile}`)"
 					/>
 				</div>
-				<!-- src="@/assets/skateboard-generic.png" -->
-				<!-- :src="require(`@/assets/${selectedProduct.imgFile}`)" -->
 
 				<div class="modalInfo">
 					<div class="modalTitle">
@@ -27,13 +24,13 @@
 						<span>{{ selectedProduct.price }}</span>
 					</div>
 
-					<button
-						v-if="!loggedInAsAdmin"
-						@click="addToCart(selectedProduct)"
-						class="blackPill"
-					>
-						<img class="bagSvg" src="@/assets/icon-bag-white.svg" />Take my money!
-					</button>
+						<button
+							v-if="!loggedInAsAdmin"
+							@click="addToCart(selectedProduct)"
+							class="blackPill"
+						>
+							<img class="bagSvg" src="@/assets/icon-bag-white.svg" />Take my money!
+						</button>
 				</div>
 			</div>
 		</Overlay>
@@ -98,7 +95,7 @@ export default {
 		...mapMutations(['addToCart']),
 
 		...mapActions([
-			'giveStuff', // -> this.someMutation
+			'giveStuff', 
 			'loadAllProducts',
 		]),
 	},

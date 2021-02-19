@@ -84,7 +84,6 @@ export default {
 		}
 	},
 	computed: {
-		// ...mapState(['basket']),
 		...mapGetters([
 			'basketCount',
 			'basketTotalPrice',
@@ -102,7 +101,6 @@ export default {
 
 .header {
 	display: flex;
-	// border-bottom: 1px solid #d3d3d3;
 	overflow: hidden;
 	align-items: center;
 	flex-wrap: wrap;
@@ -112,7 +110,7 @@ export default {
 
 div#header > div {
 	text-align: center;
-	border: 4px dashed; /* Useful for positioning */
+	border: 4px dashed; 
 	overflow: hidden;
 }
 
@@ -175,9 +173,6 @@ div#header > div {
 	padding-top: 1rem;
 }
 
-.counterAndButton {
-}
-/* On screens that are 600px wide or less, the background color is olive */
 @media screen and (max-width: 40rem) {
 	.header {
 		flex-direction: column;
