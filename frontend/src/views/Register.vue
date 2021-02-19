@@ -10,20 +10,23 @@
 		</div>
 
 		<div class="twoWrappers">
-			<div class="cut">
-				<h1>Cowabunga</h1>
+			<div class="cut aboutInfo">
+				<h1>About us</h1>
 				<h3 class="">
-					arcu posuere, nec condimentum diam ultrices. Cras fermentum commodo
-					tellus at ullamcorper. Fusce euismod pretium tellus, sit amet iaculis
-					sem molestie eu. Pellentesque tristique diam sit amet magna maximus,
-					vel mollis metus blandit.
+					We are a skating website focused on delivering the highest quality
+					products at low price!
 				</h3>
 				<span class="">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget ex
-					nec purus auctor mollis ac ut nulla. Vivamus maximus, sapien sit amet
-					rhoncus sodales, ligula quam tincidunt tellus, sit amet vestibulum
-					velit orci et nisl. Nullam aliquet lorem sed tellus vestibulum dictum.
-					Etiam efficitur tristique ligula et interdum. In hac habitasse platea
+					Ever since the dawn of man there has been need for wheels. It is our
+					desire to deliver the best skateboards the world has ever seen using
+					modern technology available for everyone. Our skateboards and wheels
+					are made in modern environmentally friendly polymer using only
+					recycled materials. We follow all the International Skateboard
+					Annoyance Nonsense Standards and strive to give all workers in our
+					factories reasonable working fair trade conditions! You will not find
+					better skateboards anywhere in the world! Currently this website is
+					under production and in alpha mode so please check back for the latest
+					updates soon when we add more products!
 				</span>
 			</div>
 
@@ -148,5 +151,27 @@ export default {
 
 .cut {
 	width: 100%;
+}
+
+.aboutInfo {
+	min-width: 10rem;
+}
+.twoWrappers {
+	display: flex;
+	align-items: stretch;
+
+	flex-direction: row;
+	gap: 1rem;
+	overflow: hidden;
+	margin-top: 1rem;
+
+	text-align: left;
+	transition: ease all 0.5s;
+}
+
+@media only screen and (max-width: 600px) {
+	.twoWrappers {
+		flex-direction: column;
+	}
 }
 </style>

@@ -37,10 +37,19 @@
 				<div class="pageFlex">
 					<Basket v-on:clickBuy="showUserMod = false" />
 
-					<form v-if="!basketEmpty" @submit.prevent="placeNewUnknownOrder" class="loginForm">
+					<form
+						v-if="!basketEmpty"
+						@submit.prevent="placeNewUnknownOrder"
+						class="loginForm"
+					>
 						<h1 class="yourDetails">Your Details</h1>
 						<div class="gapping">
-							<input required class="Field" placeholder="Your name" type="text" />
+							<input
+								required
+								class="Field"
+								placeholder="Your name"
+								type="text"
+							/>
 						</div>
 
 						<div class="gapping">
@@ -71,7 +80,7 @@
 								<input class="Field" placeholder="CCV" type="text" />
 							</div>
 						</div>
-						<input  value="Submit order" type="submit" class="submitBtn">
+						<input value="Submit order" type="submit" class="submitBtn" />
 					</form>
 
 					<div v-if="false">
@@ -125,7 +134,6 @@
 									/>
 								</div>
 							</div>
-
 						</TitledContainer>
 
 						<TitledContainer class="fixa" title="Payment Details">
@@ -146,7 +154,8 @@
 							</div>
 							<div class="forBut">
 								<button v-if="!basketEmpty" @click="Confirm" class="blackPill">
-									<img class="bagSvg" src="@/assets/icon-bag-white.svg" />Take my money!
+									<img class="bagSvg" src="@/assets/icon-bag-white.svg" />Take
+									my money!
 								</button>
 							</div>
 						</TitledContainer>
@@ -165,28 +174,22 @@
 				</div>
 
 				<div class="column">
-					<h1>Cowabunga</h1>
+					<h1>Thank you for making your Purchase. Please consider the following announcement.</h1>
 					<h3>
-						arcu posuere, nec condimentum diam ultrices. Cras fermentum commodo
-						tellus at ullamcorper. Fusce euismod pretium tellus, sit amet
-						iaculis sem molestie eu. Pellentesque tristique diam sit amet magna
-						maximus, vel mollis metus blandit.
+						We are a skating website focused on delivering the highest quality
+						products at low price! And we are looking for partners!
 					</h3>
 					<span>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget ex
-						nec purus auctor mollis ac ut nulla. Vivamus maximus, sapien sit
-						amet rhoncus sodales, ligula quam tincidunt tellus, sit amet
-						vestibulum velit orci et nisl. Nullam aliquet lorem sed tellus
-						vestibulum dictum. Etiam efficitur tristique ligula et interdum. In
-						hac habitasse platea dictumst. Donec rhoncus maximus orci vel
-						tempus. Quisque interdum leo consequat aliquet posuere. Pellentesque
-						habitant morbi tristique senectus et netus et malesuada fames ac
-						turpis egestas. Aliquam pulvinar libero et arcu posuere, nec
-						condimentum diam ultrices. Cras fermentum commodo tellus at
-						ullamcorper. Fusce euismod pretium tellus, sit amet iaculis sem
-						molestie eu. Pellentesque tristique diam sit amet magna maximus, vel
-						mollis metus blandit.
-						<p>TESTING STUFF YO</p>
+						Ever since the dawn of man there has been need for wheels. It is our
+						desire to deliver the best skateboards the world has ever seen using
+						modern technology available for everyone. Our skateboards and wheels
+						are made in modern environmentally friendly polymer using only
+						recycled materials. We follow all the International Skateboard
+						Annoyance Nonsense Standards and strive to give all workers in our
+						factories reasonable working fair trade conditions! You will not
+						find better skateboards anywhere in the world! Currently this
+						website is under production and in alpha mode so please check back
+						for the latest updates soon when we add more products!
 					</span>
 					<button @click="startNewOrder" class="submitBtn">Coolio!</button>
 				</div>
@@ -203,7 +206,6 @@ import { mapMutations, mapGetters, mapActions, mapState } from 'vuex'
 
 export default {
 	methods: {
-
 		tryme() {
 			this.showMe = !this.showMe
 		},
@@ -232,15 +234,11 @@ export default {
 				}
 			}
 
-
-
 			let tmptotalprice = this.basketTotalPrice
 			let payload = { items: items, price: tmptotalprice }
 
-
 			this.placeNewOrder(payload) //Placerar i databas
 			this.completePayment() //Sätter payment som klar, och resettar basket
-
 		},
 
 		...mapMutations(['startNewOrder', 'completePayment']),

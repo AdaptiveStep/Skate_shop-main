@@ -76,6 +76,7 @@
 				<!-- <button @click="">Submit</button> -->
 			</form>
 
+			<!-- PRODUCTDEMO COMPONENT HERE - REFACTOR -->
 			<Overlay :show="showProductModal" v-on:close="showProductModal = false">
 				<div class="modalProduct">
 					<div class="modalPic">
@@ -172,6 +173,7 @@
 				</div>
 			</Overlay>
 
+			<!-- PRODUCTLISTING component HERE - REFACTOR  -->
 			<div class="productsContainer" v-if="true">
 				<div
 					v-for="(item, index) in allProducts"

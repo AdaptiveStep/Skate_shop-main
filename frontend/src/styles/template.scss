@@ -38,7 +38,7 @@
 }
 
 .bagSvg {
-	padding:0.5rem;
+	padding: 0.5rem;
 }
 
 .pillSEK {
@@ -62,16 +62,6 @@
 	transform: translate(-50%, -50%);
 	font-size: 3rem;
 	color: $primary-color;
-}
-
-.twoWrappers {
-	display: flex;
-	align-items: stretch;
-	gap: 1rem;
-	overflow: hidden;
-	margin-top: 1rem;
-
-	text-align: left;
 }
 
 .column {
@@ -247,6 +237,11 @@ hr {
 	font-size: 2rem;
 	align-items: center;
 }
+.cardHeader span {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 .cardSubTitle {
 	display: flex;
 	/* margin: 1rem; */
@@ -346,9 +341,6 @@ hr {
 	z-index: 3;
 	padding-top: 0.5rem;
 }
-
-
-
 
 /////////////////--------Buttons
 .modifiers {
