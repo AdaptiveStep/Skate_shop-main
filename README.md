@@ -1,26 +1,26 @@
 s# SINUS Webshop
 
 ## Instruktioner
-Ni ska bygga en FrontEnd till en färdig BackEnd.
+Innehåller FrontEnd till en färdig BackEnd.
 
 ## SINUS Webshop
 
 SINUS Webshop är en onlinebutik som säljer skateboards och tillbehör.
 
-Webshoppen ska ha 3 olika lägen
+Webshoppen har 3 olika lägen
 * Anonym besökare
 * Inloggad Kund
 * Inloggad Admin
 
 ### Anonym besökare
-Det ska finnas en `registrerings`-view med ett registreringsformulär.
+Det finns en `registrerings`-view med ett registreringsformulär.
 En order kan genomföras som anonym användare.
 
 ### Inloggad Kund
-Det ska finnas en `My Account`-view med information om ditt konto och din orderhistorik.
+Det finns en `My Account`-view med information om ditt konto och din orderhistorik.
 
 ### Inloggad Admin (VG-krav)
-Det ska finnas en `Admin Area`-view med ett CRUD-gränssnitt för alla produkter.
+Det finns en `Admin Area`-view med ett CRUD-gränssnitt för alla produkter.
 
 ### Övriga Views och Features
 * En view för produktlista
