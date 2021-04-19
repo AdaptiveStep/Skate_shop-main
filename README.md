@@ -19,7 +19,7 @@ En order kan genomföras som anonym användare.
 ### Inloggad Kund
 Det finns en `My Account`-view med information om ditt konto och din orderhistorik.
 
-### Inloggad Admin (VG-krav)
+### Inloggad Admin 
 Det finns en `Admin Area`-view med ett CRUD-gränssnitt för alla produkter.
 
 ### Övriga Views och Features
